@@ -1,4 +1,4 @@
-# Instalacion
+# Instalación
 
 1. `npm install`
 2. Crear un archivo `.env` en la raiz del proyecto.
