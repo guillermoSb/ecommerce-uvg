@@ -21,10 +21,10 @@ export default function Login() {
     <form onSubmit={handleSubmit(onSubmit)}>
 
       {/* register your input into the hook by invoking the "register" function */}
-      <label>Email</label>
+      <label>Email </label>
       <input type="text" placeholder="Email" {...register("email", {required: "Este campo es requerido", pattern: { value: /^\S+@\S+$/i, message: "El email debe de contener una @"} })} />
       <p>{errors.email?.message}</p>
-      <label>Password</label>
+      <label>Password </label>
       <input type="password" placeholder="Password" {...register("password", {required: "Este campo es requerido", minLength:{
         value: 8,
         message: "El mínimo de caracteres es 8"
@@ -37,7 +37,7 @@ export default function Login() {
 
       
 
-      <input type="submit" />
+      <input type="submit" value="Log In"/>
     </form>
     </div>
   );
