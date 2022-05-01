@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { regular_signup } from "./firebaselogin";
-import PasswordChecklist from "react-password-checklist"
 
 
 export default function Signup() {
