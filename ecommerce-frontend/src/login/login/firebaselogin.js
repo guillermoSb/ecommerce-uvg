@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 const regeneratorRuntime = require("regenerator-runtime");
 
 // Your web app's Firebase configuration
@@ -21,6 +21,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const analytics = getAnalytics(app);
 
-export function regular_signup(email, password) {
-  return createUserWithEmailAndPassword(auth, email, password);
+export function regular_login(email, password) {
+  return signInWithEmailAndPassword(auth, email, password);
 }
