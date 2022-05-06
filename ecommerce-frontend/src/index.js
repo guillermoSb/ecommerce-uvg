@@ -1,13 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './styles/index.scss';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./styles/index.scss";
+import App from "./App";
+import ContenedorItemsRec from "./pages/PagesRecomendacion/Componentes/ContenedorItemsRec";
+import reportWebVitals from "../src/reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// aqui podes reemplazar el contenedor por app y estructurarla bien bien, solo lo reemplace para probar
+// la wishlist
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <ContenedorItemsRec title="WhishList" />
   </React.StrictMode>
 );
 

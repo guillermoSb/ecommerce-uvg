@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import ContenedorItemsRec from "../Componentes/ContenedorItemsRec";
 
 const Recomendaciones = () => {
-  return (
-    <div>Recomendaciones</div>
-  )
-}
+  return <ContenedorItemsRec />;
+};
 
-export default Recomendaciones
+export default Recomendaciones;
