@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { regular_signup } from "./firebaselogin";
+import { regular_signup } from "../firebaselogin";
 
 export default function Signup() {
   const [loading, setLoading] = useState(false);
+  const [userInfo, setUserInfo] = useState("");
 
   const {
     register,

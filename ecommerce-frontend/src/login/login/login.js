@@ -1,10 +1,28 @@
 import React, { useState } from "react";
 // import ReactDOM from "react-dom";
 import { useForm } from "react-hook-form";
-import { regular_login } from "../login/firebaselogin";
+import { regular_login, signOutAccount, google_auth, getUser, facebook_auth} from "../firebaselogin";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
+  const [userInfo, setUserInfo] = useState("");
+
+  const handleSignOut = () => {
+    signOutAccount();
+    setUserInfo("");
+  }
+
+  function googleAuth() {
+    setLoading(true);
+    google_auth();
+    setLoading(false);
+  }
+
+  function fbAuth() {
+    setLoading(true);
+    facebook_auth();
+    setLoading(false);
+  }
 
   const {
     register,
@@ -16,7 +34,8 @@ export default function Login() {
     setLoading(true);
     try {
       await regular_login(watch("email"), watch("password"));
-      alert("Usuario registrado con exito");
+      setUserInfo(watch("email"))
+      alert("Usuario logueado con exito");
     } catch (error) {
       alert("Usuario o contraseña incorrecta. Asegurese que todo este bien");
     }
@@ -61,6 +80,10 @@ export default function Login() {
 
         <input type="submit" value="Log In" />
       </form>
+      <p>Bienvenido {userInfo}</p>
+      <button onClick={() => googleAuth()}>Google</button>
+      <button onClick={() => fbAuth()}>Facebook</button>
+      <button onClick={() => handleSignOut()}>Sign out</button>
     </div>
   );
 }
