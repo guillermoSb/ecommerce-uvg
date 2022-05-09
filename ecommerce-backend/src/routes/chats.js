@@ -5,8 +5,6 @@ const { validateFields } = require("../middlewares/validator");
 const router = Router();
 
 router.get("/", getAllChats);   // GET /api/chats/
-router.post("/", [
-    validateFields
-], createChat);
+router.post("/", createChat);   // POST /api/chats
 
 module.exports = router;

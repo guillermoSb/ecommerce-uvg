@@ -25,5 +25,6 @@ const createChat = (req, res) => {
 };
 
 module.exports = {
-    getAllChats
+    getAllChats,
+    createChat
 };
