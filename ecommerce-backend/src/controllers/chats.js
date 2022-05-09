@@ -12,6 +12,18 @@ const getAllChats = (req, res) => {
     });
 };
 
+/**
+ * Create a chat
+ * @param {*} req 
+ * @param {*} res 
+ */
+const createChat = (req, res) => {
+
+    return res.status(200).send({
+        ok: true,
+    });
+};
+
 module.exports = {
     getAllChats
 };
