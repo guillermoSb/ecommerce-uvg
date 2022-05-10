@@ -76,6 +76,8 @@ html, body {
 }
 
 .items-container{
+    display: grid;
+    grid-template-rows: 100px 100%;
 }
 
 .head{
@@ -94,4 +96,14 @@ html, body {
 h1{
     margin: 0;
     padding: 10px;
+}
+
+.chats-container{
+    background-color: red;
+    border-radius: 3%;
+    place-self: center;
+    width: 75%;
+    height: 60%;
+    overflow: scroll;
+    overflow-x: hidden;
 }

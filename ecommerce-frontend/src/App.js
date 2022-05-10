@@ -36,6 +36,7 @@ const App = () => (
               <img className="circle" src={grayCirc}></img>
               <div>Abandonado</div>
             </div>
+            <div className="chats-container"></div>
           </div>
         </div>
       </div>
