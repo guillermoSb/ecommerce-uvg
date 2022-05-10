@@ -1,16 +1,27 @@
 import React, { useState } from "react";
 // import ReactDOM from "react-dom";
 import { useForm } from "react-hook-form";
-import { regular_login, signOutAccount, google_auth, getUser, facebook_auth} from "../firebaselogin";
+import {
+  regular_login,
+  signOutAccount,
+  google_auth,
+  getUser,
+  facebook_auth,
+} from "../firebaselogin";
+import { getAuth } from "firebase/auth";
+
+import { sendPasswordResetEmail } from "firebase/auth";
+const auth = getAuth();
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleSignOut = () => {
     signOutAccount();
     setUserInfo("");
-  }
+  };
 
   function googleAuth() {
     setLoading(true);
@@ -24,6 +35,13 @@ export default function Login() {
     setLoading(false);
   }
 
+  function resetPassword(email) {
+    alert("Correo enviado!");
+    return sendPasswordResetEmail(auth, email, {
+      url: "https://localhost:8080",
+    });
+  }
+
   const {
     register,
     handleSubmit,
@@ -34,7 +52,7 @@ export default function Login() {
     setLoading(true);
     try {
       await regular_login(watch("email"), watch("password"));
-      setUserInfo(watch("email"))
+      setUserInfo(watch("email"));
       alert("Usuario logueado con exito");
     } catch (error) {
       alert("Usuario o contraseña incorrecta. Asegurese que todo este bien");
@@ -84,6 +102,17 @@ export default function Login() {
       <button onClick={() => googleAuth()}>Google</button>
       <button onClick={() => fbAuth()}>Facebook</button>
       <button onClick={() => handleSignOut()}>Sign out</button>
+      <p>¿Olvidaste tu contraseña?</p>
+      <input
+        type="text"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      ></input>
+      <br />
+      <button onClick={() => resetPassword(email)}>
+        Restablecer contraseña
+      </button>
     </div>
   );
 }
