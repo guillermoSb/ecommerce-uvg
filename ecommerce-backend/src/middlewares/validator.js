@@ -8,7 +8,7 @@ const validateFields = (req, res, next) => {
     if (!errors.isEmpty()) {
         return res.status(400).send({
             ok: false,
-            errors: errors.array({ onlyFirstError: true }).flat(err => err.msg) ?? []
+            errors: errors.array({ onlyFirstError: true }).flatMap(err => err.msg) ?? []
         });
     }
     next();
