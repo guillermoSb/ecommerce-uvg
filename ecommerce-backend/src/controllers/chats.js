@@ -9,12 +9,10 @@ const { db } = require("../firebase");
 const getAllChats = async (req, res) => {
     try {
         const querySnapshot = await getDocs(collection(db, "chats"));
-        querySnapshot.forEach((doc) => {
-            console.log(`${doc.id} => ${doc.data()}`);
-        });
+
         return res.status(200).send({
             ok: true,
-            chats: []
+            chats: querySnapshot.docs.map((doc) => doc.data())
         });
     } catch (error) {
         return res.status(500).send({
