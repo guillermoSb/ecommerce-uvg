@@ -8,9 +8,10 @@ import {
   getUser,
   facebook_auth,
 } from "../firebaselogin";
-import { getAuth } from "firebase/auth";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import "./login.css";
+import profile_img from './profile.png';
 
-import { sendPasswordResetEmail } from "firebase/auth";
 const auth = getAuth();
 
 export default function Login() {
@@ -63,10 +64,10 @@ export default function Login() {
   // you can watch individual input by pass the name of the input
 
   return (
-    <div>
+    <div className="loginWrap">
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* register your input into the hook by invoking the "register" function */}
-        <label>Email </label>
+        <img src ={profile_img} alt="loading"></img>
         <input
           type="text"
           placeholder="Email"
@@ -79,7 +80,6 @@ export default function Login() {
           })}
         />
         <p>{errors.email?.message}</p>
-        <label>Password </label>
         <input
           type="password"
           placeholder="Password"
@@ -96,12 +96,12 @@ export default function Login() {
         {/* include validation with required or other standard HTML validation rules */}
         {/* errors will return when field validation fails  */}
 
-        <input type="submit" value="Log In" />
+        <input className ="login_button" type="submit" value="Log In" />
       </form>
       <p>Bienvenido {userInfo}</p>
-      <button onClick={() => googleAuth()}>Google</button>
-      <button onClick={() => fbAuth()}>Facebook</button>
-      <button onClick={() => handleSignOut()}>Sign out</button>
+      <button className = "google_button" onClick={() => googleAuth()}>Google</button>
+      <button className = "facebook_button" onClick={() => fbAuth()}>Facebook</button>
+      <hr />
       <p>¿Olvidaste tu contraseña?</p>
       <input
         type="text"
@@ -110,9 +110,10 @@ export default function Login() {
         onChange={(e) => setEmail(e.target.value)}
       ></input>
       <br />
-      <button onClick={() => resetPassword(email)}>
+      <button className="resetPassword_button" onClick={() => resetPassword(email)}>
         Restablecer contraseña
       </button>
+      <p>Not a member? <span><a href="google.com">Sign up now</a></span></p>
     </div>
   );
 }
