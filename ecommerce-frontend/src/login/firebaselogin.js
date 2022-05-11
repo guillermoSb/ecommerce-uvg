@@ -1,7 +1,10 @@
+/* eslint-disable no-template-curly-in-string */
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, signOut, FacebookAuthProvider, UserInfo } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, signOut, FacebookAuthProvider } from "firebase/auth";
+import "firebase/firestore";
+import { addDoc, getFirestore, collection } from "firebase/firestore";
 const googleProvider = new GoogleAuthProvider();
 const FBProvider = new FacebookAuthProvider();
 
@@ -20,18 +23,21 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
+const firestore = getFirestore(app);
 const loggedUser = auth.currentUser;
 const analytics = getAnalytics(app);
 
-export function regular_signup(email, password) {
-  return createUserWithEmailAndPassword(auth, email, password);
+export async function regular_signup(email, password) {
+  await createUserWithEmailAndPassword(auth, email, password);
+  await createUserDocument(email);
 }
 
-export function facebook_auth() {
+export async function facebook_auth() {
   signInWithPopup(auth, FBProvider)
   .then((result) => {
     // The signed-in user info.
     const user = result.user;
+    createUserDocument(user);
     console.log(user);
     // This gives you a Facebook Access Token. You can use it to access the Facebook API.
     const credential = FacebookAuthProvider.credentialFromResult(result);
@@ -50,9 +56,10 @@ export function facebook_auth() {
 
     // ...
   });
+  
 }
 
-export function google_auth() {
+export async function google_auth() {
   signInWithPopup(auth, googleProvider)
   .then((result) => {
     // This gives you a Google Access Token. You can use it to access the Google API.
@@ -60,7 +67,9 @@ export function google_auth() {
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
+    createUserDocument(user);
     console.log(user);
+
     return token;
     // ...
   }).catch((error) => {
@@ -75,8 +84,23 @@ export function google_auth() {
   });
 }
 
-export function regular_login(email, password) {
-  return signInWithEmailAndPassword(auth, email, password);
+const createUserDocument = async(email) => {
+  if(!email) return;
+    
+  try {
+    const docRef = await addDoc(collection(firestore, "users"), {
+      email: email,
+      isAdmin: false,
+    })
+    console.log("Registered in firestore");
+  } catch {
+    console.log("Error in user creation (firestore)");
+  }
+  
+}
+
+export async function regular_login(email, password) {
+  await signInWithEmailAndPassword(auth, email, password);
 }
 
 export function signOutAccount() {

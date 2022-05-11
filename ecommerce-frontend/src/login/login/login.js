@@ -1,16 +1,28 @@
 import React, { useState } from "react";
 // import ReactDOM from "react-dom";
 import { useForm } from "react-hook-form";
-import { regular_login, signOutAccount, google_auth, getUser, facebook_auth} from "../firebaselogin";
+import {
+  regular_login,
+  signOutAccount,
+  google_auth,
+  getUser,
+  facebook_auth,
+} from "../firebaselogin";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import "./login.css";
+import profile_img from './profile.png';
+
+const auth = getAuth();
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleSignOut = () => {
     signOutAccount();
     setUserInfo("");
-  }
+  };
 
   function googleAuth() {
     setLoading(true);
@@ -24,6 +36,13 @@ export default function Login() {
     setLoading(false);
   }
 
+  function resetPassword(email) {
+    alert("Correo enviado!");
+    return sendPasswordResetEmail(auth, email, {
+      url: "https://localhost:8080",
+    });
+  }
+
   const {
     register,
     handleSubmit,
@@ -34,7 +53,7 @@ export default function Login() {
     setLoading(true);
     try {
       await regular_login(watch("email"), watch("password"));
-      setUserInfo(watch("email"))
+      setUserInfo(watch("email"));
       alert("Usuario logueado con exito");
     } catch (error) {
       alert("Usuario o contraseña incorrecta. Asegurese que todo este bien");
@@ -45,10 +64,10 @@ export default function Login() {
   // you can watch individual input by pass the name of the input
 
   return (
-    <div>
+    <div className="loginWrap">
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* register your input into the hook by invoking the "register" function */}
-        <label>Email </label>
+        <img src ={profile_img} alt="loading"></img>
         <input
           type="text"
           placeholder="Email"
@@ -61,7 +80,6 @@ export default function Login() {
           })}
         />
         <p>{errors.email?.message}</p>
-        <label>Password </label>
         <input
           type="password"
           placeholder="Password"
@@ -78,12 +96,24 @@ export default function Login() {
         {/* include validation with required or other standard HTML validation rules */}
         {/* errors will return when field validation fails  */}
 
-        <input type="submit" value="Log In" />
+        <input className ="login_button" type="submit" value="Log In" />
       </form>
       <p>Bienvenido {userInfo}</p>
-      <button onClick={() => googleAuth()}>Google</button>
-      <button onClick={() => fbAuth()}>Facebook</button>
-      <button onClick={() => handleSignOut()}>Sign out</button>
+      <button className = "google_button" onClick={() => googleAuth()}>Google</button>
+      <button className = "facebook_button" onClick={() => fbAuth()}>Facebook</button>
+      <hr />
+      <p>¿Olvidaste tu contraseña?</p>
+      <input
+        type="text"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      ></input>
+      <br />
+      <button className="resetPassword_button" onClick={() => resetPassword(email)}>
+        Restablecer contraseña
+      </button>
+      <p>Not a member? <span><a href="google.com">Sign up now</a></span></p>
     </div>
   );
 }
