@@ -15,4 +15,12 @@ const validateFields = (req, res, next) => {
 };
 
 
-module.exports = { validateFields };
+const validateState= async (state) => {
+    const states = ["espera","activo"];
+    if (!isNaN(state) && !states.includes(state)) {
+        throw new Error(`El perfil ${state} no existe.`);
+    }
+};
+
+
+module.exports = { validateFields, validateState };
