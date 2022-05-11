@@ -1,7 +1,7 @@
 const { Router } = require("express");
-const { check } = require("express-validator");
+const { check, param } = require("express-validator");
 const { getAllChats, createChat, getAllChatsBy } = require("../controllers/chats");
-const { validateFields } = require("../middlewares/validator");
+const { validateFields, validateState } = require("../middlewares/validator");
 const { chatUniqueValidator } = require("../validators/chat-unique");
 
 const router = Router();
@@ -20,9 +20,7 @@ router.post(
 router.get(
   "/:state",
   [
-    check("state", "El tipo de contenido es requerido")
-      .notEmpty()
-      .isIn(["espera", "activo"]),
+    param("state", "Estado invalido.").custom(validateState)
   ],
   getAllChatsBy
 ); // GET /api/chats/
