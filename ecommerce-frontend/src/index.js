@@ -11,7 +11,8 @@ import reportWebVitals from "../src/reportWebVitals";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ContenedorItemsRec title="WhishList" />
+    <ContenedorItemsRec title="WishList" />
+    <ContenedorItemsRec title="Productos Similares" />
   </React.StrictMode>
 );
 
