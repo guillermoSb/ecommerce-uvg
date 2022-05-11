@@ -7,7 +7,7 @@ const { db } = require("../firebase");
 const chatUniqueValidator = async (userId) => {
     // Get active chats or waiting for that user
     const chatsRef = collection(db, "chats");
-    const chatQuery = query(chatsRef, where("iniciadoPor", "==", userId), where("estado", "in", ["espera", "activo"]))
+    const chatQuery = query(chatsRef, where("iniciadoPor", "==", userId), where("estado", "in", ["espera", "activo"]));
     const docs = await getDocs(chatQuery);
     if (docs.size > 0) {
         throw new Error("Ya existe un chat en espera o activo para ese usuario. No se puede crear uno nuevo.");
