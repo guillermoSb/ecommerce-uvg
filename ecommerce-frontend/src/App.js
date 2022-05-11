@@ -7,12 +7,11 @@ import Signup from './login/signup/signup';
 import './styles/App.scss';
 
 function App() {
-
   return (
     <div className="App">
       <body>
         <p>Seccion Login</p>
-        <Login/>
+        <Login />
         <p>Seccion Registro</p>
         <Signup />
       </body>
