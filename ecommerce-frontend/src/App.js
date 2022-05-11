@@ -4,6 +4,7 @@ import Login from './login/login/login';
 import Signup from './login/signup/signup';
 
 
+import './styles/App.scss';
 
 function App() {
 
