@@ -1,4 +1,4 @@
-const { collection, getDocs, addDoc } = require("firebase/firestore");
+const { collection, getDocs, addDoc, query, where } = require("firebase/firestore");
 const { db } = require("../firebase");
 
 /**
@@ -9,6 +9,32 @@ const { db } = require("../firebase");
 const getAllChats = async (req, res) => {
     try {
         const querySnapshot = await getDocs(collection(db, "chats"));
+
+        return res.status(200).send({
+            ok: true,
+            chats: querySnapshot.docs.map((doc) => doc.data())
+        });
+    } catch (error) {
+        return res.status(500).send({
+            ok: false,
+            errors: [
+                "Algo salió mal."
+            ]
+        });
+    }
+
+};
+
+/**
+ * Get all chats
+ * @param {*} req 
+ * @param {*} res 
+ */
+ const getAllChatsBy = async (req, res) => {
+    try {
+        const { state } = req.params;
+        const q = query(collection(db, "chats"), where("estado", "==", state));
+        const querySnapshot = await getDocs(q);
 
         return res.status(200).send({
             ok: true,
@@ -63,5 +89,6 @@ const createChat = async (req, res) => {
 
 module.exports = {
     getAllChats,
-    createChat
+    getAllChatsBy,
+    createChat,
 };
