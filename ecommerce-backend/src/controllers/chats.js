@@ -129,19 +129,29 @@ const sendChat = async (req, res) => {
                         where("estado","==","activo"), 
                         where("atendidoPor","==", atendidoPor));
         const querySnapshot = await getDocs(q);
-        const id = querySnapshot.docs[0].id;
-        const ref = doc(db, "chats", id);
-        await updateDoc(ref, {
-            mensajes: arrayUnion({
-                enviadoPor: UserID,
-                date: new Date(),
-                mensaje: userMessage
-            })
-        });
-        return res.status(200).send({
-            ok: true,
-            message: "Activado con exito."
-        });
+        if (!querySnapshot.empty) {
+            const id = querySnapshot.docs[0].id;
+            const ref = doc(db, "chats", id);
+            await updateDoc(ref, {
+                mensajes: arrayUnion({
+                    enviadoPor: UserID,
+                    date: new Date(),
+                    mensaje: userMessage
+                })
+            });
+            return res.status(200).send({
+                ok: true,
+                message: "Enviado con exito."
+            });
+        } else {
+            return res.status(500).send({
+                ok: false,
+                errors: [
+                    "No existe chat con estas caracteristicas."
+                ]
+            });
+        }
+        
     } catch (error) {
         return res.status(500).send({
             ok: false,
