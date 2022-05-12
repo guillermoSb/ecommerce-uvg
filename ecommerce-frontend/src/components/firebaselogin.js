@@ -37,7 +37,6 @@ export async function facebook_auth() {
   .then((result) => {
     // The signed-in user info.
     const user = result.user;
-    createUserDocument(user);
     console.log(user);
     // This gives you a Facebook Access Token. You can use it to access the Facebook API.
     const credential = FacebookAuthProvider.credentialFromResult(result);
@@ -67,7 +66,6 @@ export async function google_auth() {
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
-    createUserDocument(user);
     console.log(user);
 
     return token;
@@ -111,4 +109,3 @@ export function signOutAccount() {
     // An error happened.
   });
 }
-

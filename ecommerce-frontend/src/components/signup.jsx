@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { regular_signup } from "../firebaselogin";
-import profile_img from './profile.png';
+import { regular_signup } from "./firebaselogin";
+import profile_img from '../assets/profile.png';
 
-import './signup.css';
+import '../styles/signup.css';
 
 export default function Signup() {
   const [loading, setLoading] = useState(false);

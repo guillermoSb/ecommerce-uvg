@@ -7,10 +7,10 @@ import {
   google_auth,
   getUser,
   facebook_auth,
-} from "../firebaselogin";
+} from "./firebaselogin";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import "./login.css";
-import profile_img from './profile.png';
+import "../styles/login.css";
+import profile_img from '../assets/profile.png';
 
 const auth = getAuth();
 
