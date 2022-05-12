@@ -77,7 +77,7 @@ html, body {
 
 .items-container{
     display: grid;
-    grid-template-rows: 100px 100%;
+    grid-template-rows: 100px 100px 73%;
 }
 
 .head{
@@ -100,11 +100,58 @@ h1{
 
 .chats-container{
     background-color: $grayTh;
-    border-radius: 3%;
+    border-radius: 10px;
     place-self: center;
-    width: 75%;
-    height: 60%;
+    width: 80vh;
+    height: 50vh;
     overflow: scroll;
     overflow-x: hidden;
 }
 
+/*Search Bar*/
+.search-container{
+    display: grid;
+    place-items: center;
+}
+#search-bar{
+    align-self: center;
+    justify-self: center;
+    width: 70%;
+    height: 30%;
+    border: black solid 2px;
+    border-radius: 30px;
+    padding-left: 10px;
+    grid-row-start: 1;
+    overflow: scroll;
+    
+    &::placeholder{
+        color:#A8A9AD;
+        opacity: 1;
+    }
+}
+
+/*End search bar*/
+
+/*Scroll Bar*/
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+/*End scroll bar*/
