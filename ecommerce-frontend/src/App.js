@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.css";
-import Login from "./login/login/login";
-import Signup from "./login/signup/signup";
+import Login from "./components/login";
+import Signup from "./components/signup";
 
 function App() {
   return (
