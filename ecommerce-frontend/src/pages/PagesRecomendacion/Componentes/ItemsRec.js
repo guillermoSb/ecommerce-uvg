@@ -1,5 +1,5 @@
 import React from "react";
-import { BsCartPlus } from "../../../../node_modules/react-icons/bs";
+import { FaCartPlus } from "../../../../node_modules/react-icons/fa";
 
 const ItemsRec = ({ id, name, image }) => {
   return (
@@ -7,7 +7,11 @@ const ItemsRec = ({ id, name, image }) => {
       <img src={image} alt="imagen" height="150px" />
       <div className="itemRecNameAndCart">
         <p>{name}</p>
-        <BsCartPlus />
+        <FaCartPlus
+          size={20}
+          onMouseOver={({ target }) => (target.style.color = "#0066ff")}
+          onMouseOut={({ target }) => (target.style.color = "black")}
+        />
       </div>
     </div>
   );
