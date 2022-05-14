@@ -24,6 +24,7 @@ class Server {
      */
     routes() {
         this.app.use(this.paths.chats, require("./routes/chats"));
+       this.app.use(this.paths.chats, require("./routes/usuarioRoutes"));
     }
     /**
      * Implement firebase on the server
