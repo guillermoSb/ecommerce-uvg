@@ -1,7 +1,7 @@
 const express = require("express");
-const Firestore = require("@google-cloud/firestore");
+const { collection, getDocs, addDoc, query, where, updateDoc, doc, getDoc, orderBy } = require("firebase/firestore");
+const { db, loggedUser } = require("../firebase");
 
-const db = new Firestore();
 const app = express();
 app.use(express.json());
 const port = process.env.PORT || 8080;
@@ -10,21 +10,61 @@ app.listen(port, () => {
 });
 
 app.get("/", async (req, res) => {
-    res.json({status: "Bark bark! Ready to roll."});
+    res.json({status: "Bienvenido al API de Login"});
+});
+
+app.get("/usuarios", async (req, res) => {
+    const querySnapshot = await getDocs(collection(db, "users"));
+    res.json({users: querySnapshot.docs.map(doc => doc.data())});
+});
+
+app.get("/usuarios/:user", async (req, res) => {
+    const user = req.params.user;
+    //const querySnapshot = await getDoc(collection(db, "users"), where("email", "==", user));
+    try {
+        //const docQuery = await getDocs(collection(db, "users"), where("email", "==", user));
+        //const docSnap = docQuery.docs[0];
+        const docRef = doc(db, "users", user);
+        const docSnap = await getDoc(docRef);
+
+        return res.json({
+            ok: true,
+            usuario: docSnap.data()
+        });
+    } catch (error) {
+        return res.json({
+            ok:false,
+            errors: [
+                "Algo salio mal"
+            ]
+        });
+    }
+   
+});
+
+app.get("/usuarios/currentUser", async (req,res) => {
+    return res.json({
+        currentUser: loggedUser
+    });
+});
+
+app.get("/usuarios/currentUID", async (req,res) => {
+    return res.json({
+        currentUID: loggedUser.uid
+    });
 });
 
 const getUsuario = async (req, res) => {
-    app.get("/:usuario", async (req, res) => {
-        const users = req.params.usuario;
+        const user = req.query.user;
         try {
-            const querySnapshot = await getDocs(collection(db, "users").where("email", "==", users));
+            const querySnapshot = await getDoc(collection(db, "users"), where("email", "==", user));
             
-            return res.status(200).send({
+            return res.json({
                 ok: true,
-                usuario: querySnapshot.data()
+                usuario: querySnapshot.docs.map(doc => doc.data())
             });
         } catch (error) {
-            return res.status(500).send({
+            return res.json({
                 ok: false,
                 errors: [
                     "Algo salió mal."
@@ -32,8 +72,7 @@ const getUsuario = async (req, res) => {
             });
         }
 
-    });
-};
+    };
 
 module.exports = {
     getUsuario,
