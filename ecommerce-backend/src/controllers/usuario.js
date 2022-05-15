@@ -13,17 +13,15 @@ app.get("/", async (req, res) => {
     res.json({status: "Bienvenido al API de Login"});
 });
 
-app.get("/usuarios", async (req, res) => {
+app.get("/usuarios", async (req, res) => { //Obtener listado de usuarios
     const querySnapshot = await getDocs(collection(db, "users"));
     res.json({users: querySnapshot.docs.map(doc => doc.data())});
 });
 
-app.get("/usuarios/:user", async (req, res) => {
+app.get("/usuarios/:user", async (req, res) => { //Obtener un usuario usando como parametro su UID
     const user = req.params.user;
-    //const querySnapshot = await getDoc(collection(db, "users"), where("email", "==", user));
     try {
-        //const docQuery = await getDocs(collection(db, "users"), where("email", "==", user));
-        //const docSnap = docQuery.docs[0];
+
         const docRef = doc(db, "users", user);
         const docSnap = await getDoc(docRef);
 
@@ -42,13 +40,13 @@ app.get("/usuarios/:user", async (req, res) => {
    
 });
 
-app.get("/usuarios/currentUser", async (req,res) => {
+app.get("/usuarios/currentUser", async (req,res) => { //Obtener el usuario actualmente autenticado
     return res.json({
         currentUser: loggedUser
     });
 });
 
-app.get("/usuarios/currentUID", async (req,res) => {
+app.get("/usuarios/currentUID", async (req,res) => { //Obtener el UID del usuario actualmente autenticado
     return res.json({
         currentUID: loggedUser.uid
     });
