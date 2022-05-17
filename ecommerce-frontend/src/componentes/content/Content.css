@@ -1,0 +1,143 @@
+.ChatContent {
+    flex-grow: 1;
+    padding: 20px 40px;
+    max-width: 63%;
+}
+
+.content-body {
+    max-height: calc(100vh - calc(100vh / 2.5));
+    overflow: auto;
+}
+
+.chat-bubble {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    transform: scale(0);
+    transform-origin: right;
+    animation-name: showIn;
+    animation-duration: 0.2s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-timing-function: cubic-bezier(0.88, 0.19, 0.37, 1.11);
+    animation-fill-mode: both;
+    animation-delay: 0.2s;
+}
+
+@keyframes showIn {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.chat-bubble .avatar {
+    margin-right: 0px;
+    margin-left: 20px;
+    background: #3b3b3b;
+    padding: 1px;
+}
+
+.chat-bubble-content {
+    background-color: #3A86FF;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px 10px 0 10px;
+    max-width: 50%;
+    min-width: 215px;
+}
+
+.chat-bubble-content .chat-desc {
+    justify-content: space-between;
+    display: flex;
+    margin-top: 10px;
+}
+
+.chat-bubble-content .chat-desc i {
+    font-size: 11px;
+    color: #181818;
+    user-select: none;
+}
+
+.chat-text {
+    user-select: none;
+}
+
+.chat-bubble.other {
+    flex-direction: row-reverse;
+    transform-origin: left;
+}
+
+.chat-bubble.other .chat-bubble-content {
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px 10px 10px 0;
+    max-width: 50%;
+}
+
+.chat-bubble.other .avatar {
+    margin-right: 20px;
+    margin-left: 0px;
+}
+
+.chat-bubble.other .chat-bubble-content .chat-meta span {
+    color: #3b3b3b;
+}
+
+.content-footer {
+    padding-top: 30px;
+    position: absolute;
+    width: 75%;
+    bottom: 130px;
+}
+
+.sendNewMessage {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.sendNewMessage button {
+    width: 36px;
+    height: 36px;
+    background-color: #ccd4ff;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #3A86FF;
+    padding: 0;
+    border-radius: 5px;
+    line-height: 36px;
+    transition: all 0.3s cubic-bezier(0.88, 0.19, 0.37, 1.11);
+}
+
+.sendNewMessage button:hover {
+    transform: scale(1.2);
+}
+
+.sendNewMessage button i {
+    display: block;
+}
+
+.sendNewMessage input {
+    flex-grow: 1;
+    padding: 0 15px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+#sendTextBtn {
+    width: 70px;
+    background-color: #3A86FF;
+    color: #fff;
+}
