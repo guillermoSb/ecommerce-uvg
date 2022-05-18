@@ -1,4 +1,4 @@
-const { collection, getDocs, addDoc, query, where, updateDoc, doc } = require("firebase/firestore");
+const { collection, getDocs, addDoc, query, where, updateDoc, doc, arrayUnion } = require("firebase/firestore");
 const { db } = require("../firebase");
 
 /**
@@ -119,7 +119,47 @@ const createChat = async (req, res) => {
             ]
         });
     }
+};
 
+const sendChat = async (req, res) => {
+    try {
+        const { iniciadoPor, atendidoPor, UserID, userMessage } = req.body;
+        const q = query(collection(db, "chats"), 
+                        where("iniciadoPor", "==", iniciadoPor),
+                        where("estado","==","activo"), 
+                        where("atendidoPor","==", atendidoPor));
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+            const id = querySnapshot.docs[0].id;
+            const ref = doc(db, "chats", id);
+            await updateDoc(ref, {
+                mensajes: arrayUnion({
+                    enviadoPor: UserID,
+                    date: new Date(),
+                    mensaje: userMessage
+                })
+            });
+            return res.status(200).send({
+                ok: true,
+                message: "Enviado con exito."
+            });
+        } else {
+            return res.status(500).send({
+                ok: false,
+                errors: [
+                    "No existe chat con estas caracteristicas."
+                ]
+            });
+        }
+        
+    } catch (error) {
+        return res.status(500).send({
+            ok: false,
+            errors: [
+                "Algo salió mal."
+            ]
+        });
+    }
 };
 
 module.exports = {
@@ -127,4 +167,5 @@ module.exports = {
     getAllChatsBy,
     createChat,
     setChatActive,
+    sendChat
 };
