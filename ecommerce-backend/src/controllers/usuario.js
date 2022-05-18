@@ -5,17 +5,17 @@ const { db, loggedUser } = require("../firebase");
 const app = express();
 app.use(express.json());
 const port = process.env.PORT || 8080;
-app.listen(port, () => {
-    console.log("BarkBark Rest API listening on port &{port}");
-});
+// app.listen(port, () => {
+//     console.log("BarkBark Rest API listening on port &{port}");
+// });
 
 app.get("/", async (req, res) => {
-    res.json({status: "Bienvenido al API de Login"});
+    res.json({ status: "Bienvenido al API de Login" });
 });
 
 app.get("/usuarios", async (req, res) => { //Obtener listado de usuarios
     const querySnapshot = await getDocs(collection(db, "users"));
-    res.json({users: querySnapshot.docs.map(doc => doc.data())});
+    res.json({ users: querySnapshot.docs.map(doc => doc.data()) });
 });
 
 app.get("/usuarios/:user", async (req, res) => { //Obtener un usuario usando como parametro su UID
@@ -31,46 +31,46 @@ app.get("/usuarios/:user", async (req, res) => { //Obtener un usuario usando com
         });
     } catch (error) {
         return res.json({
-            ok:false,
+            ok: false,
             errors: [
                 "Algo salio mal"
             ]
         });
     }
-   
+
 });
 
-app.get("/usuarios/currentUser", async (req,res) => { //Obtener el usuario actualmente autenticado
+app.get("/usuarios/currentUser", async (req, res) => { //Obtener el usuario actualmente autenticado
     return res.json({
         currentUser: loggedUser
     });
 });
 
-app.get("/usuarios/currentUID", async (req,res) => { //Obtener el UID del usuario actualmente autenticado
+app.get("/usuarios/currentUID", async (req, res) => { //Obtener el UID del usuario actualmente autenticado
     return res.json({
         currentUID: loggedUser.uid
     });
 });
 
 const getUsuario = async (req, res) => {
-        const user = req.query.user;
-        try {
-            const querySnapshot = await getDoc(collection(db, "users"), where("email", "==", user));
-            
-            return res.json({
-                ok: true,
-                usuario: querySnapshot.docs.map(doc => doc.data())
-            });
-        } catch (error) {
-            return res.json({
-                ok: false,
-                errors: [
-                    "Algo salió mal."
-                ]
-            });
-        }
+    const user = req.query.user;
+    try {
+        const querySnapshot = await getDoc(collection(db, "users"), where("email", "==", user));
 
-    };
+        return res.json({
+            ok: true,
+            usuario: querySnapshot.docs.map(doc => doc.data())
+        });
+    } catch (error) {
+        return res.json({
+            ok: false,
+            errors: [
+                "Algo salió mal."
+            ]
+        });
+    }
+
+};
 
 module.exports = {
     getUsuario,

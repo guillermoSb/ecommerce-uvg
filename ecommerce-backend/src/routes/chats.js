@@ -11,7 +11,6 @@ router.post(
   "/",
   [
     check("iniciadoPor", "El id del usuario es necesario.").notEmpty(),
-    check("iniciadoPor").custom(chatUniqueValidator),
     validateFields,
   ],
   createChat
@@ -26,13 +25,13 @@ router.get(
 ); // GET /api/chats/
 
 router.post(
-    "/activate",
-    [
-      check("iniciadoPor", "El id del usuario es necesario.").notEmpty(),
-      check("atendidoPor", "El id del admin es necesario.").notEmpty(),
-      validateFields,
-    ],
-    setChatActive
-  ); // POST /api/chats
+  "/activate",
+  [
+    check("iniciadoPor", "El id del usuario es necesario.").notEmpty(),
+    check("atendidoPor", "El id del admin es necesario.").notEmpty(),
+    validateFields,
+  ],
+  setChatActive
+); // POST /api/chats
 
 module.exports = router;
