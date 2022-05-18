@@ -1,10 +1,12 @@
 const { Router } = require("express");
 const { check, param } = require("express-validator");
-const { getAllChats, createChat, getAllChatsBy, setChatActive } = require("../controllers/chats");
+const { getAllChats, createChat, getAllChatsBy, setChatActive, sendChat } = require("../controllers/chats");
 const { validateFields, validateState } = require("../middlewares/validator");
 const { chatUniqueValidator } = require("../validators/chat-unique");
 
 const router = Router();
+
+router.post("/sendChat", sendChat);
 
 router.get("/", getAllChats); // GET /api/chats/
 router.post(
