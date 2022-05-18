@@ -10,7 +10,8 @@ class Server {
      * Rutas de cada modulo
      */
     paths = {
-        chats: "/api/chats"
+        chats: "/api/chats",
+        usuarioRoutes: "/usuario"
     };
 
     constructor() {
@@ -24,6 +25,7 @@ class Server {
      */
     routes() {
         this.app.use(this.paths.chats, require("./routes/chats"));
+        this.app.use(this.paths.usuarioRoutes, require("./routes/usuarioRoutes"));
     }
     /**
      * Habilitar CORS
