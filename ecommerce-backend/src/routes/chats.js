@@ -28,7 +28,6 @@ router.get(
 router.post(
     "/activate",
     [
-      check("iniciadoPor", "El id del usuario es necesario.").notEmpty(),
       check("atendidoPor", "El id del admin es necesario.").notEmpty(),
       validateFields,
     ],
