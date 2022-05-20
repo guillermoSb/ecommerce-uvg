@@ -1,4 +1,4 @@
-const { collection, getDocs, addDoc, query, where, updateDoc, doc, arrayUnion } = require("firebase/firestore");
+const { collection, getDocs, addDoc, query, where, updateDoc, doc, arrayUnion, getDoc } = require("firebase/firestore");
 const { db } = require("../firebase");
 
 /**
@@ -12,7 +12,12 @@ const getAllChats = async (req, res) => {
 
         return res.status(200).send({
             ok: true,
-            chats: querySnapshot.docs.map((doc) => doc.data())
+            chats: querySnapshot.docs.map((doc) => 
+            {
+
+                return {...doc.data(), id: doc.id};
+
+            }),
         });
     } catch (error) {
         return res.status(500).send({
@@ -38,7 +43,12 @@ const getAllChatsBy = async (req, res) => {
 
         return res.status(200).send({
             ok: true,
-            chats: querySnapshot.docs.map((doc) => doc.data())
+            chats: querySnapshot.docs.map((doc) => 
+            {
+
+                return {...doc.data(), id: doc.id};
+
+            }),
         });
     } catch (error) {
         return res.status(500).send({
@@ -95,7 +105,6 @@ const createChat = async (req, res) => {
         });
 
     } catch (error) {
-        console.log(error)
         return res.status(500).send({
             ok: false,
             errors: [
@@ -112,23 +121,29 @@ const createChat = async (req, res) => {
  */
 const setChatActive = async (req, res) => {
     try {
-        const { iniciadoPor, atendidoPor } = req.body;
-        const q = query(collection(db, "chats"),
-            where("iniciadoPor", "==", iniciadoPor),
-            where("estado", "==", "espera"),
-            where("atendidoPor", "==", null));
-        const querySnapshot = await getDocs(q);
-        const id = querySnapshot.docs[0].id;
-        const ref = doc(db, "chats", id);
-        await updateDoc(ref, {
-            estado: "activo",
-            atendidoPor: atendidoPor,
-            fechaInicio: new Date()
+        const { id, atendidoPor } = req.body;
+
+        let querySnapshot = await getDoc(doc(db, "chats",id));
+        if (querySnapshot.exists() && querySnapshot.data().estado == "espera") {
+            const ref = doc(db, "chats", id);
+            await updateDoc(ref, {
+                estado: "activo",
+                atendidoPor: atendidoPor,
+                fechaInicio: new Date()
+            });
+            querySnapshot = await getDoc(doc(db, "chats",id));
+            return res.status(200).send({
+                ok: true,
+                chat: {...querySnapshot.data(), id}
         });
-        return res.status(200).send({
-            ok: true,
-            message: "Activado con exito."
-        });
+        } else {
+            return res.status(500).send({
+                ok: false,
+                errors: [
+                    "El chat no se encuentra disponible."
+                ]
+            });
+        }
     } catch (error) {
         return res.status(500).send({
             ok: false,
