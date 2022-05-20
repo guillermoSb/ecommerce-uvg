@@ -24,6 +24,8 @@ export default class Content extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.chatId && prevProps.chatId !== this.props.chatId) {
             this.attachRealTimeMessageListening();  // Attach the listener for messages
+
+
         }
     }
 
@@ -58,6 +60,12 @@ export default class Content extends Component {
         this.setState({ text: e.target.value });
     };
 
+    enviarMensaje = () => {
+        console.log(this.props.chatId);
+        console.log(this.auth.currentUser.uid);
+        console.log(this.state.text);
+    }
+
     render() {
         return (
             <div className='ChatContent'>
@@ -87,7 +95,7 @@ export default class Content extends Component {
                                 onChange={this.onStateChange}
                                 value={this.state.text}
                             />
-                            <button className='btnSendText' id='sendTextBtn'>
+                            <button className='btnSendText' id='sendTextBtn' onClick={this.enviarMensaje}>
                                 <i className='send'>Enviar</i>
                             </button>
                         </div>
