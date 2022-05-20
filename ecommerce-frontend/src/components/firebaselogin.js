@@ -23,7 +23,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
-const firestore = getFirestore(app);
+export const firestore = getFirestore(app);
 const loggedUser = auth.currentUser;
 const analytics = getAnalytics(app);
 
@@ -34,57 +34,57 @@ export async function regular_signup(email, password) {
 
 export async function facebook_auth() {
   signInWithPopup(auth, FBProvider)
-  .then((result) => {
-    // The signed-in user info.
-    const user = result.user;
-    console.log(user);
-    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-    const credential = FacebookAuthProvider.credentialFromResult(result);
-    const accessToken = credential.accessToken;
-    return credential;
-    // ...
-  })
-  .catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.email;
-    // The AuthCredential type that was used.
-    const credential = FacebookAuthProvider.credentialFromError(error);
+    .then((result) => {
+      // The signed-in user info.
+      const user = result.user;
+      console.log(user);
+      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+      const credential = FacebookAuthProvider.credentialFromResult(result);
+      const accessToken = credential.accessToken;
+      return credential;
+      // ...
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.email;
+      // The AuthCredential type that was used.
+      const credential = FacebookAuthProvider.credentialFromError(error);
 
-    // ...
-  });
-  
+      // ...
+    });
+
 }
 
 export async function google_auth() {
   signInWithPopup(auth, googleProvider)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    console.log(user);
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      console.log(user);
 
-    return token;
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-  });
+      return token;
+      // ...
+    }).catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      // ...
+    });
 }
 
-const createUserDocument = async(email) => {
-  if(!email) return;
-    
+const createUserDocument = async (email) => {
+  if (!email) return;
+
   try {
     const docRef = await addDoc(collection(firestore, "users"), {
       email: email,
@@ -94,7 +94,7 @@ const createUserDocument = async(email) => {
   } catch {
     console.log("Error in user creation (firestore)");
   }
-  
+
 }
 
 export async function regular_login(email, password) {

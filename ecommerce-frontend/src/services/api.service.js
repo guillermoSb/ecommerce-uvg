@@ -9,7 +9,6 @@ const api_url = "http://localhost:8000/api";
 export const initChat = async (iniciadoPor) => {
     const URL = `${api_url}/chats`;
     const body = { iniciadoPor }
-    console.log(body)
     const otherPram = {
 
         method: "POST",
