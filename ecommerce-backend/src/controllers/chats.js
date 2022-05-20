@@ -12,10 +12,9 @@ const getAllChats = async (req, res) => {
 
         return res.status(200).send({
             ok: true,
-            chats: querySnapshot.docs.map((doc) => 
-            {
+            chats: querySnapshot.docs.map((doc) => {
 
-                return {...doc.data(), id: doc.id};
+                return { ...doc.data(), id: doc.id };
 
             }),
         });
@@ -43,10 +42,9 @@ const getAllChatsBy = async (req, res) => {
 
         return res.status(200).send({
             ok: true,
-            chats: querySnapshot.docs.map((doc) => 
-            {
+            chats: querySnapshot.docs.map((doc) => {
 
-                return {...doc.data(), id: doc.id};
+                return { ...doc.data(), id: doc.id };
 
             }),
         });
@@ -115,27 +113,31 @@ const createChat = async (req, res) => {
 };
 
 /**
- * Get all chats
+ * Update chat state
  * @param {*} req 
  * @param {*} res 
  */
-const setChatActive = async (req, res) => {
+const setChatState = async (req, res) => {
     try {
-        const { id, atendidoPor } = req.body;
+        const { id, atendidoPor, estado } = req.body;
 
-        let querySnapshot = await getDoc(doc(db, "chats",id));
-        if (querySnapshot.exists() && querySnapshot.data().estado == "espera") {
+        let querySnapshot = await getDoc(doc(db, "chats", id));
+        if (querySnapshot.exists()) {
             const ref = doc(db, "chats", id);
-            await updateDoc(ref, {
-                estado: "activo",
-                atendidoPor: atendidoPor,
-                fechaInicio: new Date()
-            });
-            querySnapshot = await getDoc(doc(db, "chats",id));
+            const updatedDoc = {
+                estado
+            };
+            // If the state is active, do some extra updates.
+            if (estado === "activo") {
+                updateDoc.fechaInicio = new Date();
+                updateDoc.atendidoPor = atendidoPor;
+            }
+            await updateDoc(ref, updatedDoc);
+            querySnapshot = await getDoc(doc(db, "chats", id));
             return res.status(200).send({
                 ok: true,
-                chat: {...querySnapshot.data(), id}
-        });
+                chat: { ...querySnapshot.data(), id }
+            });
         } else {
             return res.status(500).send({
                 ok: false,
@@ -157,10 +159,10 @@ const setChatActive = async (req, res) => {
 const sendChat = async (req, res) => {
     try {
         const { iniciadoPor, atendidoPor, UserID, userMessage } = req.body;
-        const q = query(collection(db, "chats"), 
-                        where("iniciadoPor", "==", iniciadoPor),
-                        where("estado","==","activo"), 
-                        where("atendidoPor","==", atendidoPor));
+        const q = query(collection(db, "chats"),
+            where("iniciadoPor", "==", iniciadoPor),
+            where("estado", "==", "activo"),
+            where("atendidoPor", "==", atendidoPor));
         const querySnapshot = await getDocs(q);
         if (!querySnapshot.empty) {
             const id = querySnapshot.docs[0].id;
@@ -184,7 +186,7 @@ const sendChat = async (req, res) => {
                 ]
             });
         }
-        
+
     } catch (error) {
         return res.status(500).send({
             ok: false,
@@ -199,6 +201,6 @@ module.exports = {
     getAllChats,
     getAllChatsBy,
     createChat,
-    setChatActive,
+    setChatState,
     sendChat
 };
