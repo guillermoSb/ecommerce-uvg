@@ -1,34 +1,45 @@
 import React, { Component, useState, createRef, useEffect } from 'react';
 import './Content.css';
 import Bubble from './Bubble';
+import { doc, onSnapshot } from "firebase/firestore";
+import { firestore } from '../../components/firebaselogin';
+import { getAuth } from 'firebase/auth';
 
 export default class Content extends Component {
     textEndRef = createRef(null);
-    texts = [
-        {
-            key: 1,
-            image: 'https://images.pexels.com/photos/3660527/pexels-photo-3660527.jpeg',
-            type: 'other',
-            text: 'Bienvenido al chat',
-        }
-    ];
 
     constructor(props) {
         super(props);
         this.state = {
-            chat: this.texts,
             text: '',
+            messages: []
         };
+        this.auth = getAuth();  // Get current firebase auth
     }
 
     scrollToBottom = () => {
         this.textEndRef.current.scrollIntoView({ behavior: 'smooth' });
     };
 
+    componentDidUpdate(prevProps) {
+        if (this.props.chatId && prevProps.chatId !== this.props.chatId) {
+            this.attachRealTimeMessageListening();  // Attach the listener for messages
+        }
+    }
+
+    attachRealTimeMessageListening() {
+        onSnapshot(doc(firestore, "chats", this.props.chatId), (doc) => {
+            const messages = doc.data().mensajes;
+            console.log(messages);
+            this.setState({ messages });
+
+        })
+    }
+
     componentDidMount() {
         window.addEventListener('keydown', (e) => {
             if (e.keyCode == 13) {
-                if (this.state.text != '') {
+                if (this.state.text !== '') {
                     this.texts.push({
                         key: 1,
                         type: '',
@@ -52,14 +63,14 @@ export default class Content extends Component {
             <div className='ChatContent'>
                 <div className='content-body'>
                     <div className='chat-bubbles'>
-                        {this.state.chat.map((textContent, index) => {
+                        {this.state.messages.map((message, index) => {
                             return (
                                 <Bubble
                                     animationDelay={index + 2}
-                                    key={textContent.key}
-                                    user={textContent.type ? textContent.type : 'me'}
-                                    text={textContent.text}
-                                    image={textContent.image}
+                                    key={message.fecha}
+                                    user={this.auth.currentUser.uid === message.enviadoPor ? 'me' : 'other'}
+                                    text={message.contenido}
+                                    image={""}
                                 />
                             );
                         })}
@@ -67,20 +78,21 @@ export default class Content extends Component {
                     </div>
                 </div>
                 <div className='content-footer'>
-                    <div className='sendNewMessage'>
-                        <button className='addFiles'>
-                            <i className='plus'>+</i>
-                        </button>
-                        <input
-                            type='text'
-                            placeholder='Escriba un mensaje'
-                            onChange={this.onStateChange}
-                            value={this.state.text}
-                        />
-                        <button className='btnSendText' id='sendTextBtn'>
-                            <i className='send'>Enviar</i>
-                        </button>
-                    </div>
+
+                    {this.props.chatId ? <>
+                        <div className='sendNewMessage'>
+                            <input
+                                type='text'
+                                placeholder='Escriba un mensaje'
+                                onChange={this.onStateChange}
+                                value={this.state.text}
+                            />
+                            <button className='btnSendText' id='sendTextBtn'>
+                                <i className='send'>Enviar</i>
+                            </button>
+                        </div>
+                    </> : ''}
+
                 </div>
             </div>
         );
