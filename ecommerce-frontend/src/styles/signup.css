@@ -41,6 +41,7 @@ input {
     height: 40px;
     cursor: pointer;
     color: white;
+    text-decoration: none;
 }
 
 .or {

@@ -113,7 +113,7 @@ export default function Login() {
       <button className="resetPassword_button" onClick={() => resetPassword(email)}>
         Restablecer contraseña
       </button>
-      <p>Not a member? <span><a href="google.com">Sign up now</a></span></p>
+      <p>Not a member? <span><a href="/signup">Sign up now</a></span></p>
     </div>
   );
 }
