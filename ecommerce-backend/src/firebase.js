@@ -1,5 +1,7 @@
+const { getAuth } = require("firebase/auth");
 const { initializeApp } = require("firebase/app");
 const { getFirestore } = require("firebase/firestore");
+require("dotenv").config();
 
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_API_KEY,
@@ -11,7 +13,9 @@ const firebaseConfig = {
     measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 };
 const app = initializeApp(firebaseConfig);   // Initialize firebase app
-
+const auth = getAuth();
 const db = getFirestore(app);
+const loggedUser = auth.currentUser;
 
-module.exports = { db };
+
+module.exports = { db, loggedUser };
