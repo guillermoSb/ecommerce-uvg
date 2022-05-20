@@ -27,6 +27,28 @@ const firestore = getFirestore(app);
 const loggedUser = auth.currentUser;
 const analytics = getAnalytics(app);
 
+
+/* Inactivity timeout - set 5 mins */ 
+auth.onAuthStateChanged((user) => {
+  let sessionTimeout = null;
+  if (user === null) {
+    // User is logged out.
+    // Clear the session timeout.
+    sessionTimeout && clearTimeout(sessionTimeout);
+    sessionTimeout = null;
+  } else {
+    // User is logged in.
+    // Fetch the decoded ID token and create a session timeout which signs the user out.
+    user.getIdTokenResult().then((idTokenResult) => {
+      // Make sure all the times are in milliseconds!
+      const authTime = idTokenResult.claims.auth_time * 1000;
+      const sessionDuration = 1000 * 60 * 5;
+      const millisecondsUntilExpiration = sessionDuration - (Date.now() - authTime);
+      sessionTimeout = setTimeout(() => auth.signOut(), millisecondsUntilExpiration);
+    });
+  }
+})
+
 export async function regular_signup(email, password) {
   await createUserWithEmailAndPassword(auth, email, password);
   await createUserDocument(email);
