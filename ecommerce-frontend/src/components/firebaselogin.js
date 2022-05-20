@@ -40,7 +40,7 @@ auth.onAuthStateChanged((user) => {
     // User is logged in.
     // Fetch the decoded ID token and create a session timeout which signs the user out.
     user.getIdTokenResult().then((idTokenResult) => {
-      // Make sure all the times are in milliseconds!
+      // Times are in milliseconds!
       const authTime = idTokenResult.claims.auth_time * 1000;
       const sessionDuration = 1000 * 60 * 5;
       const millisecondsUntilExpiration = sessionDuration - (Date.now() - authTime);
