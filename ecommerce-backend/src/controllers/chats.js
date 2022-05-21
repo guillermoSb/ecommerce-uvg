@@ -163,9 +163,7 @@ const sendChat = async (req, res) => {
                 chatId,
                 userMessage } = req.body;
         let querySnapshot = await getDoc(doc(db, "chats", chatId));
-        //const querySnapshot = await getDocs(q);
         if (querySnapshot.exists()) {
-            // const id = chatId;
             console.log("prueba");
             const ref = doc(db, "chats", chatId);
             await updateDoc(ref, {
