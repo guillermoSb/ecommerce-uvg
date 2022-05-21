@@ -4,6 +4,7 @@ import Bubble from './Bubble';
 import { doc, onSnapshot } from "firebase/firestore";
 import { firestore } from '../../components/firebaselogin';
 import { getAuth } from 'firebase/auth';
+import { sendingChat } from '../../services/api.service';
 
 export default class Content extends Component {
     textEndRef = createRef(null);
@@ -61,9 +62,10 @@ export default class Content extends Component {
     };
 
     enviarMensaje = () => {
-        console.log(this.props.chatId);
+        /* console.log(this.props.chatId);
         console.log(this.auth.currentUser.uid);
-        console.log(this.state.text);
+        console.log(this.state.text); */
+        sendingChat(this.auth.currentUser.uid, this.props.chatId, this.state.text);
     }
 
     render() {
