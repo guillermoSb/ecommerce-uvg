@@ -36,7 +36,6 @@ const Chatbubble = () => {
   };
 
   const abandonChat = () => {
-    console.log("asfdjsdnifuasdifunasdjfni");
     changeState(currentChat,"abandonado");
   }
 
