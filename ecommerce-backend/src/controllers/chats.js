@@ -93,7 +93,7 @@ const createChat = async (req, res) => {
             fechaFin: null,
             mensajes: []
         };
-        // Agregar a firestore
+        // Agregar a firestoreF
         const docRef = await addDoc(collection(db, "chats"), chat);
         chat.id = docRef.id;
         // Enviar respuesta
@@ -159,18 +159,18 @@ const setChatState = async (req, res) => {
 
 const sendChat = async (req, res) => {
     try {
-        const { iniciadoPor, atendidoPor, UserID, userMessage } = req.body;
-        const q = query(collection(db, "chats"),
-            where("iniciadoPor", "==", iniciadoPor),
-            where("estado", "==", "activo"),
-            where("atendidoPor", "==", atendidoPor));
-        const querySnapshot = await getDocs(q);
-        if (!querySnapshot.empty) {
-            const id = querySnapshot.docs[0].id;
-            const ref = doc(db, "chats", id);
+        const { UserId, 
+                chatId,
+                userMessage } = req.body;
+        let querySnapshot = await getDoc(doc(db, "chats", chatId));
+        //const querySnapshot = await getDocs(q);
+        if (querySnapshot.exists()) {
+            // const id = chatId;
+            console.log("prueba");
+            const ref = doc(db, "chats", chatId);
             await updateDoc(ref, {
                 mensajes: arrayUnion({
-                    enviadoPor: UserID,
+                    enviadoPor: UserId,
                     date: new Date(),
                     mensaje: userMessage
                 })
