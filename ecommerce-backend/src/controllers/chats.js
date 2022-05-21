@@ -119,7 +119,7 @@ const createChat = async (req, res) => {
  */
 const setChatState = async (req, res) => {
     try {
-        const { id, atendidoPor, estado } = req.body;
+        const { id, estado } = req.body;
 
         let querySnapshot = await getDoc(doc(db, "chats", id));
         if (querySnapshot.exists()) {
@@ -129,6 +129,7 @@ const setChatState = async (req, res) => {
             };
             // If the state is active, do some extra updates.
             if (estado === "activo") {
+                const {atendidoPor} = req.body;
                 updateDoc.fechaInicio = new Date();
                 updateDoc.atendidoPor = atendidoPor;
             }

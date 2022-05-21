@@ -29,7 +29,8 @@ router.get(
 router.post(
   "/state",
   [
-    check("atendidoPor", "El id del admin es necesario.").notEmpty(),
+    check("id", "El id del chat es necesario.").notEmpty(),
+    check("estado", "El estado del chat es necesario.").notEmpty(),
     validateFields,
   ],
   setChatState

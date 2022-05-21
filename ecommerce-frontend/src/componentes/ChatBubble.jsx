@@ -3,7 +3,7 @@ import "../styles/chat.css";
 import Chat from "./svg/chat";
 import Content from "./content/Content.js";
 import { getAuth } from "firebase/auth";
-import { initChat } from "../services/api.service";
+import { changeState, initChat } from "../services/api.service";
 
 const bubbleSta = {
   open: {
@@ -15,18 +15,34 @@ const bubbleSta = {
 };
 
 const Chatbubble = () => {
+
   const [bubbleState, setBubbleState] = useState("closed");
   const [currentChat, setCurrentChat] = useState(null);
+  const [timeout,setTime] = useState(null);
 
   const initbubble = () => {
     if (bubbleState === "closed") {
       startChat();
       setBubbleState("open");
+      if(timeout) {
+        clearTimeout(timeout)
+        setTime(null)
+      }
     }
     if (bubbleState === "open") {
       setBubbleState("closed");
+      setTime(setTimeout(() => {abandonChat()},120000));
     }
   };
+
+  const abandonChat = () => {
+    console.log("asfdjsdnifuasdifunasdjfni");
+    changeState(currentChat,"abandonado");
+  }
+
+  window.addEventListener("beforeunload", () => {
+    if (currentChat) abandonChat();
+  })
 
   /**
    * Function that initializes the chat
