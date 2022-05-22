@@ -27,11 +27,11 @@ export default class Content extends Component {
     }
 
     attachRealTimeMessageListening() {
-        if(this.props.chatId) {
+        if (this.props.chatId) {
             onSnapshot(doc(firestore, "chats", this.props.chatId), (doc) => {
                 const messages = doc.data().mensajes;
 
-                this.setState({ messages }, function() {this.scrollToBottom()});
+                this.setState({ messages }, function () { this.scrollToBottom() });
 
             })
         }
@@ -39,6 +39,11 @@ export default class Content extends Component {
 
     componentDidMount() {
         this.attachRealTimeMessageListening();
+        document.addEventListener('keydown', (e) => {
+            if (e.keyCode === 13) {
+                this.enviarMensaje();
+            }
+        });
     }
 
     onStateChange = (e) => {
@@ -47,6 +52,8 @@ export default class Content extends Component {
 
     enviarMensaje = () => {
         sendingChat(this.auth.currentUser.uid, this.props.chatId, this.state.text);
+        document.getElementsByClassName('input-message')[0].value = '';
+        this.setState({ text: '' });
     }
 
     render() {
@@ -65,7 +72,7 @@ export default class Content extends Component {
                                 />
                             );
                         })
-                       }
+                        }
                         <div ref={this.textEndRef} />
                     </div>
                 </div>
@@ -74,12 +81,15 @@ export default class Content extends Component {
                     {this.props.chatId ? <>
                         <div className='sendNewMessage'>
                             <input
+                                className='input-message'
                                 type='text'
                                 placeholder='Escriba un mensaje'
                                 onChange={this.onStateChange}
                                 value={this.state.text}
                             />
-                            <button className='btnSendText' id='sendTextBtn' onClick={()=> {this.enviarMensaje()}}>
+                            <button className='btnSendText' id='sendTextBtn' onClick={() => {
+                                this.enviarMensaje();
+                            }}>
                                 <i className='send'>Enviar</i>
                             </button>
                         </div>

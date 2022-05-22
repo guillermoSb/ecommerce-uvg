@@ -1,16 +1,15 @@
 .ChatContent {
     flex-grow: 1;
-    padding: 2.21vw 0.58vw;
     max-width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 100%;
 }
 
 .content-body {
-    max-height: calc(100vh - calc(100vh / 2.5));
     overflow: hidden auto;
-    height: 19vw;
+    height: 100%;
 }
 
 .chat-bubble {
@@ -104,6 +103,7 @@
     justify-content: space-between;
     padding: 0.65vw;
     border-radius: 0.52vw;
+    font-size: 1.2vw;
 }
 
 .sendNewMessage button {
