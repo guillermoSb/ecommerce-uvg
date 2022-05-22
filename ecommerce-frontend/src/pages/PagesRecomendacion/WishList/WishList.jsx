@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import ContenedorItemsRec from "../Componentes/ContenedorItemsRec";
 
-const WishList = () => {
+const WishList = ({ objectsfromdb }) => {
   return (
-    <div>WishList</div>
-  )
-}
+    <div className="wishlistPage">
+      <ContenedorItemsRec title="Wish List" items={objectsfromdb} />
+    </div>
+  );
+};
 
-export default WishList
+export default WishList;
