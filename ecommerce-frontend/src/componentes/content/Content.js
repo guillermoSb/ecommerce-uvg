@@ -19,7 +19,7 @@ export default class Content extends Component {
     }
 
     scrollToBottom = () => {
-        this.textEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        this.textEndRef.current.scrollIntoView(false);
     };
 
     componentDidUpdate(prevProps) {
@@ -73,6 +73,7 @@ export default class Content extends Component {
                 <div className='content-body'>
                     <div className='chat-bubbles'>
                         {this.state.messages.map((message, index) => {
+                            this.scrollToBottom()
                             return (
                                 <Bubble
                                     animationDelay={index + 2}
