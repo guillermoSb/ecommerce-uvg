@@ -1,14 +1,11 @@
-<<<<<<< HEAD
-import logo from "./logo.svg";
-import "./styles/App.scss";
-=======
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import logo from "./logo.svg";
 import "./App.css";
 import Login from "./components/login";
 import Signup from "./components/signup";
->>>>>>> 8081733884530756e2d7d00b31dfe61442f44f68
+import WishList from "./pages/PagesRecomendacion/WishList/WishList";
+import Recomendaciones from "./pages/PagesRecomendacion/Recomendacion/Recomendaciones";
 
 function App() {
   return (
@@ -16,6 +13,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
+        <Route path="/wishlist" element={<WishList />}></Route>
+        <Route path="/recomendaciones" element={<Recomendaciones />}></Route>
       </Routes>
     </Router>
   );

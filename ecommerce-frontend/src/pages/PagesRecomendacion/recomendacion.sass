@@ -4,13 +4,13 @@
     margin: 20px
     padding: 20px 40px
     box-shadow: 1px 2px 2px 2px gray
+    background-color: #fff
     min-width: fit-content
 
 .contenedorItemsRec
     width: fit-content
     max-width: fit-content
     height: auto
-    background-color: #fff
     display: flex
     flex-flow: row wrap
     justify-content: flex-start
@@ -25,12 +25,14 @@
     box-shadow: 1px 2px 2px 2px gray
     display: flex
     justify-content: center
+    img
+        margin: 5px 5px 5px 5px
     
 .itemRecNameAndCart
     width: 100%
     padding: 0
     display: flex
-    justify-content: space-between 
+    justify-content: space-around 
     p
         margin: 0
     
@@ -40,11 +42,19 @@
 
 .bigItemRec:hover
     box-shadow: 1px 2px 2px 2px #0066ff
+    cursor: pointer
 
 .boxRecItems:hover
     box-shadow: 1px 2px 2px 2px #0066ff
+    cursor: pointer
+
 
 .alignToRightRecCont
     position: relative
     float: right
     bottom: 35px
+
+.RecomendacionesPageDescription
+    position: relative
+    display: flex
+    padding: 10px
