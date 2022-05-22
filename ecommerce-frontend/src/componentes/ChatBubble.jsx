@@ -62,7 +62,7 @@ const Chatbubble = () => {
               " bg-gradient-to-br from-primary2 to-primary1 w-[320px] h-[600px] rounded-md mx-auto p-8 tablet:w-[700px] tablet:h-[800px] laptop:w-[500px] laptop:h-[450px]  desktop:w-[650px]"
             }
           >
-            <Content chatId={currentChat} />
+              {currentChat && <Content chatId={currentChat} /> }
           </div>
           <div
             onClick={() => {

@@ -19,52 +19,41 @@ export default class Content extends Component {
     }
 
     scrollToBottom = () => {
-        this.textEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        this.textEndRef.current.scrollIntoView(false);
     };
 
-    componentDidUpdate(prevProps) {
-        if (this.props.chatId && prevProps.chatId === this.props.chatId) {
-            this.attachRealTimeMessageListening();  // Attach the listener for messages
-        }
+    componentDidUpdate() {
+        this.scrollToBottom()
     }
 
     attachRealTimeMessageListening() {
-        onSnapshot(doc(firestore, "chats", this.props.chatId), (doc) => {
-            const messages = doc.data().mensajes;
+        if (this.props.chatId) {
+            onSnapshot(doc(firestore, "chats", this.props.chatId), (doc) => {
+                const messages = doc.data().mensajes;
 
-            this.setState({ messages });
+                this.setState({ messages }, function () { this.scrollToBottom() });
 
-        })
+            })
+        }
     }
 
-    /*componentDidMount() {
-        window.addEventListener('keydown', (e) => {
-            if (e.keyCode == 13) {
-                if (this.state.text !== '') {
-                    this.state.messages.push({
-                        key: 1,
-                        type: '',
-                        text: this.state.text,
-                        image: 'https://images.pexels.com/photos/3660527/pexels-photo-3660527.jpeg',
-                    });
-                    this.setState({ chat: [...this.state.messages] });
-                    this.scrollToBottom();
-                    this.setState({ text: '' });
-                }
+    componentDidMount() {
+        this.attachRealTimeMessageListening();
+        document.addEventListener('keydown', (e) => {
+            if (e.keyCode === 13) {
+                this.enviarMensaje();
             }
         });
-        this.scrollToBottom();
-    }*/
+    }
 
     onStateChange = (e) => {
         this.setState({ text: e.target.value });
     };
 
     enviarMensaje = () => {
-        /* console.log(this.props.chatId);
-        console.log(this.auth.currentUser.uid);
-        console.log(this.state.text); */
         sendingChat(this.auth.currentUser.uid, this.props.chatId, this.state.text);
+        document.getElementsByClassName('input-message')[0].value = '';
+        this.setState({ text: '' });
     }
 
     render() {
@@ -82,7 +71,8 @@ export default class Content extends Component {
                                     image={""}
                                 />
                             );
-                        })}
+                        })
+                        }
                         <div ref={this.textEndRef} />
                     </div>
                 </div>
@@ -91,12 +81,15 @@ export default class Content extends Component {
                     {this.props.chatId ? <>
                         <div className='sendNewMessage'>
                             <input
+                                className='input-message'
                                 type='text'
                                 placeholder='Escriba un mensaje'
                                 onChange={this.onStateChange}
                                 value={this.state.text}
                             />
-                            <button className='btnSendText' id='sendTextBtn' onClick={this.enviarMensaje}>
+                            <button className='btnSendText' id='sendTextBtn' onClick={() => {
+                                this.enviarMensaje();
+                            }}>
                                 <i className='send'>Enviar</i>
                             </button>
                         </div>
