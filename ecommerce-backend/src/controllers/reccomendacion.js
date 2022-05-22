@@ -6,19 +6,37 @@
 
  */
 
+const { collection, getDocs, addDoc, query, where, updateDoc, doc, Timestamp } = require("firebase/firestore");
+const { db } = require("../firebase");
 
 const getRecomendationByName = (req, res) => {
 
-    return res.status(200).send({
-        ok: true,
-        chats: []
-    });
+};
+
+const getRecomendationByCategory = async (req, res) => {
+    const {categoria} = req.body;
+    try {
+        const querySnapshot = await getDocs(query(collection(db, "inventario"), where("categoria", "==", categoria))) ;
+        return res.status(200).send({   
+            ok: true,
+            productos: querySnapshot.docs.map((doc) => doc.data())
+        });
+    } catch (error) {
+        return res.status(500).send({
+            ok: false,
+            errors: [
+                "Algo salió mal."
+            ]
+        });
+    }
+
 };
 /* 
 AQUI hacen sus funciones
 */
 module.exports = {
-    getRecomendationByName
+    getRecomendationByName,
+    getRecomendationByCategory
 };
 /* 
 aqui las exportan
