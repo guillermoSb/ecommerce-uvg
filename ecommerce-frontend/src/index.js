@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+<<<<<<< HEAD
 import "./styles/index.scss";
 import App from "./App";
 import ContenedorItemsRec from "./pages/PagesRecomendacion/Componentes/ContenedorItemsRec";
@@ -10,6 +11,13 @@ import SpectsRec from "./pages/PagesRecomendacion/Componentes/SpectsRec";
 // aqui podes reemplazar el contenedor por app y estructurarla bien bien, solo lo reemplace para probar
 // la wishlist
 
+=======
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter as Router } from "react-router-dom";
+
+>>>>>>> 8081733884530756e2d7d00b31dfe61442f44f68
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
