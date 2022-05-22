@@ -22,48 +22,31 @@ export default class Content extends Component {
         this.textEndRef.current.scrollIntoView(false);
     };
 
-    componentDidUpdate(prevProps) {
-        if (this.props.chatId && prevProps.chatId === this.props.chatId) {
-            this.attachRealTimeMessageListening();  // Attach the listener for messages
-        }
+    componentDidUpdate() {
+        this.scrollToBottom()
     }
 
     attachRealTimeMessageListening() {
-        onSnapshot(doc(firestore, "chats", this.props.chatId), (doc) => {
-            const messages = doc.data().mensajes;
+        if(this.props.chatId) {
+            console.log('asdasd');
+            onSnapshot(doc(firestore, "chats", this.props.chatId), (doc) => {
+                const messages = doc.data().mensajes;
 
-            this.setState({ messages });
+                this.setState({ messages }, function() {this.scrollToBottom()});
 
-        })
+            })
+        }
     }
 
-    /*componentDidMount() {
-        window.addEventListener('keydown', (e) => {
-            if (e.keyCode == 13) {
-                if (this.state.text !== '') {
-                    this.state.messages.push({
-                        key: 1,
-                        type: '',
-                        text: this.state.text,
-                        image: 'https://images.pexels.com/photos/3660527/pexels-photo-3660527.jpeg',
-                    });
-                    this.setState({ chat: [...this.state.messages] });
-                    this.scrollToBottom();
-                    this.setState({ text: '' });
-                }
-            }
-        });
-        this.scrollToBottom();
-    }*/
+    componentDidMount() {
+        this.attachRealTimeMessageListening();
+    }
 
     onStateChange = (e) => {
         this.setState({ text: e.target.value });
     };
 
     enviarMensaje = () => {
-        /* console.log(this.props.chatId);
-        console.log(this.auth.currentUser.uid);
-        console.log(this.state.text); */
         sendingChat(this.auth.currentUser.uid, this.props.chatId, this.state.text);
     }
 
@@ -73,7 +56,6 @@ export default class Content extends Component {
                 <div className='content-body'>
                     <div className='chat-bubbles'>
                         {this.state.messages.map((message, index) => {
-                            this.scrollToBottom()
                             return (
                                 <Bubble
                                     animationDelay={index + 2}
@@ -83,7 +65,8 @@ export default class Content extends Component {
                                     image={""}
                                 />
                             );
-                        })}
+                        })
+                       }
                         <div ref={this.textEndRef} />
                     </div>
                 </div>
@@ -97,7 +80,7 @@ export default class Content extends Component {
                                 onChange={this.onStateChange}
                                 value={this.state.text}
                             />
-                            <button className='btnSendText' id='sendTextBtn' onClick={this.enviarMensaje}>
+                            <button className='btnSendText' id='sendTextBtn' onClick={()=> {this.enviarMensaje()}}>
                                 <i className='send'>Enviar</i>
                             </button>
                         </div>
