@@ -3,6 +3,6 @@ const { getRecomendationByName } = require("../controllers/reccomendacion");
 
 const router = Router();
 
-router.get("/", getRecomendationByName);   // GET /api/chats/
+router.get("/get-nombre/:nombre", getRecomendationByName);   // GET /api/chats/
 
 module.exports = router;
