@@ -7,7 +7,7 @@ export default class Bubble extends Component {
         super(props);
         var today = new Date(),
             time = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes();
-        this.state = { user: this.use, text: '', currentTime: time }
+        this.state = { user: this.props.user, text: '', currentTime: time }
     }
     render() {
         return (

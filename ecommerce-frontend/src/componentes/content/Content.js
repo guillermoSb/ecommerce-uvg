@@ -23,10 +23,8 @@ export default class Content extends Component {
     };
 
     componentDidUpdate(prevProps) {
-        if (this.props.chatId && prevProps.chatId !== this.props.chatId) {
+        if (this.props.chatId && prevProps.chatId === this.props.chatId) {
             this.attachRealTimeMessageListening();  // Attach the listener for messages
-
-
         }
     }
 
@@ -39,24 +37,25 @@ export default class Content extends Component {
         })
     }
 
-    componentDidMount() {
+    /*componentDidMount() {
         window.addEventListener('keydown', (e) => {
             if (e.keyCode == 13) {
                 if (this.state.text !== '') {
-                    this.texts.push({
+                    this.state.messages.push({
                         key: 1,
                         type: '',
                         text: this.state.text,
                         image: 'https://images.pexels.com/photos/3660527/pexels-photo-3660527.jpeg',
                     });
-                    this.setState({ chat: [...this.texts] });
+                    this.setState({ chat: [...this.state.messages] });
                     this.scrollToBottom();
                     this.setState({ text: '' });
                 }
             }
         });
         this.scrollToBottom();
-    }
+    }*/
+
     onStateChange = (e) => {
         this.setState({ text: e.target.value });
     };
@@ -77,9 +76,9 @@ export default class Content extends Component {
                             return (
                                 <Bubble
                                     animationDelay={index + 2}
-                                    key={message.fecha}
+                                    key={message.date}
                                     user={this.auth.currentUser.uid === message.enviadoPor ? 'me' : 'other'}
-                                    text={message.contenido}
+                                    text={message.mensaje}
                                     image={""}
                                 />
                             );
