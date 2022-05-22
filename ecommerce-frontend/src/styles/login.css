@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+
+.loginWrap {
+    background-color: white;
+    border-radius: 25px;
+    width: 300px;
+    padding: 20px;
+    margin: 4% auto 4%;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+.login_button, .resetPassword_button {
+    background-color: #409B49;
+    height: 40px;
+    cursor: pointer;
+    color: white;
+    margin-top: 10px;
+}
+
+.google_button {
+    background-color: #FF0000;
+}
+    
+.facebook_button {
+    background-color: #11389B;
+    
+}
+
+button {
+    border-radius: 20px;
+    margin: 10px, 0;
+    outline: none;
+    border: none;
+    font-size: 15px;
+    margin-right: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+img {
+    width: 180px;
+}
