@@ -1,19 +1,23 @@
 .ChatContent {
     flex-grow: 1;
-    padding: 20px 40px;
-    max-width: 63%;
+    padding: 2.21vw 0.58vw;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .content-body {
     max-height: calc(100vh - calc(100vh / 2.5));
-    overflow: auto;
+    overflow: hidden auto;
+    height: 19vw;
 }
 
 .chat-bubble {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    margin-bottom: 15px;
+    margin-bottom: 0.97vw;
     transition: all 0.3s ease;
     transform: scale(0);
     transform-origin: right;
@@ -37,29 +41,29 @@
 }
 
 .chat-bubble .avatar {
-    margin-right: 0px;
-    margin-left: 20px;
+    margin-right: 0vw;
+    margin-left: 1.30vw;
     background: #3b3b3b;
-    padding: 1px;
+    padding: 0.06vw;
 }
 
 .chat-bubble-content {
     background-color: #3A86FF;
     color: #fff;
-    padding: 10px;
-    border-radius: 10px 10px 0 10px;
+    padding: 0.65vw;
+    border-radius: 0.65vw 0.65vw 0 0.65vw;
     max-width: 50%;
-    min-width: 215px;
+    min-width: 13.99vw;
 }
 
 .chat-bubble-content .chat-desc {
     justify-content: space-between;
     display: flex;
-    margin-top: 10px;
+    margin-top: 0.65vw;
 }
 
 .chat-bubble-content .chat-desc i {
-    font-size: 11px;
+    font-size: 0.71vw;
     color: #181818;
     user-select: none;
 }
@@ -76,13 +80,13 @@
 .chat-bubble.other .chat-bubble-content {
     background-color: #fff;
     color: #000;
-    border-radius: 10px 10px 10px 0;
+    border-radius: 0.65vw 0.65vw 0.65vw 0;
     max-width: 50%;
 }
 
 .chat-bubble.other .avatar {
-    margin-right: 20px;
-    margin-left: 0px;
+    margin-right: 1.30vw;
+    margin-left: 0vw;
 }
 
 .chat-bubble.other .chat-bubble-content .chat-meta span {
@@ -90,33 +94,31 @@
 }
 
 .content-footer {
-    padding-top: 30px;
-    position: absolute;
-    width: 75%;
-    bottom: 130px;
+    width: 100%;
+    bottom: 8.46vw;
 }
 
 .sendNewMessage {
     background-color: #ffffff;
     display: flex;
     justify-content: space-between;
-    padding: 10px;
-    border-radius: 8px;
+    padding: 0.65vw;
+    border-radius: 0.52vw;
 }
 
 .sendNewMessage button {
-    width: 36px;
-    height: 36px;
+    width: 2.34vw;
+    height: 2.34vw;
     background-color: #ccd4ff;
     border: none;
     box-shadow: none;
     outline: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1.04vw;
     color: #3A86FF;
     padding: 0;
-    border-radius: 5px;
-    line-height: 36px;
+    border-radius: 0.32vw;
+    line-height: 2.34vw;
     transition: all 0.3s cubic-bezier(0.88, 0.19, 0.37, 1.11);
 }
 
@@ -130,14 +132,14 @@
 
 .sendNewMessage input {
     flex-grow: 1;
-    padding: 0 15px;
+    padding: 0 0.97vw;
     background-color: transparent;
     border: none;
     outline: none;
 }
 
 #sendTextBtn {
-    width: 70px;
+    width: 4.55vw;
     background-color: #3A86FF;
     color: #fff;
 }
