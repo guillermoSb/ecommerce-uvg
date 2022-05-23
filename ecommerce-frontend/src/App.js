@@ -1,32 +1,16 @@
 import React from 'react';
-import pp from '../img/pp.jpg';
+
 import GreenCircle from '../img/greenCir.png';
 import redCirc from '../img/redCirc.png';
 import grayCirc from '../img/grayCirc.png';
-
+import LeftPanel from '../Components/LeftPanel.js';
 import './style.scss';
 
 function App() {
   return (
     <>
       <div className="container">
-        <div className="leftPanel">
-          <img src={pp} id="pp"></img>
-          <div className="options-container">
-            <a href="" className="option">
-              Home
-            </a>
-            <a href="" className="option">
-              Chats
-            </a>
-            <a href="" className="option">
-              Settings
-            </a>
-            <a href="" className="option">
-              Logout
-            </a>
-          </div>
-        </div>
+        <LeftPanel home="https://stackoverflow.com/questions/763745/how-to-get-text-box-value-in-javascript"></LeftPanel>
         <div className="panel-container">
           <div id="generalPanel">
             <div className="items-container">
