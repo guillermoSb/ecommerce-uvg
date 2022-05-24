@@ -9,7 +9,25 @@ const {
 } = require("firebase/firestore");
 const { db } = require("../firebase");
 
-const getRecomendationByScore = async (req, res) => {};
+const getRecomendationByRating = async (req, res) => {
+  try {
+    const { calificacion } = req.params;
+    const que = query(
+      collection(db, "inventario"),
+      where("calificacion", "==", calificacion)
+    );
+    const querySnapshot = await getDocs(que);
+    return res.status(200).send({
+      ok: true,
+      productos: querySnapshot.docs.map((doc) => doc.data()),
+    });
+  } catch (error) {
+    return res.status(500).send({
+      ok: false,
+      errors: ["Algo salió mal."],
+    });
+  }
+};
 
 const getRecomendationByName = async (req, res) => {
   const { nombre } = req.params;
@@ -52,7 +70,7 @@ AQUI hacen sus funciones
 module.exports = {
   getRecomendationByName,
   getRecomendationByCategory,
-  getRecomendationByScore,
+  getRecomendationByRating,
 };
 /* 
 aqui las exportan
