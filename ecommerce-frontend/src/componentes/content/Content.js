@@ -38,6 +38,7 @@ export default class Content extends Component {
     }
 
     componentDidMount() {
+        this.sendWelcomeMessage();
         this.attachRealTimeMessageListening();
         document.addEventListener('keydown', (e) => {
             if (e.keyCode === 13) {
@@ -55,6 +56,12 @@ export default class Content extends Component {
         document.getElementsByClassName('input-message')[0].value = '';
         this.setState({ text: '' });
     }
+
+    // on first load send welcome message
+    sendWelcomeMessage = () => {
+        sendingChat(this.auth.currentUser.uid, this.props.chatId, 'Bienvenido a la conversación');
+    }
+
 
     render() {
         return (
