@@ -48,7 +48,7 @@ const getRecomendationByName = async (req, res) => {
 };
 
 const getRecomendationByCategory = async (req, res) => {
-  const { categoria } = req.body;
+  const { categoria } = req.params;
   try {
     const querySnapshot = await getDocs(
       query(collection(db, "inventario"), where("categoria", "==", categoria))

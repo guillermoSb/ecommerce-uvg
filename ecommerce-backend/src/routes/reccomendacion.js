@@ -4,6 +4,6 @@ const { getRecomendationByName, getRecomendationByCategory } = require("../contr
 const router = Router();
 
 router.get("/get-nombre/:nombre", getRecomendationByName);
-router.get("/by-category", getRecomendationByCategory);
+router.get("/by-category/:categoria", getRecomendationByCategory);
 
 module.exports = router;
