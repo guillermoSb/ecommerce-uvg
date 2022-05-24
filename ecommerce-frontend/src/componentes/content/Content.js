@@ -7,10 +7,6 @@ import { getAuth } from 'firebase/auth';
 import { sendingChat } from '../../services/api.service';
 import "../../styles/chat.css";
 
-const chatState = {
-    estado:"",
-}
-
 export default class Content extends Component {
     textEndRef = createRef(null);
 
@@ -18,6 +14,7 @@ export default class Content extends Component {
         super(props);
         this.state = {
             text: '',
+            estado:'',
             messages: []
         };
         this.auth = getAuth();  // Get current firebase auth
@@ -36,17 +33,12 @@ export default class Content extends Component {
             onSnapshot(doc(firestore, "chats", this.props.chatId), (doc) => {
                 const messages = doc.data().mensajes;
                 const estado = doc.data().estado
-                console.log(doc.data())
                 this.setState({ messages }, function () { this.scrollToBottom() });
-                console.log(estado)
+                this.setState({estado:estado})
             })
         }
     }
 
-    estadoC(){
-        const estado = doc.data().estado
-        return estado;
-    }
 
     componentDidMount() {
         this.attachRealTimeMessageListening();
@@ -71,7 +63,7 @@ export default class Content extends Component {
         return (
             <div className='ChatContent'>
                 <div className="text-bg4 text-sm">
-                    {chatState.estado=this.estadoC}
+                    {this.state.estado}
                 </div>
                 <div className='content-body'>
                     <div className='chat-bubbles'>
