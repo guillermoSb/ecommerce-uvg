@@ -64,6 +64,24 @@ const getRecomendationByCategory = async (req, res) => {
     });
   }
 };
+
+const getRecomendationByBrand = async (req, res) => {
+  const { marca } = req.body;
+  try {
+    const querySnapshot = await getDocs(
+      query(collection(db, "inventario"), where("marca", "==", marca))
+    );
+    return res.status(200).send({
+      ok: true,
+      productos: querySnapshot.docs.map((doc) => doc.data()),
+    });
+  } catch (error) {
+    return res.status(500).send({
+      ok: false,
+      errors: ["Algo salió mal."],
+    });
+  }
+};
 /* 
 AQUI hacen sus funciones
 */
@@ -71,6 +89,7 @@ module.exports = {
   getRecomendationByName,
   getRecomendationByCategory,
   getRecomendationByRating,
+  getRecomendationByBrand,
 };
 /* 
 aqui las exportan
