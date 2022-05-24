@@ -5,6 +5,11 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { firestore } from '../../components/firebaselogin';
 import { getAuth } from 'firebase/auth';
 import { sendingChat } from '../../services/api.service';
+import "../../styles/chat.css";
+
+const chatState = {
+    estado:"",
+}
 
 export default class Content extends Component {
     textEndRef = createRef(null);
@@ -30,11 +35,17 @@ export default class Content extends Component {
         if (this.props.chatId) {
             onSnapshot(doc(firestore, "chats", this.props.chatId), (doc) => {
                 const messages = doc.data().mensajes;
-
+                const estado = doc.data().estado
+                console.log(doc.data())
                 this.setState({ messages }, function () { this.scrollToBottom() });
-
+                console.log(estado)
             })
         }
+    }
+
+    estadoC(){
+        const estado = doc.data().estado
+        return estado;
     }
 
     componentDidMount() {
@@ -59,6 +70,9 @@ export default class Content extends Component {
     render() {
         return (
             <div className='ChatContent'>
+                <div className="text-bg4 text-sm">
+                    {chatState.estado=this.estadoC}
+                </div>
                 <div className='content-body'>
                     <div className='chat-bubbles'>
                         {this.state.messages.map((message, index) => {
