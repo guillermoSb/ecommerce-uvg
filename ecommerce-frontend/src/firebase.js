@@ -1,5 +1,6 @@
-/* eslint-disable no-template-curly-in-string */
-// Import the functions you need from the SDKs you need
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, signOut, FacebookAuthProvider } from "firebase/auth";
@@ -8,16 +9,15 @@ import { addDoc, getFirestore, collection } from "firebase/firestore";
 const googleProvider = new GoogleAuthProvider();
 const FBProvider = new FacebookAuthProvider();
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyA_WclKi_NmhfPviSUYxdLUJ4FXvexgGpE",
-  authDomain: "stw-uvg-proyecto2.firebaseapp.com",
-  projectId: "stw-uvg-proyecto2",
-  storageBucket: "stw-uvg-proyecto2.appspot.com",
-  messagingSenderId: "365577856480",
-  appId: "1:365577856480:web:08ba1a0676098be3543785",
-  measurementId: "G-902XSQSB9J",
+    apiKey: "AIzaSyA_WclKi_NmhfPviSUYxdLUJ4FXvexgGpE",
+    authDomain: "stw-uvg-proyecto2.firebaseapp.com",
+    databaseURL: "https://stw-uvg-proyecto2-default-rtdb.firebaseio.com",
+    projectId: "stw-uvg-proyecto2",
+    storageBucket: "stw-uvg-proyecto2.appspot.com",
+    messagingSenderId: "365577856480",
+    appId: "1:365577856480:web:f7987beb398947f8543785",
+    measurementId: "G-GKWKDPWBCK"
 };
 
 // Initialize Firebase
@@ -26,6 +26,28 @@ const auth = getAuth();
 const firestore = getFirestore(app);
 const loggedUser = auth.currentUser;
 const analytics = getAnalytics(app);
+
+
+/* Inactivity timeout - set 5 mins */ 
+auth.onAuthStateChanged((user) => {
+  let sessionTimeout = null;
+  if (user === null) {
+    // User is logged out.
+    // Clear the session timeout.
+    sessionTimeout && clearTimeout(sessionTimeout);
+    sessionTimeout = null;
+  } else {
+    // User is logged in.
+    // Fetch the decoded ID token and create a session timeout which signs the user out.
+    user.getIdTokenResult().then((idTokenResult) => {
+      // Times are in milliseconds!
+      const authTime = idTokenResult.claims.auth_time * 1000;
+      const sessionDuration = 1000 * 60 * 5;
+      const millisecondsUntilExpiration = sessionDuration - (Date.now() - authTime);
+      sessionTimeout = setTimeout(() => auth.signOut(), millisecondsUntilExpiration);
+    });
+  }
+})
 
 export async function regular_signup(email, password) {
   await createUserWithEmailAndPassword(auth, email, password);
@@ -109,3 +131,9 @@ export function signOutAccount() {
     // An error happened.
   });
 }
+
+firebase.initializeApp(firebaseConfig);
+
+export default firebase;
+
+

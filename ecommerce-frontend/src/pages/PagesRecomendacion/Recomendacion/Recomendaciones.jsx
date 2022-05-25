@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ContenedorItemsRec from "../Componentes/ContenedorItemsRec";
 import BigItemDescripcion from "../Componentes/BigItemDescripcion";
 import SpectsRec from "../Componentes/SpectsRec";
@@ -15,7 +15,10 @@ const items = {
   thisdesc5: "adfasdfasd",
 };
 
-const Recomendaciones = ({ objectsfromdb }) => {
+const Recomendaciones = () => {
+
+  const [objectsfromdb, setObjectsfromdb] = useState([]);
+
   return (
     <div>
       <div className="RecomendacionesPageDescription">

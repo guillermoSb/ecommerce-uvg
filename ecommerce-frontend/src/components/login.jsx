@@ -7,7 +7,7 @@ import {
   google_auth,
   getUser,
   facebook_auth,
-} from "./firebaselogin";
+} from "../firebase";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import "../styles/login.css";
 import profile_img from '../assets/profile.png';
@@ -113,7 +113,7 @@ export default function Login() {
       <button className="resetPassword_button" onClick={() => resetPassword(email)}>
         Restablecer contraseña
       </button>
-      <p>Not a member? <span><a href="google.com">Sign up now</a></span></p>
+      <p>Not a member? <span><a href="/signup">Sign up now</a></span></p>
     </div>
   );
 }

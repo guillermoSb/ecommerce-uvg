@@ -1,9 +1,9 @@
 import React from "react";
 import { FaCartPlus, FaTrash } from "../../../../node_modules/react-icons/fa";
-
-const ItemsRec = ({ id, name, image, borrarItem, agregarItem }) => {
+import { Link } from "react-router-dom";
+const ItemsRec = ({ id, name, image, removeWishList, id_global }) => {
   return (
-    <div id={id}>
+    <Link id={id} to={`/details-product/${id}`}>
       <img src={image} alt="imagen" height="150px" />
       <div className="itemRecNameAndCart">
         <p>{name}</p>
@@ -17,10 +17,12 @@ const ItemsRec = ({ id, name, image, borrarItem, agregarItem }) => {
           size={20}
           onMouseOver={({ target }) => (target.style.color = "red")}
           onMouseOut={({ target }) => (target.style.color = "black")}
-          onClick={borrarItem}
+          onClick={() => {
+            removeWishList(id_global);
+          }}
         />
       </div>
-    </div>
+    </Link>
   );
 };
 
