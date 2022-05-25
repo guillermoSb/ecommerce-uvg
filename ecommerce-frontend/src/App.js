@@ -4,6 +4,8 @@ import logo from "./logo.svg";
 import "./App.css";
 import Login from "./components/login";
 import Signup from "./components/signup";
+import Catalogo from './components/Catalogo';
+
 
 function App() {
   return (
@@ -11,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
+        {/* <Route path="/catalogo" element={<Catalogo/>}></Route> */}
       </Routes>
     </Router>
   );
