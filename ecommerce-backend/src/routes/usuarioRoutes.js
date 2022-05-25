@@ -7,7 +7,7 @@ const router = Router();
 
 
 
-router.get (
+router.get ( //API GET /usuario/search/(userUID buscado) (Devuelve los datos del usuario buscado)
     "/search/:user",
     [
         param("user", "user invalido")
@@ -15,17 +15,17 @@ router.get (
     getUsuario
 );
 
-router.get (
+router.get ( //API GET /usuario/current (Devuelve el email del usuario actualmente autenticado)
     "/current",
     getCurrentUser
 );
 
-router.get(
+router.get( //API GET /usuario/currentUID (Devuelve el UserID del usuario actualmente autenticado)
     "/currentUID",
     getCurrentUserUID
 );
 
-router.get(
+router.get( //API GET /usuario/usuarios (Listado de todos los usuarios y sus atributos)
     "/usuarios",
     listadoUsuarios
 );

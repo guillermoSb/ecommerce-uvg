@@ -12,7 +12,8 @@ class Server {
     paths = {
         chats: '/api/chats',
         reccomendacion: '/api/reccomendacion',
-        usuarioRoutes: "/usuario"
+        usuarioRoutes: "/usuario",
+        wishlist: "/api/wishlist"
     };
 
     constructor() {
@@ -28,6 +29,7 @@ class Server {
         this.app.use(this.paths.chats, require('./routes/chats'));
         this.app.use(this.paths.reccomendacion, require('./routes/reccomendacion'));
         this.app.use(this.paths.usuarioRoutes, require("./routes/usuarioRoutes"));
+        this.app.use(this.paths.wishlist, require("./routes/wishlist"));
     }
     /**
      * Habilitar CORS

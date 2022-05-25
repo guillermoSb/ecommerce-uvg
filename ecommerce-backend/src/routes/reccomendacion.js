@@ -10,7 +10,7 @@ const {
 const router = Router();
 
 router.get("/get-nombre/:nombre", getRecomendationByName);
-router.get("/by-category/:categoria", getRecomendationByCategory);
+router.get("/by-category/:id", getRecomendationByCategory);
 router.get("/get-item-by-id/:id", getItemById);
 router.get("/get-calificacion/:calificacion", getRecomendationByRating);
 router.get("/get-marca/:marca", getRecomendationByBrand);
