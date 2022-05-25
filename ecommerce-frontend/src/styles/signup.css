@@ -19,7 +19,7 @@ label {
 }
 
 input {
-    background-color: #E5E5E5;
+    background-color: #CCC9DC;
     border-radius: 20px;
     margin: 10px, 0;
     width: 100%;
@@ -37,7 +37,7 @@ input {
 }
 
 .signup_button, .login_button {
-    background-color: #409B49;
+    background-color: #324A5F;
     height: 40px;
     cursor: pointer;
     color: white;
