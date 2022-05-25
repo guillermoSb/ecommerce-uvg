@@ -1,12 +1,4 @@
-const {
-  collection,
-  getDocs,
-  addDoc,
-  query,
-  where,
-  updateDoc,
-  doc,
-} = require("firebase/firestore");
+const { collection, getDocs, query, where } = require("firebase/firestore");
 const { db } = require("../firebase");
 
 const getRecomendationByRating = async (req, res) => {
