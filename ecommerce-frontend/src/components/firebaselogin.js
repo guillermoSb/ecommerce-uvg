@@ -11,13 +11,13 @@ const FBProvider = new FacebookAuthProvider();
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyA_WclKi_NmhfPviSUYxdLUJ4FXvexgGpE",
-  authDomain: "stw-uvg-proyecto2.firebaseapp.com",
-  projectId: "stw-uvg-proyecto2",
-  storageBucket: "stw-uvg-proyecto2.appspot.com",
-  messagingSenderId: "365577856480",
-  appId: "1:365577856480:web:08ba1a0676098be3543785",
-  measurementId: "G-902XSQSB9J",
+  apiKey: "AIzaSyB-lVV_pu8TlFoOaSBUifu1MnBygNriHZs",
+  authDomain: "e-commerce-chat-c4578.firebaseapp.com",
+  projectId: "e-commerce-chat-c4578",
+  storageBucket: "e-commerce-chat-c4578.appspot.com",
+  messagingSenderId: "628163791171",
+  appId: "1:628163791171:web:df61a31aefb9b023f547f6",
+  measurementId: "G-7B141R0M5T",
 };
 
 // Initialize Firebase
