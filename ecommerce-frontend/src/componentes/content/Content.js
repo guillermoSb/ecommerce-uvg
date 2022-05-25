@@ -62,7 +62,7 @@ export default class Content extends Component {
     render() {
         return (
             <div className='ChatContent'>
-                <div className="text-bg4 text-sm">
+                <div className="text-[#FFF] text-sm bg-bg2 rounded-3xl w-16 text-center shadow-2xl border-2 border-bg3">
                     {this.state.estado}
                 </div>
                 <div className='content-body'>
