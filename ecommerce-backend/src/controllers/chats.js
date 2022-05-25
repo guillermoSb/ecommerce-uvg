@@ -119,7 +119,7 @@ const createChat = async (req, res) => {
  */
 const setChatState = async (req, res) => {
     try {
-        const { id, estado } = req.body;
+        const { id, atendidoPor = "", estado } = req.body;
 
         let querySnapshot = await getDoc(doc(db, "chats", id));
         if (querySnapshot.exists()) {
@@ -129,7 +129,14 @@ const setChatState = async (req, res) => {
             };
             // If the state is active, do some extra updates.
             if (estado === "activo") {
-                const {atendidoPor} = req.body;
+                if (!atendidoPor) {
+                    return res.status(400).send({
+                        ok: false,
+                        errors: [
+                            "No se envió el campo enviadoPor",
+                        ]
+                    });
+                }
                 updateDoc.fechaInicio = new Date();
                 updateDoc.atendidoPor = atendidoPor;
             }
@@ -159,9 +166,9 @@ const setChatState = async (req, res) => {
 
 const sendChat = async (req, res) => {
     try {
-        const { UserId, 
-                chatId,
-                userMessage } = req.body;
+        const { UserId,
+            chatId,
+            userMessage } = req.body;
         let querySnapshot = await getDoc(doc(db, "chats", chatId));
         if (querySnapshot.exists()) {
             console.log("prueba");
