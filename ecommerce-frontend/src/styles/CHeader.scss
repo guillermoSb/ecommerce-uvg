@@ -1,0 +1,127 @@
+#catalogo_header {
+    background-color: rgba(255, 255, 255, 0.9);
+    height: 50px;
+    width: 100%;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0px;
+    position: sticky;
+    z-index: 4;
+    top: 0px;
+}
+
+#title {
+    color: black;
+    text-align: center;
+    align-content: center;
+}
+
+#catalogo_logo {
+    height: 32px;
+    width: 32px;
+    padding-left: 0px;
+    padding-top: 0px;
+}
+
+#spacer_div {
+    width: 15px;
+}
+
+.navver {
+    align-items: center;
+    background-color: rgba(255, 255, 255, 1);
+    display: flex;
+    height: 60px;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+button {
+    color: #767676;
+    background-color: rgba(255, 255, 255, 0);
+    outline-color: rgba(0, 0, 0, 0);
+    border-width: 0px;
+    text-align: center;
+    font-size: 14px;
+    font-family: 'Nunito', sans-serif;
+    border-radius: 10px;
+    transition: all 0.1s ease-in-out;
+}
+
+button:hover {
+    color: black;
+    border-color: black;
+}
+
+.nav_list {
+    align-items: center;
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+}
+
+.__bar {
+    background-color: #d1d1d1;
+    content: "";
+    height: 32px;
+    width: 1px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+#nav_button {
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 20px;
+}
+
+#btn-menu {
+    margin-right: 0px;
+    display: flex;
+    margin-left: auto;
+    background-color: #707070;
+    border-color: #707070;
+}
+
+.iconHeader {
+    color: black;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+#btn-cart-header{
+    position: absolute;
+    right: 10%
+}
+#btn-star-header{
+    position: absolute;
+    right: 15%
+}
+#btn-menu-header{
+    position: absolute;
+    right: 5%
+}
+
+.btn.btn-primary.iconHeader {
+    color: rgba(0, 0, 0, 0.5);
+    background-color: transparent;
+    border-color: transparent;
+    margin-right: 0px;
+    padding-right: 0px;
+}
+
+.btn.btn-primary.iconHeader:hover {
+    color: rgb(0, 0, 0);
+}
+
+.card.card-wide {
+    border-radius: 10px;
+}
+
+.card {
+    border-radius: 10px !important;
+}
