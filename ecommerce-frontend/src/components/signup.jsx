@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { regular_signup } from "./firebaselogin";
+import { regular_signup } from "../firebase";
 import profile_img from '../assets/profile.png';
 
 import '../styles/signup.css';
 
 export default function Signup() {
   const [loading, setLoading] = useState(false);
-  const [userInfo, setUserInfo] = useState("");
 
   const {
     register,
@@ -85,7 +84,7 @@ export default function Signup() {
         <input className = "signup_button" disabled={loading} type="submit" value="Sign Up" />
         <hr />
         <p className = "or">OR</p>
-        <input className = "login_button" disabled={loading} type="submit" value = "Log in"/>
+        <a href="/"><input className = "login_button" disabled={loading} type="button" value = "Log in"></input></a>
       </form>
     </div>
   );
