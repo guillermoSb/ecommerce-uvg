@@ -14,7 +14,7 @@ export default class Content extends Component {
         super(props);
         this.state = {
             text: '',
-            estado:'',
+            estado: '',
             messages: []
         };
         this.auth = getAuth();  // Get current firebase auth
@@ -31,10 +31,11 @@ export default class Content extends Component {
     attachRealTimeMessageListening() {
         if (this.props.chatId) {
             onSnapshot(doc(firestore, "chats", this.props.chatId), (doc) => {
+                console.log(doc.data())
                 const messages = doc.data().mensajes;
                 const estado = doc.data().estado
-                this.setState({ messages }, function () { this.scrollToBottom() });
-                this.setState({estado:estado})
+                this.setState({ messages, estado }, function () { this.scrollToBottom() });
+
             })
         }
     }
