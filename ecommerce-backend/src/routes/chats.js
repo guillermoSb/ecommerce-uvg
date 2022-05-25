@@ -29,11 +29,6 @@ router.get(
 router.post(
   "/state",
   [
-<<<<<<< HEAD
-    check("id", "El id del chat es necesario.").notEmpty(),
-    check("estado", "El estado del chat es necesario.").notEmpty(),
-=======
->>>>>>> feature/end-chat
     validateFields,
   ],
   setChatState
