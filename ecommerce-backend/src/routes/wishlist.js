@@ -5,6 +5,6 @@ const router = Router();
 
 router.get("/by-user/:uid", getWishlistByUser);
 router.post("/save-as-wish", saveDoc);
-router.delete("/remove-from-wish", removeDoc);
+router.delete("/remove-from-wish/:id", removeDoc);
 
 module.exports = router;

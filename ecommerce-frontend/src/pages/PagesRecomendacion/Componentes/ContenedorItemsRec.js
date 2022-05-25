@@ -2,15 +2,15 @@ import React from "react";
 import ItemsRec from "./ItemsRec";
 import "../recomendacion.sass";
 
-const ContenedorItemsRec = ({ title, items }) => {
+const ContenedorItemsRec = ({ title, items, removeWishList }) => {
   return (
     <div className="contenedorItemsRecDiv">
       <h2>{title}</h2>
       <ul className="contenedorItemsRec">
-        {items.map((item) => {
+        {items.map((item, index) => {
           return (
-            <div className="boxRecItems">
-              <ItemsRec id={item.id} name={item.name} image={item.image} />
+            <div key={index} className="boxRecItems">
+              <ItemsRec removeWishList={removeWishList} id_global={item.id_global} id={item.producto.ID || item.ID} name={item.producto.nombre || item.nombre} image={ item.producto.imagen || item.imagen} />
             </div>
           );
         })}
