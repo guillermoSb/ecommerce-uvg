@@ -57,9 +57,9 @@ export default class Content extends Component {
         this.setState({ text: '' });
     }
 
-    // on first load send welcome message
-    sendWelcomeMessage = () => {
-        sendingChat(this.auth.currentUser.uid, this.props.chatId, 'Bienvenido a la conversación');
+    // on first load send welcome message from the system
+    sendWelcomeMessage() {
+        sendingChat('system', this.props.chatId, 'Bienvenido a nuestro chat');
     }
 
 
