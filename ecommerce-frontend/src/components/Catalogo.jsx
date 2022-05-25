@@ -5,10 +5,6 @@ import CHeader from './CHeader';
 import Card from './ProductCard';
 import { getData } from '../firebase';
 
-// import prod1 from "../imgs/prod_1.png"
-// import prod2 from "../imgs/prod_2.png"
-// import prod3 from "../imgs/prod_3.png"
-// import prod4 from "../imgs/prod_4.png"
 
 export default function Catalogo() {
   // const [products, setProducts] = useState([
@@ -101,8 +97,6 @@ export default function Catalogo() {
              }else{
                let category = products.filter(products => products.categoria === listCategories[i])
                updateDisplayProducts([...category])
-               console.log("categorias",category)
-               console.log("showing",displayProducts)
              }
             }
           }>{listCategories[i]}</a>
@@ -115,7 +109,7 @@ export default function Catalogo() {
   function setCards() {
     const row = [];
     for (let i = 0; i < displayProducts.length; i += 1) {
-      const id = displayProducts[i].id;
+      const id = displayProducts[i].ID;
       const titulo = displayProducts[i].nombre;
       const precio = displayProducts[i].precio;
       const img = displayProducts[i].imagen;
@@ -126,7 +120,6 @@ export default function Catalogo() {
         <Card id={id} imgSrc={img} titulo={titulo} precio={precio} descripcion={descripcion} cantidad={cantidad}/>
       );
     }
-    console.log("seting cards", row);
     return row;
   }
 
@@ -135,9 +128,9 @@ export default function Catalogo() {
     const row = [];
     displayProducts.map((item) => {
       if (search !== '' && item.nombre.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
-        row.push(<Card id={item.id} imgSrc={item.imagen} titulo={item.nombre} precio={item.precio} descripcion={item.descripcion} cantidad={item.cantidad}/>)
+        row.push(<Card id={item.ID} imgSrc={item.imagen} titulo={item.nombre} precio={item.precio} descripcion={item.descripcion} cantidad={item.cantidad}/>)
       }
-      else if (search === '') row.push(<Card id={item.id} imgSrc={item.img} titulo={item.nombre} precio={item.precio} descripcion={item.descripcion}/>)
+      else if (search === '') row.push(<Card id={item.id} imgSrc={item.img} titulo={item.nombre} precio={item.precio} descripcion={item.descripcion} cantidad={item.cantidad} />)
     })
     return row;
   }
@@ -160,7 +153,7 @@ export default function Catalogo() {
     let cards = []
     displayProducts.map((item) => {
       if (item.precio >= minimo && item.precio <= maximo) {
-        cards.push(<Card id={item.id} imgSrc={item.imagen} titulo={item.nombre} precio={item.precio} descripcion={item.descripcion} cantidad={item.cantidad}/>)
+        cards.push(<Card id={item.ID} imgSrc={item.imagen} titulo={item.nombre} precio={item.precio} descripcion={item.descripcion} cantidad={item.cantidad}/>)
       }
     })
     return cards

@@ -141,6 +141,24 @@ export async function  getData(){
 
 }
 
+export function addCompra(imagen, precio, itemcode, nombre, cantidad_disponible) {
+  if (cantidad_disponible > 0) {
+    firebase.firestore().collection('carrito').doc('ZsuFnGu76TWPQus6xGce').set(
+      {items: firebase.firestore.FieldValue.arrayUnion( {
+              "imagen":imagen, 
+              "precio":precio, 
+              "itemcode":itemcode, 
+              "nombre":nombre, 
+              "cantidad":cantidad_disponible 
+      })},
+      {merge: true}
+    );
+    alert(`${nombre} added to cart!`);
+  } else {
+    alert(`Couldn't add ${nombre} to cart.`);
+  }
+}
+
 firebase.initializeApp(firebaseConfig);
 
 export default firebase;
