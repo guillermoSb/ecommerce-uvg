@@ -12,10 +12,7 @@ export default class CentralItem extends React.Component {
                 ID: "V8763NF57CYZB3fKHg1u",
                 imagen: "https://www.vuescript.com/wp-content/uploads/2018/11/Show-Loader-During-Image-Loading-vue-load-image.png",
                 descripcion: "descripcion",
-                fecha: {
-                    "seconds": 0,
-                    "nanoseconds": 0
-                },
+                fecha: '0',
                 precio: 0,
                 categoria: "categoria",
                 calificacion: 0,
@@ -38,7 +35,8 @@ export default class CentralItem extends React.Component {
         return (
             <div className='centrarl-card-item-wrapper'>
                 {(this.state.product && this.state.product!==0 ) && (
-                <div> 
+                <>
+                <div > 
                     <div className='card-item-image-spaceArt' style={(this.state.product.imagen) ? { backgroundImage: `url(${this.state.product.imagen})`, backgroundSize: 'cover' } : {}}> </div>
                     <div className='info-into-central-card-item'> 
                         <p className='no-style-p'>Q{this.state.product.precio} </p>
@@ -50,7 +48,16 @@ export default class CentralItem extends React.Component {
 
 
                     </div>
-                </div>)}
+                </div>
+                <ul className='char-in-details-product'> 
+                    <li>Cantidad de ventas: {this.state.product.cant_ventas}</li>
+                    <li>Calificacion: {this.state.product.calificacion}/5</li>
+                    <li>Fecha: {this.state.product.fecha}</li>
+                    <li>Existencias: {this.state.product.cantidad}</li>
+
+                </ul>
+                </>
+                )}
                 {!this.state.product && (<div> Loading...</div>)}
             </div>
         )
