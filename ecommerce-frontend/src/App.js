@@ -18,7 +18,7 @@ function App() {
         <Route path="/wishlist" element={<WishList />}></Route>
         <Route path="/recomendaciones" element={<Recomendaciones />}></Route>
         <Route path="/wishlist" element={<WishList />}></Route>
-        <Route path="/details-product/:id" element={<PaginaDetallesRec />}></Route>
+        <Route path="/details-product/:id" element={<PaginaDetallesRec tipo_de_recomendacion="/by-category"/>}></Route>
 
         {/* <Route path="/catalogo" element={<Catalogo/>}></Route> */}
       </Routes>

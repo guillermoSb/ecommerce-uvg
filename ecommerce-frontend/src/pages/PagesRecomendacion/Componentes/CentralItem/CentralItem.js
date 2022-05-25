@@ -25,9 +25,7 @@ export default class CentralItem extends React.Component {
     componentDidMount(){
         axios.get(`http://localhost:3000/api/reccomendacion/get-item-by-id/${this.props.id}`)
         .then((res) => {
-            console.log(res)
             if(res.data.producto) {
-                console.log(res.data.producto)
                 this.setState({product: res.data.producto }) }
     })
     }

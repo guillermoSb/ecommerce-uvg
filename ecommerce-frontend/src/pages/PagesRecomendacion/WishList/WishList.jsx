@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ContenedorItemsRec from "../Componentes/ContenedorItemsRec";
 import { api } from "../../../api";
-import Swal from "sweetalert2";
+import Swal from "sweetalert2"; 
 
 const WishList = () => {
   const [objectsfromdb, setObjectsfromdb] = useState([]);
