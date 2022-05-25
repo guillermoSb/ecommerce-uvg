@@ -11,6 +11,7 @@ import {
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import "../styles/login.css";
 import profile_img from '../assets/profile.png';
+import { FaWindowRestore } from "react-icons/fa";
 
 const auth = getAuth();
 
@@ -55,6 +56,7 @@ export default function Login() {
       await regular_login(watch("email"), watch("password"));
       setUserInfo(watch("email"));
       alert("Usuario logueado con exito");
+      window.location = '/Catalogo';
     } catch (error) {
       alert("Usuario o contraseña incorrecta. Asegurese que todo este bien");
     }

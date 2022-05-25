@@ -11,12 +11,11 @@ export default function CHeader(props) {
           <div id="spacer_div" />
           <ul className="nav_list">
             <button type="button" id="nav_button"> Home </button>
-            <button type="button" id="nav_button"> Browse </button>
           </ul>
           <div className="__bar" />
-          <ul className="nav_list">
+          {/* <ul className="nav_list">
             <button type="button" id="nav_button"> Contact </button>
-          </ul>
+          </ul> */}
           <a href="#ref" className="btn btn-primary iconHeader" id="btn-cart-header"><FaShoppingCart/></a>
           <a href="#ref" className="btn btn-primary iconHeader" id="btn-star-header"><FaStar/></a>
         </nav>

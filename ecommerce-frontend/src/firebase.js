@@ -5,7 +5,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, signOut, FacebookAuthProvider } from "firebase/auth";
 import "firebase/firestore";
-import { addDoc, getFirestore, collection } from "firebase/firestore";
+import { addDoc, getFirestore, collection, getDocs } from "firebase/firestore";
 const googleProvider = new GoogleAuthProvider();
 const FBProvider = new FacebookAuthProvider();
 
@@ -130,6 +130,15 @@ export function signOutAccount() {
   }).catch((error) => {
     // An error happened.
   });
+}
+
+export async function  getData(){
+
+  let data = [];
+  let datos = await firebase.firestore().collection('inventario').get()
+  datos.docs.forEach(item=>{data.push(item.data())});
+  return(data)
+
 }
 
 firebase.initializeApp(firebaseConfig);

@@ -9,6 +9,7 @@ export default function ProductCard(props) {
   const { precio } = props;
   const { descripcion } = props;
   const { id } = props;
+  const { cantidad } = props;
 
   function addCompra(imagen, precio, itemcode, nombre, cantidad_disponible) {
     firebase.firestore().collection('carrito').doc('ZsuFnGu76TWPQus6xGce').set(
@@ -23,15 +24,23 @@ export default function ProductCard(props) {
     );
   }
 
+  function addWish (imagen, precio, itemcode, nombre, cantidad_disponible){
+
+  }
+
   return (
-    <div className="card" alt = "prueba" id={id} >
+    <div className="card" alt = "prueba" key={id} id={id} >
         <img className="card-img-top" src={imgSrc} alt=""/>
         <div className="card-body">
             <h5 className="card-title">{titulo}</h5>
             <h5 className="card-title">{"$"+ precio}</h5>
-            <p className="card-text">{descripcion}</p>
-            <a href="#ref" className="btn btn-primary" onClick={addCompra("img",precio,id,titulo,1)}><FaCartPlus/></a>
-            <a href="#ref" className="btn btn-primary" id="btn-star"><FaStar/></a>
+            <div className="desc">
+              <p className="card-text">{descripcion}</p>
+            </div>
+        </div>
+        <div className = "divbtn">
+          <a href="#ref" className="btn btn-primary btncard" onClick={() => {addCompra("img",precio,id,titulo,cantidad)}}><FaCartPlus/></a>
+          <a href="#ref" className="btn btn-primary btncard" id="btn-star" onClick={() => {addWish("img",precio,id,titulo,cantidad)}}><FaStar/></a>
         </div>
     </div>
     
