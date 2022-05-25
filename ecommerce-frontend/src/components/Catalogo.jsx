@@ -26,7 +26,18 @@ export default function Catalogo() {
   const [listCategories, updateCategories] = useState([]);
 
   useEffect(()=>{
-    getData().then(res => {setProducts(res);updateDisplayProducts(res)})
+    getData().then(res => {
+      setProducts(res);
+      updateDisplayProducts(res);
+      let categories = []
+      for (let i = 0; i < res.length; i += 1) {
+        if (!categories.includes(res[i].categoria)){
+          categories.push(res[i].categoria)
+        }
+      }
+      categories.unshift("All")
+      updateCategories(categories)
+    })
   }, [])
 
   const [displayProducts, updateDisplayProducts] = useState([...products]);
@@ -90,6 +101,8 @@ export default function Catalogo() {
              }else{
                let category = products.filter(products => products.categoria === listCategories[i])
                updateDisplayProducts([...category])
+               console.log("categorias",category)
+               console.log("showing",displayProducts)
              }
             }
           }>{listCategories[i]}</a>
@@ -101,7 +114,7 @@ export default function Catalogo() {
 
   function setCards() {
     const row = [];
-    for (let i = 0; i < displayProducts.length-1; i += 1) {
+    for (let i = 0; i < displayProducts.length; i += 1) {
       const id = displayProducts[i].id;
       const titulo = displayProducts[i].nombre;
       const precio = displayProducts[i].precio;
@@ -113,6 +126,7 @@ export default function Catalogo() {
         <Card id={id} imgSrc={img} titulo={titulo} precio={precio} descripcion={descripcion} cantidad={cantidad}/>
       );
     }
+    console.log("seting cards", row);
     return row;
   }
 
