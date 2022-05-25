@@ -16,14 +16,42 @@
     cursor: pointer;
     color: white;
     margin-top: 10px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.resetPassword_button {
+    border-radius: 20px;
+    margin: 10px, 0;
+    outline: none;
+    border: none;
+    font-size: 15px;
+    margin-right: 10px;
+    color: white;
+    cursor: pointer;
 }
 
 .google_button {
     background-color: #FF0000;
+    border-radius: 20px;
+    margin: 10px, 0;
+    outline: none;
+    border: none;
+    font-size: 15px;
+    margin-right: 10px;
+    color: white;
+    cursor: pointer;
 }
     
 .facebook_button {
     background-color: #11389B;
+    border-radius: 20px;
+    margin: 10px, 0;
+    outline: none;
+    border: none;
+    font-size: 15px;
+    margin-right: 10px;
+    color: white;
+    cursor: pointer;
     
 }
 

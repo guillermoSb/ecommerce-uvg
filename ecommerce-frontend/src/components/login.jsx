@@ -7,7 +7,7 @@ import {
   google_auth,
   getUser,
   facebook_auth,
-} from "./firebaselogin";
+} from "../firebase";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import "../styles/login.css";
 import profile_img from '../assets/profile.png';

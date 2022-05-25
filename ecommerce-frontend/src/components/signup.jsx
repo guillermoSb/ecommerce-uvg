@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { regular_signup } from "./firebaselogin";
+import { regular_signup } from "../firebase";
 import profile_img from '../assets/profile.png';
 
 import '../styles/signup.css';
