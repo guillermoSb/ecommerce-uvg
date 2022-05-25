@@ -1,10 +1,10 @@
 .centrarl-card-item-wrapper{
     border: 1px solid #CCCED1; 
-    width: 220px;
-    height: 400px;
+    width: 1180px;
+    height: 450px;
     display: flex;
-    justify-content: space-around;
     background-color: white;
+    padding: 10px;
 }
 .card-item-image-spaceArt{
     width: 200px;
@@ -35,4 +35,14 @@
 .buttons-section-into-central-card-item{
     width: 100%;
     height: 80px;
+}
+.char-in-details-product{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 50px;
+    gap: 20px;
 }

@@ -40,8 +40,12 @@ const getRecomendationByName = async (req, res) => {
 };
 
 const getRecomendationByCategory = async (req, res) => {
-  const { categoria } = req.params;
+  const { id } = req.params;
   try {
+    const querySnapshotT = await getDocs(
+      query(collection(db, "inventario"), where("ID", "==", id))
+    );
+    const categoria = querySnapshotT.docs.map((doc) => doc.data())[0].categoria;
     const querySnapshot = await getDocs(
       query(collection(db, "inventario"), where("categoria", "==", categoria))
     );
@@ -85,7 +89,11 @@ const getItemById = async (req, res) => {
     if(querySnapshot.docs.map((doc) => doc.data())[0])
     return res.status(200).send({
       ok: true,
-      producto: querySnapshot.docs.map((doc) => doc.data())[0],
+      producto: querySnapshot.docs.map((doc) =>{     
+        const d = doc.data();
+        d.fecha = d.fecha.toDate();
+        return d;
+    })[0],
     }); else
     return res.status(400).send({
       msg: "No hay producto con ese ID",
