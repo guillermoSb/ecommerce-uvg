@@ -117,99 +117,87 @@ const createChat = async (req, res) => {
  * @param {*} res
  */
 const setChatState = async (req, res) => {
-    try {
-        const { id, atendidoPor = "", estado } = req.body;
+  try {
+    const { id, atendidoPor = "", estado } = req.body;
 
-        let querySnapshot = await getDoc(doc(db, "chats", id));
-        if (querySnapshot.exists()) {
-            const ref = doc(db, "chats", id);
-            const updatedDoc = {
-                estado
-            };
-            // If the state is active, do some extra updates.
-            if (estado === "activo") {
-                if (!atendidoPor) {
-                    return res.status(400).send({
-                        ok: false,
-                        errors: [
-                            "No se envió el campo enviadoPor",
-                        ]
-                    });
-                }
-                updateDoc.fechaInicio = new Date();
-                updateDoc.atendidoPor = atendidoPor;
-            }
-            await updateDoc(ref, updatedDoc);
-            querySnapshot = await getDoc(doc(db, "chats", id));
-            return res.status(200).send({
-                ok: true,
-                chat: { ...querySnapshot.data(), id }
-            });
-        } else {
-            return res.status(500).send({
-                ok: false,
-                errors: [
-                    "El chat no se encuentra disponible."
-                ]
-            });
-        }
-    } catch (error) {
-        return res.status(500).send({
+    let querySnapshot = await getDoc(doc(db, "chats", id));
+    if (querySnapshot.exists()) {
+      const ref = doc(db, "chats", id);
+      const updatedDoc = {
+        estado
+      };
+      // If the state is active, do some extra updates.
+      if (estado === "activo") {
+        if (!atendidoPor) {
+          return res.status(400).send({
             ok: false,
             errors: [
-                "Algo salió mal."
+              "No se envió el campo enviadoPor",
             ]
-        });
+          });
+        }
+        updateDoc.fechaInicio = new Date();
+        updateDoc.atendidoPor = atendidoPor;
+      }
+      await updateDoc(ref, updatedDoc);
+      querySnapshot = await getDoc(doc(db, "chats", id));
+      return res.status(200).send({
+        ok: true,
+        chat: { ...querySnapshot.data(), id }
+      });
+    } else {
+      return res.status(500).send({
+        ok: false,
+        errors: [
+          "El chat no se encuentra disponible."
+        ]
+      });
     }
   } catch (error) {
     return res.status(500).send({
       ok: false,
-      errors: ["Algo salió mal."],
+      errors: [
+        "Algo salió mal."
+      ]
     });
   }
 };
 
 const sendChat = async (req, res) => {
-    try {
-        const { UserId,
-            chatId,
-            userMessage } = req.body;
-        let querySnapshot = await getDoc(doc(db, "chats", chatId));
-        if (querySnapshot.exists()) {
-            console.log("prueba");
-            const ref = doc(db, "chats", chatId);
-            await updateDoc(ref, {
-                mensajes: arrayUnion({
-                    enviadoPor: UserId,
-                    date: new Date(),
-                    mensaje: userMessage
-                })
-            });
-            return res.status(200).send({
-                ok: true,
-                message: "Enviado con exito."
-            });
-        } else {
-            return res.status(500).send({
-                ok: false,
-                errors: [
-                    "No existe chat con estas caracteristicas."
-                ]
-            });
-        }
-
-    } catch (error) {
-        return res.status(500).send({
-            ok: false,
-            errors: [
-                "Algo salió mal."
-            ]
-        });
+  try {
+    const { UserId,
+      chatId,
+      userMessage } = req.body;
+    let querySnapshot = await getDoc(doc(db, "chats", chatId));
+    if (querySnapshot.exists()) {
+      console.log("prueba");
+      const ref = doc(db, "chats", chatId);
+      await updateDoc(ref, {
+        mensajes: arrayUnion({
+          enviadoPor: UserId,
+          date: new Date(),
+          mensaje: userMessage
+        })
+      });
+      return res.status(200).send({
+        ok: true,
+        message: "Enviado con exito."
+      });
+    } else {
+      return res.status(500).send({
+        ok: false,
+        errors: [
+          "No existe chat con estas caracteristicas."
+        ]
+      });
     }
+
   } catch (error) {
     return res.status(500).send({
       ok: false,
-      errors: ["Algo salió mal."],
+      errors: [
+        "Algo salió mal."
+      ]
     });
   }
 };
