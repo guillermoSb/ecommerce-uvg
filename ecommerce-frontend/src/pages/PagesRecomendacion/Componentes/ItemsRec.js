@@ -3,10 +3,12 @@ import { FaCartPlus, FaTrash } from "../../../../node_modules/react-icons/fa";
 import { Link } from "react-router-dom";
 const ItemsRec = ({ id, name, image, removeWishList, id_global }) => {
   return (
-    <Link id={id} to={`/details-product/${id}`}>
+    <div>
       <img src={image} alt="imagen" height="150px" />
       <div className="itemRecNameAndCart">
-        <p>{name}</p>
+        <Link id={id} to={`/details-product/${id}`}>
+          <p>{name}</p>
+        </Link>
         <FaCartPlus
           size={20}
           onMouseOver={({ target }) => (target.style.color = "#0066ff")}
@@ -22,7 +24,7 @@ const ItemsRec = ({ id, name, image, removeWishList, id_global }) => {
           }}
         />
       </div>
-    </Link>
+    </div>
   );
 };
 

@@ -17,7 +17,7 @@ export default function CHeader(props) {
             <button type="button" id="nav_button"> Contact </button>
           </ul> */}
           <a href="#ref" className="btn btn-primary iconHeader" id="btn-cart-header"><FaShoppingCart/></a>
-          <a href="#ref" className="btn btn-primary iconHeader" id="btn-star-header"><FaStar/></a>
+          <a href="/wishlist" className="btn btn-primary iconHeader" id="btn-star-header"><FaStar/></a>
         </nav>
       </header>
     );

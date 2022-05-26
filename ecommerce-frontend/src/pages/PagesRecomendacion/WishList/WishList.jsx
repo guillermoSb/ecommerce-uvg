@@ -8,7 +8,7 @@ const WishList = () => {
 
   useEffect(() => {
     api
-      .get("/api/wishlist/by-user/" + localStorage.getItem("token"))
+      .get("/api/wishlist/by-user/" + localStorage.getItem("uid"))
       .then((res) => {
         setObjectsfromdb(res.data.wishlist);
       });
@@ -18,7 +18,7 @@ const WishList = () => {
     Swal.fire({
       title: "¿Está seguro de quitar el producto?",
       showDenyButton: true,
-      confirmButtonText: "S[i",
+      confirmButtonText: "Sí",
       denyButtonText: `Cancelar`,
     }).then((result) => {
       if (result.isConfirmed) {

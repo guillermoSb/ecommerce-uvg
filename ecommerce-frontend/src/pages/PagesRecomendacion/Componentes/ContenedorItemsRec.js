@@ -11,7 +11,7 @@ const ContenedorItemsRec = ({ title, items, removeWishList, limit}) => {
         {items.map((item, index) => {
           return (
             <div key={index} className="boxRecItems">
-              <ItemsRec removeWishList={removeWishList} id_global={item.id_global} id={item.producto?item.producto.ID:item.ID?item.ID:null} name={item.producto?item.producto.nombre:item.nombre?item.nombre:null} image={ item.producto?item.producto.imagen:item.imagen?item.imagen:null} />
+              <ItemsRec removeWishList={removeWishList} id_global={item.id_global} id={item.producto?item.producto.itemcode:item.ID?item.ID:null} name={item.producto?item.producto.nombre:item.nombre?item.nombre:null} image={ item.producto?item.producto.imagen:item.imagen?item.imagen:null} />
             </div>
           );
         })}
