@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <div className="container">
-        <LeftPanel home="" self="" settings="" logout=""></LeftPanel>
+        <LeftPanel home="https://stackoverflow.com/questions/763745/how-to-get-text-box-value-in-javascript"></LeftPanel>
         <div className="panel-container">
           <div id="generalPanel">
             <div className="items-container">
