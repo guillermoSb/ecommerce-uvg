@@ -3,7 +3,6 @@ import {useParams, useLocation} from "react-router-dom";
 import CHeader from '../../../components/CHeader'
 import './pagina-detalles-rec-styles.scss'
 import CentralItem from '../Componentes/CentralItem/CentralItem'
-import Recomendaciones from './Recomendaciones';
 import ContenedorItemsRec from '../Componentes/ContenedorItemsRec';
 import { api } from "../../../api";
 import Swal from "sweetalert2";
