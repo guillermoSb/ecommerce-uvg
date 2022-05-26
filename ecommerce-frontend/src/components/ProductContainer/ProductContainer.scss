@@ -1,0 +1,157 @@
+.prodCon {
+    width: 800px;
+    height: 250px;
+    background-color: #fafafa75;
+    margin: 0 auto;
+    position: sticky;
+    border-radius: 1rem;
+    margin-bottom: .5rem;
+    font-size: 70px;
+}
+.prodCon{
+    .prodConGrid {
+        display: grid;
+        width: 765px;
+        height: 250px;
+        background-color: transparent;
+        grid-template-columns: auto auto auto auto;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-radius: 1rem;
+    }
+}
+
+.prodCon{
+    .prodConGrid{
+        .grid-infoProduct {
+            margin-left: 5px;
+            font-size: 13px;
+            color: aliceblue;
+            align-items: center;
+            width: 200px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        
+    }
+}
+
+.prodCon{
+    .prodConGrid{
+        .grid-infoProduct {
+            .grid-infoProductSize{
+                .info-product{
+                    color :aliceblue;
+                }
+            }
+        }
+        
+    }
+}
+.prodCon{
+    .prodConGrid{
+        .grid-infoProduct {
+          .foto{
+              padding-top: 10px;
+          }
+        }
+        
+    }
+}
+
+.prodCon{
+    .prodConGrid{
+        .grid-infoProduct{
+            .grid-infoProductSize {
+                display: grid;
+                grid-template-rows: auto auto;
+                font-size: 13px;
+                color: aliceblue;
+                margin-top: 20px;
+            }
+
+        }
+    }
+}
+
+.prodCon{
+    .prodConGrid{
+        .grid-infoProduct{
+            .grid-infoProductSize2 {
+                display: grid;
+                grid-template-columns: auto auto;
+                margin-top: 15px;
+            }
+            
+           
+        }
+    }
+}
+.prodCon{
+    .prodConGrid{
+        .grid-infoProduct{
+            .info-price {
+                font-size: 30px;
+                margin-top: 100px;  
+            }
+
+        }
+    }
+}
+.prodCon{
+    .prodConGrid{
+        .grid-infoProduct{
+            .grid-infoProductSize2 {
+                .btn {
+                    padding: 0px;
+                    background-color: transparent;
+                    border: none;
+                }
+               
+            }
+            
+           
+        }
+    }
+}
+
+
+.prodCon{
+    .prodConGrid{
+        .grid-infoProduct{
+            .product-size {
+                width: 80px;
+                height: 100px;
+                background-color: #fafafa75;
+                padding-top: 10px;
+                margin-top: 20px;
+                font-weight: bold;
+                margin-left: 60px;
+                border-radius: 1rem;
+                font-size: 50px;
+                text-align: center;
+                padding-top: 30px;
+                color: #1B2A41;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            }
+
+
+        }
+    }
+}
+
+.prodCon{
+    .prodConGrid{
+        .grid-infoProduct{
+            .info-product {
+                width: 150px;
+                height: 150px;
+                padding-top: 10px;
+                margin-top: 20px;
+                font-weight: bold;
+                border-radius: 1rem;
+                font-size: 20px;
+                color: black;
+            }
+        }
+    }
+}

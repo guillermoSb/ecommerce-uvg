@@ -3,6 +3,7 @@ import ContenedorItemsRec from "../Componentes/ContenedorItemsRec";
 import { api } from "../../../api";
 import Swal from "sweetalert2";
 import CHeader from "../../../components/CHeader";
+import './styles.css';
 
 const WishList = () => {
   const [objectsfromdb, setObjectsfromdb] = useState([]);
@@ -28,12 +29,12 @@ const WishList = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         api.remove("/api/wishlist/remove-from-wish/" + id).then(() => {
+          getData();
           Swal.fire({
             title: "Exíto",
             text: "Producto eliminado de lista de deseos.",
             icon: "success",
           });
-          getData();
         });
       }
     });
@@ -42,14 +43,13 @@ const WishList = () => {
   return (
     <React.Fragment>
       <CHeader />
-      <div className="wishlistPage" 
-      //style={{backgroundColor: 'rgb(93, 116, 137)'}}
-      >
-        {objectsfromdb.length > 0 ?<ContenedorItemsRec
-          removeWishList={removeWishList}
-          title="Wish List"
-          items={objectsfromdb}
-        />: <p style={{margin: '20px'}}>Agrega productos a tu listad de deseos: <a href="/Catalogo">catálogo de productos</a> </p>}
+      <div className="wishlistPage">
+        <ContenedorItemsRec
+            removeWishList={removeWishList}
+            title="Wish List"
+            items={objectsfromdb}
+            wish={true}
+          />
       </div>
     </React.Fragment>
   );
