@@ -4,9 +4,14 @@ import { Link } from "react-router-dom";
 const ItemsRec = ({ id, name, image, removeWishList, id_global }) => {
   return (
     <div>
-      <img src={image} alt="imagen" height="150px" />
+      <img
+        src={image}
+        alt="imagen"
+        height="100%"
+        style={{ borderRadius: "15px", maxHeight: "130px", padding: "10px" }}
+      />
       <div className="itemRecNameAndCart">
-        <a href={`/details-product/${id}`} id={id} >
+        <a href={`/details-product/${id}`} id={id}>
           <p>{name}</p>
         </a>
         <FaCartPlus
