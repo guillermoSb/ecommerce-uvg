@@ -144,3 +144,22 @@
     background-color: #3A86FF;
     color: #fff;
 }
+
+.notifiersDiv{
+    display: flex;
+    justify-content: space-between;
+}
+
+.endChatBtn{
+    background-color: #3A86FF;
+    padding: 2px;
+    padding-left: 7px;
+    padding-right: 7px;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.endChatBtn p{
+    margin: 0;
+    color: white;
+}
