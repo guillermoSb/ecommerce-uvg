@@ -1,17 +1,18 @@
 const { Router } = require("express");
 const { check, param } = require("express-validator");
-const { getAllChats, createChat, getAllChatsBy, setChatActive } = require("../controllers/chats");
+const { getAllChats, createChat, getAllChatsBy, setChatState, sendChat } = require("../controllers/chats");
 const { validateFields, validateState } = require("../middlewares/validator");
-const { chatUniqueValidator } = require("../validators/chat-unique");
+//const { chatUniqueValidator } = require("../validators/chat-unique");
 
 const router = Router();
+
+router.post("/sendChat", sendChat);
 
 router.get("/", getAllChats); // GET /api/chats/
 router.post(
   "/",
   [
     check("iniciadoPor", "El id del usuario es necesario.").notEmpty(),
-    check("iniciadoPor").custom(chatUniqueValidator),
     validateFields,
   ],
   createChat
@@ -26,13 +27,11 @@ router.get(
 ); // GET /api/chats/
 
 router.post(
-    "/activate",
-    [
-      check("iniciadoPor", "El id del usuario es necesario.").notEmpty(),
-      check("atendidoPor", "El id del admin es necesario.").notEmpty(),
-      validateFields,
-    ],
-    setChatActive
-  ); // POST /api/chats
+  "/state",
+  [
+    validateFields,
+  ],
+  setChatState
+); // POST /api/chats
 
 module.exports = router;
