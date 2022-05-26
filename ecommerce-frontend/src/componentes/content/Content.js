@@ -122,7 +122,7 @@ export default class Content extends Component {
                 <button
                   disabled={this.state.finished}
 
-                  className="btnSendText"
+                  className={this.state.finished ? "btnSendTextN" : "btnSendTextA"}
                   id="sendTextBtn"
                   onClick={() => {
                     this.enviarMensaje();

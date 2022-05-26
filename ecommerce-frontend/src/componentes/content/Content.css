@@ -123,8 +123,12 @@
     transition: all 0.3s cubic-bezier(0.88, 0.19, 0.37, 1.11);
 }
 
-.sendNewMessage button:hover {
+.btnSendTextA:hover {
     transform: scale(1.2);
+}
+
+.btnSendTextN:hover {
+    cursor: default;
 }
 
 .sendNewMessage button i {
