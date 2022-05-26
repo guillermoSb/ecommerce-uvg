@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap');
+
+$backgroudColorPrimary: #A8A9AD;
+$bluePrim: #5C89BA;
+$blackPrim: black;
+$grayPrim: #565D6C;
+$graySec: #838996;
+$grayTh: #A8A9AD;
+$grayFo: #ffffff;
+$font-nColor:rgb(0, 247, 255);
+$font-nText:'Inconsolata', monospace;
+
+/*Start Left Panel*/
+.leftPanel{
+    width: 300px;
+    height: 100%;
+    background-color: $grayFo;
+    display: grid;
+    grid-template-rows: 400px 450px;
+    place-items: center;
+    
+}
+
+.options-container{
+    display:grid;
+    gap: 30px;
+    place-items: center;
+}
+
+.option{
+    font-size: 25px;
+    text-decoration: none;
+    color: rgb(49, 181, 233);
+    &:hover{
+        cursor: pointer;
+        font-size: 40px;
+        transition: 200ms ease-in-out;
+    }
+}
+#pp{
+    border-radius: 100%;
+    width: 200px;
+    height: 200px;
+}
+/* End Left Panel*/
+
