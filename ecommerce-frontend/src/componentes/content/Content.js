@@ -55,9 +55,11 @@ export default class Content extends Component {
   };
 
   enviarMensaje = () => {
-    sendingChat(this.auth.currentUser.email, this.props.chatId, this.state.text);
-    document.getElementsByClassName("input-message")[0].value = "";
-    this.setState({ text: "" });
+    if (this.auth.currentUser.email) {
+      sendingChat(this.auth.currentUser.email, this.props.chatId, this.state.text);
+      document.getElementsByClassName("input-message")[0].value = "";
+      this.setState({ text: "" });
+    }
   };
 
   // on first load send welcome message from the system
