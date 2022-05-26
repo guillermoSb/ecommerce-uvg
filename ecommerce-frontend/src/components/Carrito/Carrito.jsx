@@ -2,8 +2,6 @@ import React, {useEffect, useState} from 'react';
 import './Carrito.scss';
 import ContainerGeneral from "../ContainerGeneral/ContainerGeneral";
 import firebase from "../../firebase";
-import Header from '../Header/Header';
-
 
 function useInfo() {
 
