@@ -47,7 +47,11 @@ const getRecomendationByCategory = async (req, res) => {
     );
     const categoria = querySnapshotT.docs.map((doc) => doc.data())[0].categoria;
     const querySnapshot = await getDocs(
-      query(collection(db, "inventario"), where("categoria", "==", categoria))
+      query(
+        collection(db, "inventario"),
+        where("categoria", "==", categoria)
+        // where("ID", "!=", id)
+      )
     );
     return res.status(200).send({
       ok: true,
@@ -79,25 +83,25 @@ const getRecomendationByBrand = async (req, res) => {
   }
 };
 
-
 const getItemById = async (req, res) => {
   const { id } = req.params;
   try {
     const querySnapshot = await getDocs(
       query(collection(db, "inventario"), where("ID", "==", id))
     );
-    if(querySnapshot.docs.map((doc) => doc.data())[0])
-    return res.status(200).send({
-      ok: true,
-      producto: querySnapshot.docs.map((doc) =>{     
-        const d = doc.data();
-        d.fecha = d.fecha.toDate();
-        return d;
-    })[0],
-    }); else
-    return res.status(400).send({
-      msg: "No hay producto con ese ID",
-    });
+    if (querySnapshot.docs.map((doc) => doc.data())[0])
+      return res.status(200).send({
+        ok: true,
+        producto: querySnapshot.docs.map((doc) => {
+          const d = doc.data();
+          d.fecha = d.fecha.toDate();
+          return d;
+        })[0],
+      });
+    else
+      return res.status(400).send({
+        msg: "No hay producto con ese ID",
+      });
   } catch (error) {
     return res.status(500).send({
       ok: false,
@@ -113,7 +117,7 @@ module.exports = {
   getRecomendationByCategory,
   getRecomendationByRating,
   getRecomendationByBrand,
-  getItemById
+  getItemById,
 };
 /* 
 aqui las exportan

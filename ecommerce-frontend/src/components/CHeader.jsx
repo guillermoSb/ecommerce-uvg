@@ -27,14 +27,14 @@ export default function CHeader(props) {
           </button>
         </ul>
         <a
-          href="/wishlist"
+          href="/carrito"
           className="btn btn-primary iconHeader"
           id="btn-cart-header"
         >
           <FaShoppingCart />
         </a>
         <a
-          href="#ref"
+          href="/wishlist"
           className="btn btn-primary iconHeader"
           id="btn-star-header"
         >

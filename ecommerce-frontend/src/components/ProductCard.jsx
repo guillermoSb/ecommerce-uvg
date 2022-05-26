@@ -44,7 +44,7 @@ export default function ProductCard(props) {
           <FaCartPlus />
         </a>
         <a
-          href="/details-product/YRdaqO6f73VNRlK6gnzn"
+          href={"/details-product/" + id}
           className="btn btn-primary"
           id="btn-star"
         >
