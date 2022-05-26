@@ -41,7 +41,6 @@ export default class Content extends Component {
   }
 
   componentDidMount() {
-
     this.attachRealTimeMessageListening();
     document.addEventListener("keydown", (e) => {
       if (e.keyCode === 13) {
@@ -55,8 +54,12 @@ export default class Content extends Component {
   };
 
   enviarMensaje = () => {
-    if (this.auth.currentUser.email) {
-      sendingChat(this.auth.currentUser.email, this.props.chatId, this.state.text);
+    if (this.auth.currentUser.email && this.props.text !== "") {
+      sendingChat(
+        this.auth.currentUser.email,
+        this.props.chatId,
+        this.state.text
+      );
       document.getElementsByClassName("input-message")[0].value = "";
       this.setState({ text: "" });
     }
@@ -104,6 +107,7 @@ export default class Content extends Component {
                   placeholder="Escriba un mensaje"
                   onChange={this.onStateChange}
                   value={this.state.text}
+                  disabled={this.state.estado === "inactivo" ? true : false}
                 />
                 <button
                   className="btnSendText"
@@ -111,8 +115,14 @@ export default class Content extends Component {
                   onClick={() => {
                     this.enviarMensaje();
                   }}
+                  disabled={this.state.estado === "inactivo" ? true : false}
                 >
-                  <i className="send">Enviar</i>
+                  <i
+                    className="send"
+                    disabled={this.state.estado === "inactivo" ? true : false}
+                  >
+                    Enviar
+                  </i>
                 </button>
               </div>
             </>
