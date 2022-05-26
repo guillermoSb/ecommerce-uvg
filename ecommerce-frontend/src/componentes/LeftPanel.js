@@ -1,6 +1,6 @@
 import React from 'react';
-import pp from '../img/pp.jpg';
-import './leftPanel.scss';
+import pp from '../imgs/pp.jpg';
+import '../styles/leftPanel.scss';
 
 /*Component LeftPanel */
 export default function LeftPanel({ home, self, settings, logout }) {
