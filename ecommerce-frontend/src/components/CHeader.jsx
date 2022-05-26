@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/CHeader.scss";
 import logo from "../imgs/logo.png";
-// import { FaShoppingCart, FaStar } from "react-icons/fa";
+import { FaShoppingCart, FaStar } from "react-icons/fa";
 
 export default function CHeader(props) {
   return (
@@ -16,22 +16,19 @@ export default function CHeader(props) {
           </button>
         </ul>
         <div className="__bar" />
-        {/* <ul className="nav_list">
-            <button type="button" id="nav_button"> Contact </button>
-          </ul> */}
         <a
           href="#ref"
           className="btn btn-primary iconHeader"
           id="btn-cart-header"
         >
-          {/* <FaShoppingCart /> */}
+          <FaShoppingCart />
         </a>
         <a
           href="/wishlist"
           className="btn btn-primary iconHeader"
           id="btn-star-header"
         >
-          {/* <FaStar /> */}
+          <FaStar />
         </a>
       </nav>
     </header>
