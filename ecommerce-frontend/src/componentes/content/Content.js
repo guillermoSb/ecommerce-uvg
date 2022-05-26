@@ -86,9 +86,14 @@ export default class Content extends Component {
           <div className="text-[#FFF] text-sm bg-bg2 rounded-3xl w-25 text-center shadow-2xl border-2 border-bg3">
             {this.state.estado}
           </div>
-          <button className="endChatBtn" onClick={this.endChat}>
-            <p>Terminar chat</p>
-          </button>
+          {
+            ((this.auth.currentUser.uid !== this.state.iniciadoPor) && (this.state.estado === "abandonado")) || (this.auth.currentUser.uid === this.state.iniciadoPor) ?
+            <>
+              <button className="endChatBtn" onClick={this.endChat}>
+                <p>Terminar chat</p>
+              </button> 
+            </> : ''
+          }
         </div>
         <div className="content-body">
           <div className="chat-bubbles">
