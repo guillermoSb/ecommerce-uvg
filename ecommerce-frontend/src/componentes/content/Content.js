@@ -1,11 +1,11 @@
-import React, { Component, useState, createRef, useEffect } from "react";
-import "./Content.css";
-import Bubble from "./Bubble";
-import { doc, onSnapshot } from "firebase/firestore";
-import { firestore } from "../../firebase";
-import { getAuth } from "firebase/auth";
-import { sendingChat } from "../../services/api.service";
-import "../../styles/chat.css";
+import React, { Component, useState, createRef, useEffect } from 'react';
+import './Content.css';
+import Bubble from './Bubble';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { firestore } from '../../firebase';
+import { getAuth } from 'firebase/auth';
+import { sendingChat } from '../../services/api.service';
+import '../../styles/chat.css';
 
 export default class Content extends Component {
   textEndRef = createRef(null);
@@ -13,8 +13,8 @@ export default class Content extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "",
-      estado: "",
+      text: '',
+      estado: '',
       messages: [],
     };
     this.auth = getAuth(); // Get current firebase auth
@@ -30,7 +30,7 @@ export default class Content extends Component {
 
   attachRealTimeMessageListening() {
     if (this.props.chatId) {
-      onSnapshot(doc(firestore, "chats", this.props.chatId), (doc) => {
+      onSnapshot(doc(firestore, 'chats', this.props.chatId), (doc) => {
         const messages = doc.data().mensajes;
         const estado = doc.data().estado;
         this.setState({ messages, estado }, function () {
@@ -42,7 +42,7 @@ export default class Content extends Component {
 
   componentDidMount() {
     this.attachRealTimeMessageListening();
-    document.addEventListener("keydown", (e) => {
+    document.addEventListener('keydown', (e) => {
       if (e.keyCode === 13) {
         this.enviarMensaje();
       }
@@ -54,20 +54,20 @@ export default class Content extends Component {
   };
 
   enviarMensaje = () => {
-    if (this.auth.currentUser.email && this.props.text !== "") {
+    if (this.auth.currentUser.email && this.props.text !== '') {
       sendingChat(
         this.auth.currentUser.email,
         this.props.chatId,
         this.state.text
       );
-      document.getElementsByClassName("input-message")[0].value = "";
-      this.setState({ text: "" });
+      document.getElementsByClassName('input-message')[0].value = '';
+      this.setState({ text: '' });
     }
   };
 
   // on first load send welcome message from the system
   sendWelcomeMessage() {
-    sendingChat("system", this.props.chatId, "Bienvenido a nuestro chat");
+    sendingChat('system', this.props.chatId, 'Bienvenido a nuestro chat');
   }
 
   render() {
@@ -86,11 +86,11 @@ export default class Content extends Component {
                   name={message.enviadoPor}
                   user={
                     this.auth.currentUser.email === message.enviadoPor
-                      ? "me"
-                      : "other"
+                      ? 'me'
+                      : 'other'
                   }
                   text={message.mensaje}
-                  image={""}
+                  image={''}
                 />
               );
             })}
@@ -107,7 +107,7 @@ export default class Content extends Component {
                   placeholder="Escriba un mensaje"
                   onChange={this.onStateChange}
                   value={this.state.text}
-                  disabled={this.state.estado === "inactivo" ? true : false}
+                  disabled={this.state.estado === 'inactivo' ? true : false}
                 />
                 <button
                   className="btnSendText"
@@ -115,11 +115,11 @@ export default class Content extends Component {
                   onClick={() => {
                     this.enviarMensaje();
                   }}
-                  disabled={this.state.estado === "inactivo" ? true : false}
+                  disabled={this.state.estado === 'inactivo' ? true : false}
                 >
                   <i
                     className="send"
-                    disabled={this.state.estado === "inactivo" ? true : false}
+                    disabled={this.state.estado === 'inactivo' ? true : false}
                   >
                     Enviar
                   </i>
@@ -127,7 +127,7 @@ export default class Content extends Component {
               </div>
             </>
           ) : (
-            ""
+            ''
           )}
         </div>
       </div>
