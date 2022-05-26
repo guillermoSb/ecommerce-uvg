@@ -18,4 +18,4 @@ const auth = getAuth();
 const db = getFirestore(app);
 const loggedUser = auth.currentUser;
 
-module.exports = { db, loggedUser };
+module.exports = { db, loggedUser, auth };

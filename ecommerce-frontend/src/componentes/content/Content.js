@@ -31,7 +31,6 @@ export default class Content extends Component {
   attachRealTimeMessageListening() {
     if (this.props.chatId) {
       onSnapshot(doc(firestore, "chats", this.props.chatId), (doc) => {
-        console.log(doc.data());
         const messages = doc.data().mensajes;
         const estado = doc.data().estado;
         this.setState({ messages, estado }, function () {
@@ -42,7 +41,6 @@ export default class Content extends Component {
   }
 
   componentDidMount() {
-    this.sendWelcomeMessage();
     this.attachRealTimeMessageListening();
     document.addEventListener("keydown", (e) => {
       if (e.keyCode === 13) {
@@ -56,9 +54,15 @@ export default class Content extends Component {
   };
 
   enviarMensaje = () => {
-    sendingChat(this.auth.currentUser.uid, this.props.chatId, this.state.text);
-    document.getElementsByClassName("input-message")[0].value = "";
-    this.setState({ text: "" });
+    if (this.auth.currentUser.email && this.props.text !== "") {
+      sendingChat(
+        this.auth.currentUser.email,
+        this.props.chatId,
+        this.state.text
+      );
+      document.getElementsByClassName("input-message")[0].value = "";
+      this.setState({ text: "" });
+    }
   };
 
   // on first load send welcome message from the system
@@ -69,7 +73,7 @@ export default class Content extends Component {
   render() {
     return (
       <div className="ChatContent">
-        <div className="text-[#FFF] text-sm bg-bg2 rounded-3xl w-16 text-center shadow-2xl border-2 border-bg3">
+        <div className="text-[#FFF] text-sm bg-bg2 rounded-3xl w-16 text-center shadow-2xl border-2 border-bg3 m-2">
           {this.state.estado}
         </div>
         <div className="content-body">
@@ -79,8 +83,9 @@ export default class Content extends Component {
                 <Bubble
                   animationDelay={index + 2}
                   key={message.date}
+                  name={message.enviadoPor}
                   user={
-                    this.auth.currentUser.uid === message.enviadoPor
+                    this.auth.currentUser.email === message.enviadoPor
                       ? "me"
                       : "other"
                   }
@@ -102,6 +107,7 @@ export default class Content extends Component {
                   placeholder="Escriba un mensaje"
                   onChange={this.onStateChange}
                   value={this.state.text}
+                  disabled={this.state.estado === "inactivo" ? true : false}
                 />
                 <button
                   className="btnSendText"
@@ -109,8 +115,14 @@ export default class Content extends Component {
                   onClick={() => {
                     this.enviarMensaje();
                   }}
+                  disabled={this.state.estado === "inactivo" ? true : false}
                 >
-                  <i className="send">Enviar</i>
+                  <i
+                    className="send"
+                    disabled={this.state.estado === "inactivo" ? true : false}
+                  >
+                    Enviar
+                  </i>
                 </button>
               </div>
             </>
