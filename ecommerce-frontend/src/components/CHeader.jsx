@@ -10,7 +10,7 @@ export default function CHeader(props) {
           <img id="catalogo_logo" src={logo} alt="" />
           <div id="spacer_div" />
           <ul className="nav_list">
-            <button type="button" id="nav_button"> Home </button>
+            <a href="/Catalogo" style={{textDecoration: 'none', color: 'black'}}> <button type="button" id="nav_button"> Home </button> </a>
           </ul>
           <div className="__bar" />
           {/* <ul className="nav_list">

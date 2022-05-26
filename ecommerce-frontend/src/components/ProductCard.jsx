@@ -63,6 +63,7 @@ export default function ProductCard(props) {
           className="btn btn-primary btncard"
           id="btn-star"
           type="button"
+          title="Agregar a lista de deseos"
           onClick={() => {
             addWish(imgSrc, precio, id, titulo, cantidad);
           }}
