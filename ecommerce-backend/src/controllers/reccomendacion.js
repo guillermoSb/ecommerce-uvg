@@ -56,7 +56,7 @@ const getRecomendationByCategory = async (req, res) => {
   } catch (error) {
     return res.status(500).send({
       ok: false,
-      errors: ["Algo salió mal."],
+      errors: ["Algo salió mal."]
     });
   }
 };

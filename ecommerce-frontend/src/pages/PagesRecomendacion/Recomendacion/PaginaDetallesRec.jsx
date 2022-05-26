@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {useParams} from "react-router-dom";
+import {useParams, useLocation} from "react-router-dom";
 import CHeader from '../../../components/CHeader'
 import './pagina-detalles-rec-styles.scss'
 import CentralItem from '../Componentes/CentralItem/CentralItem'
@@ -10,14 +10,19 @@ import Swal from "sweetalert2";
 
 const PaginaDetallesRec = (props) => {
     const { id } = useParams()
+    const location = useLocation();
+
     const [myProudctID, setProductID] = useState(id)
     const [objectsfromdb, setObjectsfromdb] = useState([]);
     const [typeOfRec, setTypeOfRec] = useState('category')
     useEffect(()=>{
         api.get(`/api/reccomendacion${(props.tipo_de_recomendacion)}/${id}`)
         .then((res)=> setObjectsfromdb(res.data.productos))
+        setProductID(id)
+
         
-    })
+    }, [location])
+
 
 
     const removeWishList = (id) => {
