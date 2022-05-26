@@ -14,19 +14,26 @@ function Admin() {
     const fetchAllChats = async () => {
       const waitingChats = await getAllChats("espera");
       const activeChats = await getAllChats("activo");
+      const abandonedChats = await getAllChats("abandonado");
+
+      console.log(abandonedChats);
 
       if (waitingChats.ok && activeChats.ok) {
         setChats([...chats, ...waitingChats.chats, ...activeChats.chats]);
       }
-      console.log(chats);
+
+      if (abandonedChats.ok) {
+        setChats([...abandonedChats.chats]);
+      }
     };
     fetchAllChats();
   }, []);
   /**
    * Activate a chat
    */
-  const activateChat = async (id) => {
-    if (auth.currentUser) {
+  const activateChat = async (id, state) => {
+    console.log(state);
+    if (auth.currentUser && state !== "abandonado") {
       await changeState(id, "activo", auth.currentUser.email);
     }
   };
@@ -44,7 +51,7 @@ function Admin() {
                     className="btn btn-primary"
                     onClick={() => {
                       setCurrentChat(chat.id);
-                      activateChat(chat.id);
+                      activateChat(chat.id, chat.estado);
                     }}
                   >
                     Atender
