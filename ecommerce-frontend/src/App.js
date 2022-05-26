@@ -4,10 +4,10 @@ import "./App.css";
 import Login from "./components/login";
 import Signup from "./components/signup";
 import WishList from "./pages/PagesRecomendacion/WishList/WishList";
+import Admin from "./pages/PagesChat/Admin";
 // import Catalogo from "./components/Catalogo";
 import PaginaDetallesRec from "./pages/PagesRecomendacion/Recomendacion/PaginaDetallesRec";
 import ChatBubble from "./componentes/ChatBubble";
-import Admin from "./pages/PagesChat/Admin";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
 

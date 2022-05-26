@@ -92,7 +92,7 @@ export default class Content extends Component {
             {this.state.estado}
           </div>
           {
-            ((this.auth.currentUser.uid !== this.state.iniciadoPor) && (this.state.estado === "abandonado")) || (this.auth.currentUser.uid === this.state.iniciadoPor) ?
+            ((this.auth.currentUser.email !== this.state.iniciadoPor) && (this.state.estado === "abandonado")) || (this.auth.currentUser.email === this.state.iniciadoPor) ?
             <>
               <button className="endChatBtn" onClick={this.endChat}>
                 <p>Terminar chat</p>
