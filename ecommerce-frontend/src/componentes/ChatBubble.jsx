@@ -54,7 +54,7 @@ const Chatbubble = () => {
 
   return (
     <div className="">
-      <div className="absolute right-2 bottom-2 ">
+      <div className="fixed right-2 bottom-2 z-50">
         <div className="flex justify-end">
           <div
             className={
