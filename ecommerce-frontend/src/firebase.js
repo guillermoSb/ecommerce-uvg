@@ -164,6 +164,7 @@ export function addCompra(
   nombre,
   cantidad_disponible
 ) {
+  alert(loggedUser.email)
   if (cantidad_disponible > 0) {
     firebase
       .firestore()
