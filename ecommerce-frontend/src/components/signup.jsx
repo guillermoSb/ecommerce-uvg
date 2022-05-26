@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { regular_signup } from "../firebase";
-import profile_img from "../assets/profile.png";
+import profile_img from '../assets/profile.png';
 
-import "../styles/signup.css";
+import '../styles/signup.css';
 
 export default function Signup() {
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,7 @@ export default function Signup() {
     <div className="signupWrap">
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* register your input into the hook by invoking the "register" function */}
-        <img src={profile_img} alt="loading"></img>
+        <img src ={profile_img} alt="loading"></img>
         <h1>Crear Cuenta</h1>
         <input
           type="text"
@@ -81,22 +81,10 @@ export default function Signup() {
 
         {/* include validation with required or other standard HTML validation rules */}
         {/* errors will return when field validation fails  */}
-        <input
-          className="signup_button"
-          disabled={loading}
-          type="submit"
-          value="Sign Up"
-        />
+        <input className = "signup_button" disabled={loading} type="submit" value="Sign Up" />
         <hr />
-        <p className="or">OR</p>
-        <a href="/">
-          <input
-            className="login_button"
-            disabled={loading}
-            type="button"
-            value="Log in"
-          ></input>
-        </a>
+        <p className = "or">OR</p>
+        <a href="/"><input className = "login_button" disabled={loading} type="button" value = "Log in"></input></a>
       </form>
     </div>
   );

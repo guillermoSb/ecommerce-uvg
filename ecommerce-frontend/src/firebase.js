@@ -22,7 +22,7 @@ const firebaseConfig = {
   authDomain: "e-commerce-chat-c4578.firebaseapp.com",
   databaseURL: "https://stw-uvg-proyecto2-default-rtdb.firebaseio.com",
   projectId: "e-commerce-chat-c4578",
-  storageBucket: "e-commerce-chat-c4578.appspot.com",
+  // storageBucket: "e-commerce-chat-c4578.appspot.com",
   messagingSenderId: "628163791171",
   appId: "1:628163791171:web:df61a31aefb9b023f547f6",
   measurementId: "G-7B141R0M5T",
@@ -61,12 +61,7 @@ auth.onAuthStateChanged((user) => {
 });
 
 export async function regular_signup(email, password) {
-  await createUserWithEmailAndPassword(auth, email, password).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage);
-    // ..
-  });
+  await createUserWithEmailAndPassword(auth, email, password);
   await createUserDocument(email);
 }
 
