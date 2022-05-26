@@ -18,8 +18,6 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState("");
   const [email, setEmail] = useState("");
-  const navigate = useNavigate();
-  const path = "/catalogo";
 
   const handleSignOut = () => {
     signOutAccount();
