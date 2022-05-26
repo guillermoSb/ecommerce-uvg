@@ -10,8 +10,10 @@ class Server {
      * Rutas de cada modulo
      */
     paths = {
-        chats: "/api/chats",
-        usuarioRoutes: "/usuario"
+        chats: '/api/chats',
+        reccomendacion: '/api/reccomendacion',
+        usuarioRoutes: "/usuario",
+        wishlist: "/api/wishlist"
     };
 
     constructor() {
@@ -24,8 +26,10 @@ class Server {
      * Metodo que indica a express cuales son las rutas del api.
      */
     routes() {
-        this.app.use(this.paths.chats, require("./routes/chats"));
+        this.app.use(this.paths.chats, require('./routes/chats'));
+        this.app.use(this.paths.reccomendacion, require('./routes/reccomendacion'));
         this.app.use(this.paths.usuarioRoutes, require("./routes/usuarioRoutes"));
+        this.app.use(this.paths.wishlist, require("./routes/wishlist"));
     }
     /**
      * Habilitar CORS

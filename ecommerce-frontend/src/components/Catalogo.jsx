@@ -220,17 +220,6 @@ export default function Catalogo() {
           </div>
         </div>
       </div>
-
-        <div id="features">
-          <div className="card card-wide card-featured">
-            <h5 className="card-header">Featured</h5>
-            <div className="card-body">
-              <h5 className="card-title">Peraphone S2</h5>
-              <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#ref" className="btn btn-primary"><FaCartPlus/></a>
-            </div>
-          </div>
-        </div>
           
         <div className="catalogo">
         {printfunction()}
