@@ -34,11 +34,31 @@ const getWishlistByUser = async (req, res) => {
 const saveDoc = async (req, res) => {
   try {
     const { obj } = req.body;
-    addDoc(collection(db, "wishlist"), obj);
-    return res.status(200).send({
-      ok: true,
-      msg: "Agregado a la lista de deseos.",
+    const data = [];
+    const querySnapshot = await getDocs(
+      query(
+        collection(db, "wishlist"),
+        where("usercode", "==", obj.usercode),
+        where("itemcode", "==", obj.itemcode)
+      )
+    );
+    querySnapshot.docs.forEach((item) => {
+      data.push(item.data());
     });
+    if (data.length == 0) {
+      addDoc(collection(db, "wishlist"), obj);
+      return res.status(200).send({
+        title: "Producto agregado a la lista de deseos.",
+        text: "",
+        icon: "success",
+      });
+    } else {
+      return res.status(200).send({
+        title: "Este producto ya fue agregado atenteriormente.",
+        text: "",
+        icon: "warning",
+      });
+    }
   } catch (err) {
     return res.status(500).send({
       ok: true,

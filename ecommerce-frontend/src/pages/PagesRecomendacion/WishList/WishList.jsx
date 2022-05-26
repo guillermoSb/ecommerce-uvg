@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import ContenedorItemsRec from "../Componentes/ContenedorItemsRec";
 import { api } from "../../../api";
-import Swal from "sweetalert2"; 
+import Swal from "sweetalert2";
+import CHeader from "../../../components/CHeader";
 
 const WishList = () => {
   const [objectsfromdb, setObjectsfromdb] = useState([]);
 
-  useEffect(() => {
+  const getData = () => {
     api
       .get("/api/wishlist/by-user/" + localStorage.getItem("uid"))
       .then((res) => {
         setObjectsfromdb(res.data.wishlist);
       });
+  };
+
+  useEffect(() => {
+    getData();
   }, []);
 
   const removeWishList = (id) => {
@@ -28,15 +33,25 @@ const WishList = () => {
             text: "Producto eliminado de lista de deseos.",
             icon: "success",
           });
+          getData();
         });
       }
     });
   };
 
   return (
-    <div className="wishlistPage">
-      <ContenedorItemsRec removeWishList={removeWishList} title="Wish List" items={objectsfromdb} />
-    </div>
+    <React.Fragment>
+      <CHeader />
+      <div className="wishlistPage" 
+      //style={{backgroundColor: 'rgb(93, 116, 137)'}}
+      >
+        {objectsfromdb.length > 0 ?<ContenedorItemsRec
+          removeWishList={removeWishList}
+          title="Wish List"
+          items={objectsfromdb}
+        />: <p style={{margin: '20px'}}>Agrega productos a tu listad de deseos: <a href="/Catalogo">catálogo de productos</a> </p>}
+      </div>
+    </React.Fragment>
   );
 };
 
