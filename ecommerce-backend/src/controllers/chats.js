@@ -91,8 +91,7 @@ const createChat = async (req, res) => {
       iniciadoPor,
       estado: "espera",
       atendidoPor: null,
-      fechaInicio: null,
-      fechaFin: null,
+      fechaInicio: new Date(),
       mensajes: [
         {
           enviadoPor: "system",

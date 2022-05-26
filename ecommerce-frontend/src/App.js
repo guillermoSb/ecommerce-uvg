@@ -9,6 +9,7 @@ import PaginaDetallesRec from "./pages/PagesRecomendacion/Recomendacion/PaginaDe
 import ChatBubble from "./componentes/ChatBubble";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
+import Admin from "./pages/PagesChat/Admin";
 
 function App() {
   const auth = getAuth();
@@ -25,6 +26,7 @@ function App() {
           <Route path="/" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/wishlist" element={<WishList />}></Route>
+          <Route path="/admin-chat" element={<Admin />}></Route>
           <Route path="/details-product/:id" element={<PaginaDetallesRec tipo_de_recomendacion="/by-category" />}></Route>
           {/* <Route path="/Catalogo" element={<Catalogo />}></Route> */}
         </Routes>
