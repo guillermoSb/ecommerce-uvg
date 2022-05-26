@@ -42,14 +42,22 @@ const WishList = () => {
   return (
     <React.Fragment>
       <CHeader />
-      <div className="wishlistPage" 
-      //style={{backgroundColor: 'rgb(93, 116, 137)'}}
+      <div
+        className="wishlistPage"
+        //style={{backgroundColor: 'rgb(93, 116, 137)'}}
       >
-        {objectsfromdb.length > 0 ?<ContenedorItemsRec
-          removeWishList={removeWishList}
-          title="Wish List"
-          items={objectsfromdb}
-        />: <p style={{margin: '20px'}}>Agrega productos a tu listad de deseos: <a href="/Catalogo">catálogo de productos</a> </p>}
+        {objectsfromdb.length > 0 ? (
+          <ContenedorItemsRec
+            removeWishList={removeWishList}
+            title="Wish List"
+            items={objectsfromdb}
+          />
+        ) : (
+          <p style={{ margin: "20px" }}>
+            Agrega productos a tu lista de deseos:{" "}
+            <a href="/Catalogo">catálogo de productos</a>{" "}
+          </p>
+        )}
       </div>
     </React.Fragment>
   );
