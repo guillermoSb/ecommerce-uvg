@@ -1,0 +1,15 @@
+#root .catalogo-page .card:not(.not .card):hover {
+    width: 19rem;
+    margin: auto;
+    border-radius: 15px;
+    border-color: rgb(255, 255, 255);
+    border-width: 10px;
+
+    opacity: 0.8;
+}
+
+#root .catalogo-page .card:not(.not .card) {
+  margin: auto;
+  border-radius: 15px;
+  transition: 0.2s ease-in-out;
+}
