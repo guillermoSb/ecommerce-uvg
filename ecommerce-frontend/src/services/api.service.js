@@ -62,3 +62,21 @@ export const sendingChat = async (uId, cId, uMessage) => {
     const data = await res.json();
     return data;
 }
+
+export const endChatt = async (cId, statee) => {
+    const URL = `${api_url}/chats/state`;
+    const body = { id: cId,
+                   estado: statee }
+    const otherPram = {
+
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+
+    }
+    const res = await fetch(URL, otherPram);
+    const data = await res.json();
+    return data;
+}

@@ -4,7 +4,7 @@ import Bubble from "./Bubble";
 import { doc, onSnapshot } from "firebase/firestore";
 import { firestore } from "../../firebase";
 import { getAuth } from "firebase/auth";
-import { sendingChat } from "../../services/api.service";
+import { sendingChat, endChatt } from "../../services/api.service";
 import "../../styles/chat.css";
 
 
@@ -19,6 +19,7 @@ export default class Content extends Component {
       estado: "",
       messages: [],
       finished:  false,
+      iniciadoPor: ""
     };
     this.auth = getAuth(); // Get current firebase auth
   }
@@ -28,9 +29,10 @@ export default class Content extends Component {
   };
 
   
-  chatState = () => {
-    this.state.finished = true;
-  }
+  endChat = () => {
+    endChatt(this.props.chatId, 'inactivo');
+    console.log('holaaaaaaaaaa');
+  };
 
 
   componentDidUpdate() {
@@ -44,7 +46,8 @@ export default class Content extends Component {
         console.log(doc.data());
         const messages = doc.data().mensajes;
         const estado = doc.data().estado;
-        this.setState({ messages, estado }, function () {
+        const iniciadoPor = doc.data().iniciadoPor;
+        this.setState({ messages, estado, iniciadoPor }, function () {
           this.scrollToBottom();
         });
       });
@@ -52,6 +55,7 @@ export default class Content extends Component {
   }
 
   componentDidMount() {
+    console.log('estado ', this.state.finished);
     this.sendWelcomeMessage();
     this.attachRealTimeMessageListening();
     document.addEventListener("keydown", (e) => {
@@ -83,7 +87,7 @@ export default class Content extends Component {
           <div className="text-[#FFF] text-sm bg-bg2 rounded-3xl w-16 text-center shadow-2xl border-2 border-bg3">
             {this.state.estado}
           </div>
-          <button className="endChatBtn" onClick={this.chatState()}>
+          <button className="endChatBtn" onClick={this.endChat}>
               <p>Terminar chat</p>
           </button>
         </div>
@@ -112,7 +116,6 @@ export default class Content extends Component {
             <>
               <div className="sendNewMessage">
                 <input
-                  disabled={this.state.finished}
                   className="input-message"
                   type="text"
                   placeholder="Escriba un mensaje"
@@ -120,8 +123,6 @@ export default class Content extends Component {
                   value={this.state.text}
                 />
                 <button
-                  disabled={this.state.finished}
-
                   className={this.state.finished ? "btnSendTextN" : "btnSendTextA"}
                   id="sendTextBtn"
                   onClick={() => {
