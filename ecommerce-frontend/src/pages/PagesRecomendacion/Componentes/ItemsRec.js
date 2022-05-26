@@ -6,9 +6,9 @@ const ItemsRec = ({ id, name, image, removeWishList, id_global }) => {
     <div>
       <img src={image} alt="imagen" height="150px" />
       <div className="itemRecNameAndCart">
-        <Link id={id} to={`/details-product/${id}`}>
+        <a href={`/details-product/${id}`} id={id} >
           <p>{name}</p>
-        </Link>
+        </a>
         <FaCartPlus
           size={20}
           onMouseOver={({ target }) => (target.style.color = "#0066ff")}
