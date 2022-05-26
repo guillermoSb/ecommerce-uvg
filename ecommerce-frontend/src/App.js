@@ -25,7 +25,10 @@ function App() {
           <Route path="/" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/wishlist" element={<WishList />}></Route>
-          <Route path="/details-product/:id" element={<PaginaDetallesRec tipo_de_recomendacion="/by-category" />}></Route>
+          <Route
+            path="/details-product/:id"
+            element={<PaginaDetallesRec tipo_de_recomendacion="/by-category" />}
+          ></Route>
           <Route path="/Catalogo" element={<Catalogo />}></Route>
         </Routes>
       </Router>
