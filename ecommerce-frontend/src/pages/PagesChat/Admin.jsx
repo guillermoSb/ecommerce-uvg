@@ -19,11 +19,12 @@ function Admin() {
       console.log(abandonedChats);
 
       if (waitingChats.ok && activeChats.ok) {
-        setChats([...chats, ...waitingChats.chats, ...activeChats.chats]);
-      }
-
-      if (abandonedChats.ok) {
-        setChats([...abandonedChats.chats]);
+        setChats([
+          ...chats,
+          ...waitingChats.chats,
+          ...activeChats.chats,
+          ...abandonedChats.chats,
+        ]);
       }
     };
     fetchAllChats();
@@ -56,6 +57,9 @@ function Admin() {
                   >
                     Atender
                   </button>
+                  <div className="text-[#FFF] text-sm bg-bg2 rounded-3xl w-75 text-center shadow-2xl border-2 border-bg3">
+                    {chat.estado}
+                  </div>
                 </li>
               );
             })}
