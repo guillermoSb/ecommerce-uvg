@@ -93,7 +93,13 @@ const createChat = async (req, res) => {
       atendidoPor: null,
       fechaInicio: null,
       fechaFin: null,
-      mensajes: [],
+      mensajes: [
+        {
+          enviadoPor: "system",
+          date: new Date(),
+          mensaje: "Te damos la bienvenida al chat de soporte. Por favor espera a que un administrador vea el chat."
+        }
+      ],
     };
     // Agregar a firestoreF
     const docRef = await addDoc(collection(db, "chats"), chat);
@@ -172,7 +178,7 @@ const sendChat = async (req, res) => {
       userMessage } = req.body;
     let querySnapshot = await getDoc(doc(db, "chats", chatId));
     if (querySnapshot.exists()) {
-      console.log("prueba");
+
       const ref = doc(db, "chats", chatId);
       await updateDoc(ref, {
         mensajes: arrayUnion({
