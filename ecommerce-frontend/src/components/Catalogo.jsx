@@ -1,30 +1,42 @@
-import {React, useState} from "react";
+import {React, useState, useEffect} from "react";
 import '../styles/Catalogo.scss'
 import { FaCartPlus} from 'react-icons/fa';
 import CHeader from './CHeader';
 import Card from './ProductCard';
-
-import prod1 from "../imgs/prod_1.png"
-import prod2 from "../imgs/prod_2.png"
-import prod3 from "../imgs/prod_3.png"
-import prod4 from "../imgs/prod_4.png"
+import { getData } from '../firebase';
 
 
 export default function Catalogo() {
-  const [products, setProducts] = useState([
-    { id:"0" , nombre: 'Samsung S5', precio: 300, descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', img: prod1, categoria:'tecnologia'},
-    { id:"1" , nombre: 'Samsung S4', precio: 250, descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', img: prod2, categoria:'Phones'},
-    { id:"2" , nombre: 'iPhone SE', precio: 400, descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', img: prod3, categoria:'Phones'},
-    { id:"3" , nombre: 'iPhone 12', precio: 1000, descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', img: prod4, categoria:'tecnologia'},
-    { id:"4" , nombre: 'test_item', precio: 8000, descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', img: prod1, categoria:'Phones'},
-    { id:"5" , nombre: 'test_item', precio: 8000, descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', img: prod1, categoria:'Phones'},
-    { id:"6" , nombre: 'test_item', precio: 8000, descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', img: prod1, categoria:'tecnologia'},
-    { id:"7" , nombre: 'test_item', precio: 8000, descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', img: prod1, categoria:'tecnologia'},
-    { id:"8" , nombre: 'test_item', precio: 8000, descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', img: prod1, categoria:'tecnologia'},
-  ]);
-  const [listCategories, updateCategories] = useState(["All","Laptops","Phones","tecnologia"]);
-  const [displayProducts, updateDisplayProducts] = useState([...products]);
+  // const [products, setProducts] = useState([
+  //   { id:"0" , nombre: 'Samsung S5', precio: 300, descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', img: prod1, categoria:'tecnologia'},
+  //   { id:"1" , nombre: 'Samsung S4', precio: 250, descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', img: prod2, categoria:'Phones'},
+  //   { id:"2" , nombre: 'iPhone SE', precio: 400, descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', img: prod3, categoria:'Phones'},
+  //   { id:"3" , nombre: 'iPhone 12', precio: 1000, descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', img: prod4, categoria:'tecnologia'},
+  //   { id:"4" , nombre: 'test_item', precio: 8000, descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', img: prod1, categoria:'Phones'},
+  //   { id:"5" , nombre: 'test_item', precio: 8000, descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', img: prod1, categoria:'Phones'},
+  //   { id:"6" , nombre: 'test_item', precio: 8000, descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', img: prod1, categoria:'tecnologia'},
+  //   { id:"7" , nombre: 'test_item', precio: 8000, descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', img: prod1, categoria:'tecnologia'},
+  //   { id:"8" , nombre: 'test_item', precio: 8000, descripcion: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.', img: prod1, categoria:'tecnologia'},
+  // ]);
+  const [products, setProducts] = useState([]);
+  const [listCategories, updateCategories] = useState([]);
 
+  useEffect(()=>{
+    getData().then(res => {
+      setProducts(res);
+      updateDisplayProducts(res);
+      let categories = []
+      for (let i = 0; i < res.length; i += 1) {
+        if (!categories.includes(res[i].categoria)){
+          categories.push(res[i].categoria)
+        }
+      }
+      categories.unshift("All")
+      updateCategories(categories)
+    })
+  }, [])
+
+  const [displayProducts, updateDisplayProducts] = useState([...products]);
   const [search,setSearch] = useState('');
 
   const inputRange = document.querySelectorAll(".input-range input");
@@ -96,15 +108,16 @@ export default function Catalogo() {
 
   function setCards() {
     const row = [];
-    for (let i = 0; i < displayProducts.length-1; i += 1) {
-      const id = displayProducts[i].id;
+    for (let i = 0; i < displayProducts.length; i += 1) {
+      const id = displayProducts[i].ID;
       const titulo = displayProducts[i].nombre;
       const precio = displayProducts[i].precio;
-      const img = displayProducts[i].img;
+      const img = displayProducts[i].imagen;
       const descripcion = displayProducts[i].descripcion;
+      const cantidad = displayProducts[i].cantidad;
       row.push(
         
-        <Card id={id} imgSrc={img} titulo={titulo} precio={precio} descripcion={descripcion}/>
+        <Card id={id} imgSrc={img} titulo={titulo} precio={precio} descripcion={descripcion} cantidad={cantidad}/>
       );
     }
     return row;
@@ -113,11 +126,11 @@ export default function Catalogo() {
 
   function setCardsBySearch(){
     const row = [];
-    products.map((item) => {
+    displayProducts.map((item) => {
       if (search !== '' && item.nombre.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
-        row.push(<Card id={item.id} imgSrc={item.img} titulo={item.nombre} precio={item.precio} descripcion={item.descripcion}/>)
+        row.push(<Card id={item.ID} imgSrc={item.imagen} titulo={item.nombre} precio={item.precio} descripcion={item.descripcion} cantidad={item.cantidad}/>)
       }
-      else if (search === '') row.push(<Card id={item.id} imgSrc={item.img} titulo={item.nombre} precio={item.precio} descripcion={item.descripcion}/>)
+      else if (search === '') row.push(<Card id={item.id} imgSrc={item.img} titulo={item.nombre} precio={item.precio} descripcion={item.descripcion} cantidad={item.cantidad} />)
     })
     return row;
   }
@@ -138,9 +151,9 @@ export default function Catalogo() {
 
   const setCardsBySlider = () =>{
     let cards = []
-    products.map((item) => {
+    displayProducts.map((item) => {
       if (item.precio >= minimo && item.precio <= maximo) {
-        cards.push(<Card id={item.id} imgSrc={item.img} titulo={item.nombre} precio={item.precio} descripcion={item.descripcion}/>)
+        cards.push(<Card id={item.ID} imgSrc={item.imagen} titulo={item.nombre} precio={item.precio} descripcion={item.descripcion} cantidad={item.cantidad}/>)
       }
     })
     return cards
@@ -209,7 +222,7 @@ export default function Catalogo() {
       </div>
 
         <div id="features">
-          <div className="card card-wide">
+          <div className="card card-wide card-featured">
             <h5 className="card-header">Featured</h5>
             <div className="card-body">
               <h5 className="card-title">Peraphone S2</h5>
@@ -218,8 +231,6 @@ export default function Catalogo() {
             </div>
           </div>
         </div>
-        
-       
           
         <div className="catalogo">
         {printfunction()}

@@ -15,10 +15,10 @@ const validateFields = (req, res, next) => {
 };
 
 
-const validateState= async (state) => {
-    const states = ["espera","activo"];
+const validateState = async (state) => {
+    const states = ["espera", "activo"];
     if (!isNaN(state) && !states.includes(state)) {
-        throw new Error(`El perfil ${state} no existe.`);
+        throw new Error(`El estado ${state} no existe.`);
     }
 };
 

@@ -13,10 +13,18 @@
     width: 18rem;
     margin: auto;
     border-radius: 15px;
+    height: 550px;
+}
+
+.desc{
+    overflow-y:scroll ;
+    height: 75px;
 }
 
 .card-img-top {
     border-radius: 15px;
+    max-height: 300px;
+    padding: 10px;
 }
 
 .spacer_top {
@@ -32,6 +40,14 @@
     padding-bottom: 40px;
 }
 
+.card-featured{
+    height: 200px;
+}
+
+.divbtn{
+    margin-left: 5%;
+    margin-bottom: 5%;
+}
 #btn-star {
     margin-left: 10px;
     background-color: #f1c40f;
@@ -176,4 +192,59 @@ input[type="range"]::-moz-range-thumb{
 .btn.btn-secondary.dropdown-toggle {
     background-color: white;
     color: grey;
+}
+
+//media queries
+@media only screen and (max-width: 1280px) {
+    .catalogo {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        gap: 1rem;
+        margin: 0 20px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .catalogo {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        gap: 1rem;
+        margin: 0 20px;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .catalogo {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: auto;
+        gap: 1rem;
+        margin: 0 20px;
+    }
+
+    .max{
+        align-items: center;
+    }
+
+    input[type="number"]{
+        font-size: 11px;
+    }
+}
+
+@media only screen and (max-width: 565px) {
+    .input-precio{
+        display: inline-block;
+    }
+    .field{
+        display: flex;
+        left: 0;
+    }
+    .separator{
+        margin: auto;
+    }
+    .class_center, .class_right {
+        margin: auto;
+    }
 }

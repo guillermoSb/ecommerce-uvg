@@ -11,7 +11,6 @@ import {
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import "../styles/login.css";
 import profile_img from "../assets/profile.png";
-import { useNavigate } from "react-router-dom";
 
 const auth = getAuth();
 
@@ -58,7 +57,7 @@ export default function Login() {
       await regular_login(watch("email"), watch("password"));
       setUserInfo(watch("email"));
       alert("Usuario logueado con exito");
-      navigate(path);
+      window.location = "/Catalogo";
     } catch (error) {
       alert("Usuario o contraseña incorrecta. Asegurese que todo este bien");
     }
@@ -127,7 +126,7 @@ export default function Login() {
       <p>
         Not a member?{" "}
         <span>
-          <a href="google.com">Sign up now</a>
+          <a href="/signup">Sign up now</a>
         </span>
       </p>
     </div>
