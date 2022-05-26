@@ -20,12 +20,11 @@ const FBProvider = new FacebookAuthProvider();
 const firebaseConfig = {
   apiKey: "AIzaSyA_WclKi_NmhfPviSUYxdLUJ4FXvexgGpE",
   authDomain: "stw-uvg-proyecto2.firebaseapp.com",
-  databaseURL: "https://stw-uvg-proyecto2-default-rtdb.firebaseio.com/",
   projectId: "stw-uvg-proyecto2",
   storageBucket: "stw-uvg-proyecto2.appspot.com",
   messagingSenderId: "365577856480",
-  appId: "1:365577856480:web:f7987beb398947f8543785",
-  measurementId: "G-GKWKDPWBCK"
+  appId: "1:365577856480:web:08ba1a0676098be3543785",
+  measurementId: "G-902XSQSB9J",
 };
 
 // Initialize Firebase
@@ -160,6 +159,7 @@ export function addCompra(
   nombre,
   cantidad_disponible
 ) {
+  alert(loggedUser.email)
   if (cantidad_disponible > 0) {
     firebase
       .firestore()

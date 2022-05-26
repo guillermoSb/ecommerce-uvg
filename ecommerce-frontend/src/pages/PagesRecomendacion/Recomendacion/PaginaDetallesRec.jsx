@@ -22,35 +22,30 @@ const PaginaDetallesRec = (props) => {
         
     }, [location])
 
-
-  const removeWishList = (id) => {
-    Swal.fire({
-      title: "¿Está seguro de quitar el producto?",
-      showDenyButton: true,
-      confirmButtonText: "S[i",
-      denyButtonText: `Cancelar`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        api.remove("/api/wishlist/remove-from-wish/" + id).then(() => {
-          Swal.fire({
-            title: "Exíto",
-            text: "Producto eliminado de lista de deseos.",
-            icon: "success",
-          });
-        });
-      }
-    });
-  };
+  const addWish = (imagen, precio, itemcode, nombre, cantidad_disponible) => {
+    api
+      .post("/api/wishlist/save-as-wish", {
+        obj: {
+          usercode: localStorage.getItem("uid"),
+          itemcode,
+          producto: { imagen, precio, itemcode, nombre, cantidad_disponible },
+        },
+      })
+      .then((res) => {
+        Swal.fire(res.data);
+      });
+  }
 
   return (
     <div>
       <CHeader />
       <div className="details-page-details-content">
         <div className="details-section-on-page-details-content">
-          <CentralItem id={id} />
+          <CentralItem id={id} removeWishList={addWish}/>
           <div>
             <ContenedorItemsRec
-              removeWishList={removeWishList}
+              style={{marginRight: '3%'}}
+              removeWishList={addWish}
               title="Sugerencias"
               items={objectsfromdb}
               limit="4"

@@ -57,12 +57,13 @@ export default function ProductCard(props) {
         </div>
       </div>
       <div className="divbtn">
-        {/* <a href="#ref" className="btn btn-primary btncard" onClick={() => {addCompra(imgSrc,precio,id,titulo,cantidad)}}><FaCartPlus/></a> */}
+        <a href="#ref" className="btn btn-primary btncard" onClick={() => {addCompra(imgSrc,precio,id,titulo,cantidad)}}><FaCartPlus/></a>
         {/** Recomendaciones inicio  */}
         <button
           className="btn btn-primary btncard"
           id="btn-star"
           type="button"
+          title="Agregar a lista de deseos"
           onClick={() => {
             addWish(imgSrc, precio, id, titulo, cantidad);
           }}

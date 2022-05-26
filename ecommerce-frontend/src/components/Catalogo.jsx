@@ -1,9 +1,11 @@
 import {React, useState, useEffect} from "react";
-import '../styles/Catalogo.scss'
+import '../styles/Catalogo.scss';
+import '../styles/Cards.scss';
 import { FaCartPlus} from 'react-icons/fa';
 import CHeader from './CHeader';
 import Card from './ProductCard';
 import { getData } from '../firebase';
+
 
 
 export default function Catalogo() {

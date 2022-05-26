@@ -5,8 +5,9 @@ import Login from "./components/login";
 import Signup from "./components/signup";
 import WishList from "./pages/PagesRecomendacion/WishList/WishList";
 import Admin from "./pages/PagesChat/Admin";
-// import Catalogo from "./components/Catalogo";
+import Catalogo from "./components/Catalogo";
 import PaginaDetallesRec from "./pages/PagesRecomendacion/Recomendacion/PaginaDetallesRec";
+import Carrito from "./components/Carrito/Carrito";
 import ChatBubble from "./componentes/ChatBubble";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
@@ -31,7 +32,8 @@ function App() {
             path="/details-product/:id"
             element={<PaginaDetallesRec tipo_de_recomendacion="/by-category" />}
           ></Route>
-          {/* <Route path="/Catalogo" element={<Catalogo />}></Route> */}
+          <Route path="/Catalogo" element={<Catalogo />}></Route>
+          <Route path="/Carrito" element={<Carrito />}></Route>
         </Routes>
       </Router>
       {user ? <ChatBubble /> : ""}

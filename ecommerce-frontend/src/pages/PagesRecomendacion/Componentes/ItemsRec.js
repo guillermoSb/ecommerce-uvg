@@ -1,12 +1,17 @@
 import React from "react";
-import { FaCartPlus, FaTrash } from "../../../../node_modules/react-icons/fa";
-import { Link } from "react-router-dom";
-const ItemsRec = ({ id, name, image, removeWishList, id_global }) => {
+import { FaCartPlus, FaTrash, FaStar } from "../../../../node_modules/react-icons/fa";
+
+const ItemsRec = ({ id, name, image, removeWishList, id_global, wish, precio, cantidad }) => {
   return (
     <div>
-      <img src={image} alt="imagen" height="150px" />
+      <img
+        src={image}
+        alt="imagen"
+        height="100%"
+        style={{ borderRadius: "15px", maxHeight: "130px", padding: "10px" }}
+      />
       <div className="itemRecNameAndCart">
-        <a href={`/details-product/${id}`} id={id} >
+        <a href={`/details-product/${id}`} id={id}  style={{textDecoration: 'none', color: 'black'}}>
           <p>{name}</p>
         </a>
         <FaCartPlus
@@ -15,14 +20,21 @@ const ItemsRec = ({ id, name, image, removeWishList, id_global }) => {
           onMouseOut={({ target }) => (target.style.color = "black")}
           //onClick={agregarItem}
         />
-        <FaTrash
+        {wish ? <FaTrash
           size={20}
           onMouseOver={({ target }) => (target.style.color = "red")}
           onMouseOut={({ target }) => (target.style.color = "black")}
           onClick={() => {
             removeWishList(id_global);
           }}
-        />
+        /> : <FaStar 
+        size={20}
+          onMouseOver={({ target }) => (target.style.color = "yellow")}
+          onMouseOut={({ target }) => (target.style.color = "black")}
+          onClick={() => {
+            removeWishList(image, precio, id, name, cantidad);
+          }}
+        />}
       </div>
     </div>
   );
