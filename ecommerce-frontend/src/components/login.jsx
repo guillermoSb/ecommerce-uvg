@@ -10,8 +10,7 @@ import {
 } from "../firebase";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import "../styles/login.css";
-import profile_img from '../assets/profile.png';
-import { FaWindowRestore } from "react-icons/fa";
+import profile_img from "../assets/profile.png";
 
 const auth = getAuth();
 
@@ -56,7 +55,7 @@ export default function Login() {
       await regular_login(watch("email"), watch("password"));
       setUserInfo(watch("email"));
       alert("Usuario logueado con exito");
-      window.location = '/Catalogo';
+      window.location = "/Catalogo";
     } catch (error) {
       alert("Usuario o contraseña incorrecta. Asegurese que todo este bien");
     }
@@ -69,7 +68,7 @@ export default function Login() {
     <div className="loginWrap">
       <form onSubmit={handleSubmit(onSubmit)}>
         {/* register your input into the hook by invoking the "register" function */}
-        <img src ={profile_img} alt="loading"></img>
+        <img src={profile_img} alt="loading"></img>
         <input
           type="text"
           placeholder="Email"
@@ -98,11 +97,15 @@ export default function Login() {
         {/* include validation with required or other standard HTML validation rules */}
         {/* errors will return when field validation fails  */}
 
-        <input className ="login_button" type="submit" value="Log In" />
+        <input className="login_button" type="submit" value="Log In" />
       </form>
       <p>Bienvenido {userInfo}</p>
-      <button className = "google_button" onClick={() => googleAuth()}>Google</button>
-      <button className = "facebook_button" onClick={() => fbAuth()}>Facebook</button>
+      <button className="google_button" onClick={() => googleAuth()}>
+        Google
+      </button>
+      <button className="facebook_button" onClick={() => fbAuth()}>
+        Facebook
+      </button>
       <hr />
       <p>¿Olvidaste tu contraseña?</p>
       <input
@@ -112,10 +115,18 @@ export default function Login() {
         onChange={(e) => setEmail(e.target.value)}
       ></input>
       <br />
-      <button className="resetPassword_button" onClick={() => resetPassword(email)}>
+      <button
+        className="resetPassword_button"
+        onClick={() => resetPassword(email)}
+      >
         Restablecer contraseña
       </button>
-      <p>Not a member? <span><a href="/signup">Sign up now</a></span></p>
+      <p>
+        Not a member?{" "}
+        <span>
+          <a href="/signup">Sign up now</a>
+        </span>
+      </p>
     </div>
   );
 }
