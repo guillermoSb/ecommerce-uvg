@@ -34,15 +34,20 @@ export default class Content extends Component {
   };
 
 
-  componentDidUpdate() {
+  componentDidUpdate(prev) {
     this.scrollToBottom();
+    if (this.props.chatId) {
+
+      if (prev.chatId !== this.props.chatId) {
+        this.attachRealTimeMessageListening();
+      }
+    }
   }
 
   attachRealTimeMessageListening() {
+
     if (this.props.chatId) {
-      console.log(this.props.chatId);
       onSnapshot(doc(firestore, "chats", this.props.chatId), (doc) => {
-        console.log(doc.data());
         const messages = doc.data().mensajes;
         const estado = doc.data().estado;
         const iniciadoPor = doc.data().iniciadoPor;
@@ -54,7 +59,7 @@ export default class Content extends Component {
   }
 
   componentDidMount() {
-    console.log('estado ', this.state.finished);
+
     this.sendWelcomeMessage();
     this.attachRealTimeMessageListening();
     document.addEventListener("keydown", (e) => {
