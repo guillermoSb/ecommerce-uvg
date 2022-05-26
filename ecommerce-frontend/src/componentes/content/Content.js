@@ -31,7 +31,6 @@ export default class Content extends Component {
 
   endChat = () => {
     endChatt(this.props.chatId, 'inactivo');
-    console.log('holaaaaaaaaaa');
   };
 
 
@@ -70,20 +69,20 @@ export default class Content extends Component {
   };
 
   enviarMensaje = () => {
-    sendingChat(this.auth.currentUser.uid, this.props.chatId, this.state.text);
+    sendingChat(this.auth.currentUser.email, this.props.chatId, this.state.text);
     document.getElementsByClassName("input-message")[0].value = "";
     this.setState({ text: "" });
   };
 
   // on first load send welcome message from the system
   sendWelcomeMessage() {
-    sendingChat("system", this.props.chatId, "Bienvenido a nuestro chat");
+    // sendingChat("system", this.props.chatId, "Bienvenido a nuestro chat");
   }
 
   render() {
     return (
       <div className="ChatContent">
-        <div className="notifiersDiv">
+        <div className="notifiersDiv m-2">
           <div className="text-[#FFF] text-sm bg-bg2 rounded-3xl w-25 text-center shadow-2xl border-2 border-bg3">
             {this.state.estado}
           </div>
@@ -98,8 +97,9 @@ export default class Content extends Component {
                 <Bubble
                   animationDelay={index + 2}
                   key={message.date}
+                  name={message.enviadoPor}
                   user={
-                    this.auth.currentUser.uid === message.enviadoPor
+                    this.auth.currentUser.email === message.enviadoPor
                       ? "me"
                       : "other"
                   }

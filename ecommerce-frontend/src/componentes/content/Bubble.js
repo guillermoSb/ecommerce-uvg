@@ -7,7 +7,7 @@ export default class Bubble extends Component {
         super(props);
         var today = new Date(),
             time = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes();
-        this.state = { user: this.props.user, text: '', currentTime: time }
+        this.state = { user: this.props.user, text: '', currentTime: time, name: this.props.name }
     }
     render() {
         return (
@@ -19,7 +19,9 @@ export default class Bubble extends Component {
                     <div className="chat-msg">{this.props.text}</div>
                     <div className="chat-desc">
                         <i>{this.state.currentTime}</i>
-
+                    </div>
+                    <div className="chat-desc">
+                        <i>{this.state.name}</i>
                     </div>
                 </div>
                 {/* <Avatar image={this.props.image} /> */}
