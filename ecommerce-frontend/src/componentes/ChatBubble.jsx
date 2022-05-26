@@ -15,40 +15,43 @@ const bubbleSta = {
 };
 
 const Chatbubble = () => {
-
   const [bubbleState, setBubbleState] = useState("closed");
   const [currentChat, setCurrentChat] = useState(null);
-  const [timeout,setTime] = useState(null);
+  const [timeout, setTime] = useState(null);
 
   const initbubble = () => {
     if (bubbleState === "closed") {
       startChat();
       setBubbleState("open");
-      if(timeout) {
-        clearTimeout(timeout)
-        setTime(null)
+      if (timeout) {
+        clearTimeout(timeout);
+        setTime(null);
       }
     }
     if (bubbleState === "open") {
       setBubbleState("closed");
-      setTime(setTimeout(() => {abandonChat()},120000));
+      setTime(
+        setTimeout(() => {
+          abandonChat();
+        }, 120000)
+      );
     }
   };
 
   const abandonChat = () => {
-    changeState(currentChat,"abandonado");
-  }
+    changeState(currentChat, "abandonado");
+  };
 
   window.addEventListener("beforeunload", () => {
     if (currentChat) abandonChat();
-  })
+  });
 
   /**
    * Function that initializes the chat
    */
   const startChat = async () => {
     const auth = getAuth();
-    const data = await initChat(auth.currentUser.uid); // Call the api to init a chat
+    const data = await initChat(auth.currentUser.email); // Call the api to init a chat
     setCurrentChat(data.chat.id); // Set the current chat id
   };
 
@@ -62,7 +65,7 @@ const Chatbubble = () => {
               " bg-gradient-to-br from-primary2 to-primary1 w-[320px] h-[600px] rounded-md mx-auto p-8 tablet:w-[700px] tablet:h-[800px] laptop:w-[500px] laptop:h-[450px]  desktop:w-[650px]"
             }
           >
-              {currentChat && <Content chatId={currentChat} /> }
+            {currentChat && <Content chatId={currentChat} />}
           </div>
           <div
             onClick={() => {
