@@ -1,12 +1,12 @@
 import React from 'react';
-import pp from '../imgs/pp.jpg';
+import pp from '../assets/profile.png';
 import '../styles/leftPanel.scss';
 
 /*Component LeftPanel */
 export default function LeftPanel({ home, self, settings, logout }) {
   return (
     <div className="leftPanel">
-      <img src={pp} id="pp"></img>
+      <img src={pp} id="pp" alt=""></img>
       <div className="options-container">
         <a id="home" href={home} className="option">
           Home
