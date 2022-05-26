@@ -11,7 +11,7 @@ const ItemsRec = ({ id, name, image, removeWishList, id_global }) => {
           size={20}
           onMouseOver={({ target }) => (target.style.color = "#0066ff")}
           onMouseOut={({ target }) => (target.style.color = "black")}
-          onClick={agregarItem}
+          //onClick={agregarItem}
         />
         <FaTrash
           size={20}
