@@ -73,7 +73,7 @@ export default class Content extends Component {
   render() {
     return (
       <div className="ChatContent">
-        <div className="text-[#FFF] text-sm bg-bg2 rounded-3xl w-16 text-center shadow-2xl border-2 border-bg3 m-2">
+        <div className="text-[#FFF] text-sm bg-bg2 rounded-3xl w-25 text-center shadow-2xl border-2 border-bg3 m-2">
           {this.state.estado}
         </div>
         <div className="content-body">
@@ -107,7 +107,7 @@ export default class Content extends Component {
                   placeholder="Escriba un mensaje"
                   onChange={this.onStateChange}
                   value={this.state.text}
-                  disabled={this.state.estado === "inactivo" ? true : false}
+                  disabled={this.state.estado === "inactivo" || this.state.estado === "abandonado" ? true : false}
                 />
                 <button
                   className="btnSendText"
@@ -115,11 +115,11 @@ export default class Content extends Component {
                   onClick={() => {
                     this.enviarMensaje();
                   }}
-                  disabled={this.state.estado === "inactivo" ? true : false}
+                  disabled={this.state.estado === "inactivo" || this.state.estado === "abandonado" ? true : false}
                 >
                   <i
                     className="send"
-                    disabled={this.state.estado === "inactivo" ? true : false}
+                    disabled={this.state.estado === "inactivo" || this.state.estado === "abandonado" ? true : false}
                   >
                     Enviar
                   </i>
