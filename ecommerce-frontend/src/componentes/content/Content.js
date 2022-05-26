@@ -7,8 +7,10 @@ import { getAuth } from "firebase/auth";
 import { sendingChat } from "../../services/api.service";
 import "../../styles/chat.css";
 
+
 export default class Content extends Component {
   textEndRef = createRef(null);
+  //const [chatState, chatState] = useState(false);
 
   constructor(props) {
     super(props);
@@ -16,6 +18,7 @@ export default class Content extends Component {
       text: "",
       estado: "",
       messages: [],
+      finished:  false,
     };
     this.auth = getAuth(); // Get current firebase auth
   }
@@ -23,6 +26,12 @@ export default class Content extends Component {
   scrollToBottom = () => {
     this.textEndRef.current.scrollIntoView(false);
   };
+
+  
+  chatState = () => {
+    this.state.finished = true;
+  }
+
 
   componentDidUpdate() {
     this.scrollToBottom();
@@ -74,7 +83,7 @@ export default class Content extends Component {
           <div className="text-[#FFF] text-sm bg-bg2 rounded-3xl w-16 text-center shadow-2xl border-2 border-bg3">
             {this.state.estado}
           </div>
-          <button className="endChatBtn">
+          <button className="endChatBtn" onClick={this.chatState()}>
               <p>Terminar chat</p>
           </button>
         </div>
@@ -103,6 +112,7 @@ export default class Content extends Component {
             <>
               <div className="sendNewMessage">
                 <input
+                  disabled={this.state.finished}
                   className="input-message"
                   type="text"
                   placeholder="Escriba un mensaje"
@@ -110,6 +120,8 @@ export default class Content extends Component {
                   value={this.state.text}
                 />
                 <button
+                  disabled={this.state.finished}
+
                   className="btnSendText"
                   id="sendTextBtn"
                   onClick={() => {
