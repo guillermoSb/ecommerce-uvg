@@ -7,9 +7,9 @@ import WishList from "./pages/PagesRecomendacion/WishList/WishList";
 // import Catalogo from "./components/Catalogo";
 import PaginaDetallesRec from "./pages/PagesRecomendacion/Recomendacion/PaginaDetallesRec";
 import ChatBubble from "./componentes/ChatBubble";
+import Admin from "./pages/PagesChat/Admin";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
-import Admin from "./pages/PagesChat/Admin";
 
 function App() {
   const auth = getAuth();
