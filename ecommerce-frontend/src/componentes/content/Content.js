@@ -30,6 +30,7 @@ export default class Content extends Component {
 
   attachRealTimeMessageListening() {
     if (this.props.chatId) {
+      console.log(this.props.chatId);
       onSnapshot(doc(firestore, "chats", this.props.chatId), (doc) => {
         console.log(doc.data());
         const messages = doc.data().mensajes;

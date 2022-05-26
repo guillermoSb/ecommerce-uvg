@@ -99,11 +99,13 @@ const createChat = async (req, res) => {
     const docRef = await addDoc(collection(db, "chats"), chat);
     chat.id = docRef.id;
     // Enviar respuesta
+    console.log(chat);
     return res.status(200).send({
       ok: true,
       chat,
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).send({
       ok: false,
       errors: ["Algo salió mal."],
