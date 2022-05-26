@@ -23,13 +23,17 @@ export const initChat = async (iniciadoPor) => {
     return data;
 }
 
+
 /**
  * Iniciar  
  * @param {string} iniciadoPor 
  */
-export const changeState = async (id, state) => {
+export const changeState = async (id, state, atendidoPor = null) => {
     const URL = `${api_url}/chats/state`;
     const body = { id, estado: state }
+    if (atendidoPor) {
+        body['atendidoPor'] = atendidoPor;
+    }
     const otherPram = {
 
         method: "POST",
