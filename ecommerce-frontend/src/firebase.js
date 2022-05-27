@@ -60,7 +60,12 @@ auth.onAuthStateChanged((user) => {
 });
 
 export async function regular_signup(email, password) {
-  await createUserWithEmailAndPassword(auth, email, password);
+  await createUserWithEmailAndPassword(auth, email, password).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage);
+    // ..
+  });
   await createUserDocument(email);
 }
 
@@ -159,12 +164,11 @@ export function addCompra(
   nombre,
   cantidad_disponible
 ) {
-  //alert(loggedUser.email)
   if (cantidad_disponible > 0) {
     firebase
       .firestore()
       .collection("carrito")
-      .doc("ZsuFnGu76TWPQus6xGce")
+      .doc(localStorage.getItem("uid"))
       .set(
         {
           items: firebase.firestore.FieldValue.arrayUnion({

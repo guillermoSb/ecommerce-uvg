@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import './Carrito.scss';
 import ContainerGeneral from "../ContainerGeneral/ContainerGeneral";
 import firebase from "../../firebase";
+import CHeader from '../CHeader';
+
 
 function useInfo() {
 
@@ -46,6 +48,7 @@ function Carrito() {
 
     return (
         <>
+            <CHeader/>
             {itemsInCarrito}
         </>
     );
