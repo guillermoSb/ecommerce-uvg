@@ -18,10 +18,10 @@ export default class Bubble extends Component {
                 <div className="chat-bubble-content">
                     <div className="chat-msg">{this.props.text}</div>
                     <div className="chat-desc">
-                        <i>{this.state.name}</i>
+                        <i>{this.state.currentTime}</i>
                     </div>
                     <div className="chat-desc">
-                        <i>{this.state.currentTime}</i>
+                        <i>{this.state.name}</i>
                     </div>
                 </div>
                 {/* <Avatar image={this.props.image} /> */}

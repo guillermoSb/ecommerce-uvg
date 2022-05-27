@@ -60,12 +60,7 @@ auth.onAuthStateChanged((user) => {
 });
 
 export async function regular_signup(email, password) {
-  await createUserWithEmailAndPassword(auth, email, password).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage);
-    // ..
-  });
+  await createUserWithEmailAndPassword(auth, email, password);
   await createUserDocument(email);
 }
 
@@ -164,7 +159,7 @@ export function addCompra(
   nombre,
   cantidad_disponible
 ) {
-  alert(loggedUser.email)
+  //alert(loggedUser.email)
   if (cantidad_disponible > 0) {
     firebase
       .firestore()

@@ -91,8 +91,7 @@ const createChat = async (req, res) => {
       iniciadoPor,
       estado: "espera",
       atendidoPor: null,
-      fechaInicio: null,
-      fechaFin: null,
+      fechaInicio: new Date(),
       mensajes: [
         {
           enviadoPor: "system",
@@ -178,7 +177,7 @@ const sendChat = async (req, res) => {
       userMessage } = req.body;
     let querySnapshot = await getDoc(doc(db, "chats", chatId));
     if (querySnapshot.exists()) {
-
+      console.log("prueba");
       const ref = doc(db, "chats", chatId);
       await updateDoc(ref, {
         mensajes: arrayUnion({

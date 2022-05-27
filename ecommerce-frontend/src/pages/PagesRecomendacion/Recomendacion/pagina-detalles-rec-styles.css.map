@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,6BAA6B,CAAA;EACzB,UAAU,EAAE,IAAI;EAChB,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,KAAK;EACb,gBAAgB,EAAE,OAAkB;CACvC;;AACD,AAAA,wCAAwC,CAAA;EACpC,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,KAAK;EACb,YAAY,EAAE,KAAK;CACtB",
+    "sources": [
+        "pagina-detalles-rec-styles.scss"
+    ],
+    "names": [],
+    "file": "pagina-detalles-rec-styles.css"
+}
