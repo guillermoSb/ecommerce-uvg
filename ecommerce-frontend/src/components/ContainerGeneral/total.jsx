@@ -15,12 +15,12 @@ function total (){
         }
     }
     function addTotal(precio){
-        indexTotal = indexTotal +  precio
+        indexTotal = indexTotal +  parseInt(precio)
 
     }
 
     function ResTotal(precio){
-        indexTotal = indexTotal- precio
+        indexTotal = indexTotal- parseInt(precio)
     }
 
     function getCantidades(){

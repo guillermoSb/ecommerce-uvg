@@ -16,7 +16,7 @@ function ProductContainer({test}) {
         // ++
         if (cont < test.cantidad) {
             setcont(cont + 1)
-            setprice(price + test.precio)
+            setprice(price + parseInt(test.precio))
             addTotal(test.precio)
             updateCantidades(test.itemcode,cont+1)
         }
@@ -29,7 +29,7 @@ function ProductContainer({test}) {
         // --
         if(cont >= 1){
             setcont(cont - 1)
-            setprice(price - test.precio)
+            setprice(price - parseInt(test.precio))
             ResTotal(test.precio)
             updateCantidades(test.itemcode,cont-1)
         }
