@@ -4,11 +4,13 @@ import Bubble from "./Bubble";
 import { doc, onSnapshot } from "firebase/firestore";
 import { firestore } from "../../firebase";
 import { getAuth } from "firebase/auth";
-import { sendingChat } from "../../services/api.service";
+import { sendingChat, endChatt } from "../../services/api.service";
 import "../../styles/chat.css";
+
 
 export default class Content extends Component {
   textEndRef = createRef(null);
+  //const [chatState, chatState] = useState(false);
 
   constructor(props) {
     super(props);
@@ -16,6 +18,8 @@ export default class Content extends Component {
       text: "",
       estado: "",
       messages: [],
+      finished: false,
+      iniciadoPor: ""
     };
     this.auth = getAuth(); // Get current firebase auth
   }
@@ -24,16 +28,30 @@ export default class Content extends Component {
     this.textEndRef.current.scrollIntoView(false);
   };
 
-  componentDidUpdate() {
+
+  endChat = () => {
+    endChatt(this.props.chatId, 'inactivo');
+  };
+
+
+  componentDidUpdate(prev) {
     this.scrollToBottom();
+    if (this.props.chatId) {
+
+      if (prev.chatId !== this.props.chatId) {
+        this.attachRealTimeMessageListening();
+      }
+    }
   }
 
   attachRealTimeMessageListening() {
+
     if (this.props.chatId) {
       onSnapshot(doc(firestore, "chats", this.props.chatId), (doc) => {
         const messages = doc.data().mensajes;
         const estado = doc.data().estado;
-        this.setState({ messages, estado }, function () {
+        const iniciadoPor = doc.data().iniciadoPor;
+        this.setState({ messages, estado, iniciadoPor }, function () {
           this.scrollToBottom();
         });
       });
@@ -41,6 +59,8 @@ export default class Content extends Component {
   }
 
   componentDidMount() {
+
+    this.sendWelcomeMessage();
     this.attachRealTimeMessageListening();
     document.addEventListener("keydown", (e) => {
       if (e.keyCode === 13) {
@@ -54,27 +74,31 @@ export default class Content extends Component {
   };
 
   enviarMensaje = () => {
-    if (this.auth.currentUser.email && this.props.text !== "") {
-      sendingChat(
-        this.auth.currentUser.email,
-        this.props.chatId,
-        this.state.text
-      );
-      document.getElementsByClassName("input-message")[0].value = "";
-      this.setState({ text: "" });
-    }
+    sendingChat(this.auth.currentUser.email, this.props.chatId, this.state.text);
+    document.getElementsByClassName("input-message")[0].value = "";
+    this.setState({ text: "" });
   };
 
   // on first load send welcome message from the system
   sendWelcomeMessage() {
-    sendingChat("system", this.props.chatId, "Bienvenido a nuestro chat");
+    // sendingChat("system", this.props.chatId, "Bienvenido a nuestro chat");
   }
 
   render() {
     return (
       <div className="ChatContent">
-        <div className="text-[#FFF] text-sm bg-bg2 rounded-3xl w-16 text-center shadow-2xl border-2 border-bg3 m-2">
-          {this.state.estado}
+        <div className="notifiersDiv m-2">
+          <div className="text-[#FFF] text-sm bg-bg2 rounded-3xl w-25 text-center shadow-2xl border-2 border-bg3">
+            {this.state.estado}
+          </div>
+          {
+            ((this.auth.currentUser.email !== this.state.iniciadoPor) && (this.state.estado === "abandonado")) || (this.auth.currentUser.email === this.state.iniciadoPor) ?
+            <>
+              <button className="endChatBtn" onClick={this.endChat}>
+                <p>Terminar chat</p>
+              </button> 
+            </> : ''
+          }
         </div>
         <div className="content-body">
           <div className="chat-bubbles">
@@ -107,19 +131,19 @@ export default class Content extends Component {
                   placeholder="Escriba un mensaje"
                   onChange={this.onStateChange}
                   value={this.state.text}
-                  disabled={this.state.estado === "inactivo" ? true : false}
+                  disabled={this.state.estado === "inactivo" || this.state.estado === "abandonado" ? true : false}
                 />
                 <button
-                  className="btnSendText"
+                  className={this.state.finished ? "btnSendTextN" : "btnSendTextA"}
                   id="sendTextBtn"
                   onClick={() => {
                     this.enviarMensaje();
                   }}
-                  disabled={this.state.estado === "inactivo" ? true : false}
+                  disabled={this.state.estado === "inactivo" || this.state.estado === "abandonado" ? true : false}
                 >
                   <i
                     className="send"
-                    disabled={this.state.estado === "inactivo" ? true : false}
+                    disabled={this.state.estado === "inactivo" || this.state.estado === "abandonado" ? true : false}
                   >
                     Enviar
                   </i>

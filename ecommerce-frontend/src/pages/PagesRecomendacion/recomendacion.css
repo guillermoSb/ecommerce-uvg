@@ -1,0 +1,102 @@
+.contenedorItemsRecDiv {
+  border-radius: 25px;
+  margin: 20px;
+  padding: 20px 40px;
+  -webkit-box-shadow: 1px 2px 2px 2px gray;
+          box-shadow: 1px 2px 2px 2px gray;
+  background-color: #fff;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+}
+
+.contenedorItemsRec {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.boxRecItems {
+  margin: 10px;
+  width: 200px;
+  height: 200px;
+  border-radius: 25px;
+  -webkit-box-shadow: 1px 2px 2px 2px gray;
+          box-shadow: 1px 2px 2px 2px gray;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.boxRecItems img {
+  margin: 5px 5px 5px 5px;
+}
+
+.itemRecNameAndCart {
+  width: 100%;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.itemRecNameAndCart p {
+  margin: 0;
+}
+
+.bigItemRec {
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  max-width: -webkit-min-content;
+  max-width: -moz-min-content;
+  max-width: min-content;
+}
+
+.bigItemRec:hover {
+  -webkit-box-shadow: 1px 2px 2px 2px #0066ff;
+          box-shadow: 1px 2px 2px 2px #0066ff;
+  cursor: pointer;
+}
+
+.boxRecItems:hover {
+  -webkit-box-shadow: 1px 2px 2px 2px #0066ff;
+          box-shadow: 1px 2px 2px 2px #0066ff;
+  cursor: pointer;
+}
+
+.alignToRightRecCont {
+  position: relative;
+  float: right;
+  bottom: 35px;
+}
+
+.RecomendacionesPageDescription {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px;
+}
+/*# sourceMappingURL=recomendacion.css.map */

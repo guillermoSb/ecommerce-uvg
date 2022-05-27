@@ -4,6 +4,7 @@ import "./App.css";
 import Login from "./components/login";
 import Signup from "./components/signup";
 import WishList from "./pages/PagesRecomendacion/WishList/WishList";
+import Admin from "./pages/PagesChat/Admin";
 import Catalogo from "./components/Catalogo";
 import PaginaDetallesRec from "./pages/PagesRecomendacion/Recomendacion/PaginaDetallesRec";
 import Carrito from "./components/Carrito/Carrito";
@@ -26,6 +27,7 @@ function App() {
           <Route path="/" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/wishlist" element={<WishList />}></Route>
+          <Route path="/admin-chat" element={<Admin />}></Route>
           <Route
             path="/details-product/:id"
             element={<PaginaDetallesRec tipo_de_recomendacion="/by-category" />}

@@ -60,12 +60,7 @@ auth.onAuthStateChanged((user) => {
 });
 
 export async function regular_signup(email, password) {
-  await createUserWithEmailAndPassword(auth, email, password).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage);
-    // ..
-  });
+  await createUserWithEmailAndPassword(auth, email, password);
   await createUserDocument(email);
 }
 
