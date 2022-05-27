@@ -11,7 +11,7 @@ export default function CHeader(props) {
 
     //Todo: Add user
     useEffect(() => {
-        firebase.firestore().collection("carrito").doc("TkE5GqpRfsKZRawSMaBP").onSnapshot(snapshot => {
+        firebase.firestore().collection("carrito").doc(localStorage.getItem("uid")).onSnapshot(snapshot => {
             setCount(snapshot.data().items.length);
         });
     }, []);
