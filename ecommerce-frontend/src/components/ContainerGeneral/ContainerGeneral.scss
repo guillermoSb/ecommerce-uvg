@@ -12,7 +12,7 @@
         flex-basis: 20rem;
         flex-grow: 1;
         background-color: #324A5F;
-       
+
   }
 
 }
@@ -36,13 +36,19 @@
             text-align: center;
             text-decoration:double;
 
-           
-  
+
+
         }
 
     }
 
-    
+
+}
+
+.TotalContainer {
+    h1{
+
+    }
 }
 
 
@@ -58,9 +64,9 @@
         width: 1000px;
         overflow: scroll;
         overflow-x: hidden;
-        
+
     }
-    
+
 }
 
 
@@ -69,7 +75,7 @@
     width: 12px;
 }
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(228, 224, 219, 0.952); 
+    -webkit-box-shadow: inset 0 0 6px rgba(228, 224, 219, 0.952);
     border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
