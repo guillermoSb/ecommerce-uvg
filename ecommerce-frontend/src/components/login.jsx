@@ -27,12 +27,14 @@ export default function Login() {
   function googleAuth() {
     setLoading(true);
     google_auth();
+    window.location = "/Catalogo";
     setLoading(false);
   }
 
   function fbAuth() {
     setLoading(true);
     facebook_auth();
+    window.location = "/Catalogo";
     setLoading(false);
   }
 
