@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
-import GreenCircle from '../assets/greenCir.png';
-import redCirc from '../assets/redCirc.png';
-import grayCirc from '../assets/grayCirc.png';
+import GreenCircle from '../imgs/greenCir.png';
+import redCirc from '../imgs/redCirc.png';
+import grayCirc from '../imgs/grayCirc.png';
 import '../styles/PanelChat.scss';
 
-export const Panel = () => {
+export const Panel = ({ children }) => {
   // Para encontrar al usuario
 
   const [user, setUser] = useState();
@@ -36,7 +36,7 @@ export const Panel = () => {
               }}
             />
           </div>
-          <div className="chats-container"></div>
+          <div className="chats-container">{children}</div>
         </div>
       </div>
     </div>

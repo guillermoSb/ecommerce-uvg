@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "../styles/CHeader.scss";
 import logo from "../imgs/logo.png";
 import { FaShoppingCart, FaStar } from "react-icons/fa";
 
-import { Badge, Button, AppBar, Toolbar, IconButton } from "@material-ui/core";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+/*import { Badge, Button, AppBar, Toolbar, IconButton } from "@material-ui/core";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';*/
 
 import firebase from "../firebase";
 
