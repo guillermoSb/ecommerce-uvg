@@ -42,17 +42,15 @@ function ContainerGeneral({listaproductos, id}) {
         <div className='Container' onClick = {llamarTotal}>
             <div className='descrip'>
                 <ul className='grid-columns'>
-                    <h2 className='texto'>Product</h2>
-                    <h2 className='texto'>Amount</h2>
-                    <h2 className='texto'>Price</h2>
+                    <h2 style={{marginTop: 40}}className='texto'>Carrito</h2>
                 </ul>
             </div>
             <div className='display-productos'>
                 {listaproductos.map((Number) =>(
                     <ProductContainer test={Number}/>
                 ))}
-                <div>
-                    <h1 className='total'>Total:
+                <div className="TotalContainer">
+                    <h1 className='total' style={{textAlign:"center"}}>Total:
                     {total1}
 
                     </h1>
